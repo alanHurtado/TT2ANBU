@@ -3,6 +3,3 @@
 #   Instalar previamente Flask y python 
 #   Para instalar Flask
 sudo pip install Flask
-
-sudo yum
-
