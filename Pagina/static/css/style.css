@@ -1,0 +1,32 @@
+body{
+    
+}
+#fondo {
+    background: url(/static/img/fondo.jpg);
+    background-repeat: no-repeat;
+    background-size: auto;
+    height:585px;
+    width:1366px;
+    text-align:center;
+}
+.cuerpo {
+    height:500px;
+    width:900px;
+    margin:0px auto;
+    background-color:red;
+    opacity:0.9; /* Opacidad 60% */
+}
+.espacio {
+    height:40px;
+    width:900px;
+    margin:0px auto;
+    background-color:white;
+    opacity:0.0; /* Opacidad 60% */
+}
+.uno {
+    height:415px;
+    width:550px;
+    margin:0px auto;
+    background-color:white;
+    opacity:1; /* Opacidad 60% */
+}

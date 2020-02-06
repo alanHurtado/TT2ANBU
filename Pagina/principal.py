@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('principal.html') # se agrega rende_template para usar el template
+    return render_template('home.html') # se agrega rende_template para usar el template
 
 @app.route('/busqueda')
 def busqueda():
@@ -24,5 +24,5 @@ def resultado_consulta():
     return render_template('resultadoconsulta.html') # se agrega rende_template para usar el template
 
 if __name__ == '__main__':
-    app.run(debug = True, port = 8000)
+    app.run(debug = True, port = 8000) #se indica el puerto 
 
