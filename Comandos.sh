@@ -1,10 +1,15 @@
-#   Proyecto comandos de instalacion Flask
 #   Instalar previamente Flask y python 
-#   Para instalar Flask
+
+## ::::::::::::: Instalar Flask :::::::::##
 sudo pip install Flask
+##::::::::::: MySQL for flask :::::::::::::##
+sudo pip install flask-mysql
+##::::::::::: Formularios for flask ::::::::::: ##
+pip install Flask-WTF
+
+ 
 # ejecutar pagina
 python principal.py
-
 ##::::::::::::::::::::::MySQL :::::::::::::::::::::::::::::::###
 # Instalar MYSQL Fedora 31
 sudo yum update 
@@ -50,7 +55,4 @@ sudo firewall-cmd --reload
 # ejecutar el script en el usuario ANBU
 source DataBaseANBU.sql
 
-##::::::::::: MySQL for flask :::::::::::::##
-sudo pip install flask-mysql
- 
 
