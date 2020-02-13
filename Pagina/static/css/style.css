@@ -1,6 +1,3 @@
-body{
-    
-}
 #fondo {
     background: url(/static/img/fondo.jpg);
     background-repeat: no-repeat;
@@ -23,10 +20,4 @@ body{
     background-color:white;
     opacity:0.0; /* Opacidad 60% */
 }
-.uno {
-    height:415px;
-    width:550px;
-    margin:0px auto;
-    background-color:white;
-    opacity:1; /* Opacidad 60% */
-}
+

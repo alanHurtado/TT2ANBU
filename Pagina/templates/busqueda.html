@@ -1,5 +1,32 @@
 {% extends 'general/general.html' %}
 {% block contenido %}
-    <h1> Busqueda ::::D </h1>
+<!-- Formulario para los campos de la búsqueda -->
+   {% from "_macro.html" import render_field %}   <!-- Hacemos uso del macro render_field-->
+   <h1> Búsqueda </h1>
+   <form action="" method="post" novalidate>
+    <div>
+        {{ render_field(form.nombre) }} 
+        {% for error in form.nombre.errors %}
+        <span> style="color: red;">{{ error }} </span>
+        {% endfor %}
+    </div>
+    <div>
+        {{ render_field(form.nombre_usuario) }} 
+        {% for error in form.nombre_usuario.errors %}
+        <span> style="color: red;">{{ error }} </span>
+        {% endfor %}
+    </div>
+    <div>
+        {{ render_field(form.ubicacion) }} 
+        {% for error in form.ubicacion.errors %}
+        <span> style="color: red;">{{ error }} </span>
+        {% endfor %}
+    </div>
+    <div>
+            {{ form.submit() }} </br>
+    </div>
+   </form>
+
+
 {% endblock contenido %}
     
