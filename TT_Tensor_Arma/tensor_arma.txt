@@ -1,0 +1,20 @@
+comandos:
+
+python3 xml_a_csv.py --inputs=img_test --output=test //genera csv de img_test
+python3 xml_a_csv.py --inputs=img_entrenamiento --output=entrenamiento //genera csv de img_entrenamiento
+python3 csv_a_tf.py --csv_input=CSV/test.csv --output_path=TFRecords/test.record --images=images //genera test.record en TFRecords (pesa lo mismo que las imagenes)
+python3 csv_a_tf.py --csv_input=CSV/entrenamiento.csv --output_path=TFRecords/entrenamiento.record --images=images //genera entrenamiento.record en TFRecords (pesa lo mismo que las imagenes)
+
+Se hacen cambios a trainer.py (slim.deployment)
+Se hace cambio a faster_rcnn_inception_resnet_v2_feature_extractor.py, (slim.nets)
+Se hacen cambios a faster_rcnn_resnet_v1_feature_extractor.py (slim.nets)
+Se hace cambio a resnet_v1.py (slim.nets)
+Se hace cambio a ssd_inception_v2_feature_extractor.py (slim.nets)
+Se hace cambio a inception_v2.py (slim.nets)
+Se hace cambio a ssd_mobilenet_v1_feature_extractor.py(slim.nets)
+
+python3 object_detection/train.py --logtostderr --train_dir=train --pipeline_config_path=modelo/faster_rcnn_resnet101_coco.config //para entrenar
+
+python3 object_detection/export_inference_graph.py --input_type image_tensor --pipeline_config_path modelo/faster_rcnn_resnet101_coco.config  --trained_checkpoint_prefix train/model.ckpt-684 --output_directory modelo_congelado //para congelar modelo
+
+python3 object_detection/object_detection_runner.py //para correr final
