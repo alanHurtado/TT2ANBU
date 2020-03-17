@@ -1,5 +1,47 @@
 {% extends 'general/general.html' %}
 {% block contenido %}
-    <h1> Consulta ::::D </h1>
+<div class='cuerpo' >
+   {% from "_macro.html" import render_field %}   <!-- Hacemos uso del macro render_field-->
+   </br>
+   <h5 class = 'texT' > CONSULTA </h5>
+   <div class = 'contenido'>
+    <form action="" method="post" Consulta>
+        <div class='texST'>
+            {{ render_field(form.id_busqueda) }} 
+                {% for error in form.id_busqueda.errors %}
+                    <span> style="color: red;">{{ error }} </span>
+                {% endfor %}
+        </div>
+        <div class='texST'>
+            {{ render_field(form.nombre) }} 
+                {% for error in form.nombre.errors %}
+                    <span> style="color: red;">{{ error }} </span>
+                {% endfor %}
+        </div>
+        <div class='texST'>
+            {{ render_field(form.nombre_usuario) }} 
+                {% for error in form.nombre_usuario.errors %}
+                    <span> style="color: red;">{{ error }} </span>
+                {% endfor %}
+        </div>
+        <div class='texST'>
+            {{ render_field(form.ubicacion) }} 
+                {% for error in form.ubicacion.errors %}
+                    <span> style="color: red;">{{ error }} </span>
+                {% endfor %}
+        </div>
+        <div class='texST'>
+            {{ render_field(form.fecha) }} 
+                {% for error in form.fecha.errors %}
+                    <span> style="color: red;">{{ error }} </span>
+                {% endfor %}
+        </div>
+        <div class='texST'>
+            </br>
+            {{ form.submit(value='Consultar') }} </br>
+        </div>
+    </form>
+   </div>   
+</div>
 {% endblock contenido %}
     

@@ -1,23 +1,74 @@
 #fondo {
-    background: url(/static/img/fondo.jpg);
-    background-repeat: no-repeat;
-    background-size: auto;
+    background: url(/static/img/fondo2.jpg);
+     
+    overflow: scroll;
     height:585px;
     width:1366px;
     text-align:center;
 }
 .cuerpo {
-    height:500px;
-    width:900px;
+    background-color:#174466;
+    height:575px;
+    width:1000px;
     margin:0px auto;
-    background-color:red;
-    opacity:0.9; /* Opacidad 60% */
+    opacity:1; /* Opacidad 60% */
 }
+.Scuerpo {
+    background-color:#174466;
+    height:1200px;
+    width:1000px;
+    margin:0px auto;
+    opacity:1; /* Opacidad 60% */
+}
+
+.contenido{
+    width:750px;
+    height:400px;
+    margin: 15px auto;
+    /*background-color: bisque;*/
+}
+
+.texT {
+    color: #7FFFD4;
+    font-size: 75px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+}
+.texST {
+    color: #ccc;
+    font-size: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: normal;
+    font-weight: 300;
+}
+
+
+
 .espacio {
     height:40px;
     width:900px;
     margin:0px auto;
-    background-color:white;
     opacity:0.0; /* Opacidad 60% */
 }
 
+
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+    background: black; 
+}
+th { 
+    background: #333; 
+    color: white; 
+    font-weight: bold; 
+}
+td, th { 
+    padding: 6px; 
+    border: 1px solid #ccc; 
+    text-align: left; 
+}

@@ -1,5 +1,52 @@
 {% extends 'general/general.html' %}
 {% block contenido %}
-    <h1> Resultado Busqueda ::::D </h1>
-{% endblock contenido %}
-    
+<div class='Scuerpo'>
+   </br>
+   <h5 class = 'texT' > BÚSQUEDAS </h5>
+    <table>
+		<tr>
+			<th colspan='4'> Busqueda </th>
+		</tr>
+		<tr>
+			<th>@Username</th>
+			<th>Nombre</th>
+			<th>Url del perfil</th>
+			<th>Ubicación</th>		
+		<tr>
+		  <td>The</td>
+		  <td>Tick</td>
+		  <td>Crimefighter Sorta</td>
+		  <td>Blue</td>
+		</tr>
+	</table>
+    <div class='espacio'></div>
+<div>
+ 	<table class="table table-striped table-hover table-bordered table-sm bg-white">
+        <thead>
+        <tr>
+			<th colspan='5'> Datos de las publicaciones </th>
+		</tr>
+        <tr>
+			<th>Url publicacion</th>
+			<th>N° de rostros</th>
+			<th>Arma detectadal</th>
+			<th>Rostro agresivo detectado</th>
+            <th>Diagnostico del perfil</th>			
+		<tr>
+		</thead>
+        <tbody>
+          {% for bus in Busqueda %}
+          <tr>
+            <td>{{bus.0}}</td>
+            <td>{{bus.1}}</td>
+            <td>{{bus.2}}</td>
+            <td>{{bus.3}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+	  <div> <a href="/" class="btn btn-secondary"> Generar Reporte </a> </div>
+	  
+  </div>
+</div>
+    {% endblock contenido %}
