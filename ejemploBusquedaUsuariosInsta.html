@@ -1,0 +1,138 @@
+<!DOCTYPE html>  
+ <html>  
+      <head>  
+           <title>Webslesson Tutorial | Show JSON Data in Jquery Datatables</title>  
+           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+           <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>  
+           <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>  
+      </head> 
+      
+<body>
+    <h1>Ejemplo consumir API Web Searcher</h1><br><br>
+    <h4>1. Escribir el nombre a buscar (Ejemplo: Juan Perez)</h4>
+    <div id = "buscar">
+        <input type="text" id="nombre"/>
+        <button type="button" id="run">Run</button>
+    </div>
+        <br><br>
+    <div id = "result_1" style="display: none">
+        <h4>2. Copiar todo el contenido de este iframe (ctrl+a y luego  ctrl+c)</h4>
+        <iframe id ="lista">hola</iframe>
+        <br><br>
+        <h4>3. Pegar el contenido en este cuadro de texto (ctrl+v)</h4>
+        <textarea id = "cuadro" rows="5" cols="50" placeholder="Type HTML or text here..."></textarea>
+        <br><br>
+        <h4>4. Dar click en guardar archivo con formato .json(debe estar en la misma carpeta que este ejemplo)</h4>
+        <button type="button" value="save" id="save">Guardar archivo json</button>
+    
+        <br><br>
+    
+        <h4>5. Seleccionar el archivo recién descargado</h4>
+        Select a file to upload:
+        <input type="file" id="myFile" size="50">
+        <br><br>
+        <h4>6. Dar click en desplegar tabla</h4>
+        <button type="button" id="botonTabla">Desplegar tabla</button>
+    </div>
+    <br><br>
+    <div id="tabla_usuarios" style="display: none">
+        <table id="data-table" class="table table-bordered">  
+                     <thead>  
+                          <tr>  
+                               <th>Name</th>  
+                               <th>Network</th>  
+                               <th>User ID</th>
+                               <th>Image</th>
+                               <th>URL</th>
+                          </tr>  
+                     </thead>  
+                </table>
+    </div>
+</body>
+  
+<script type="text/javascript">
+    
+    $(function () {
+            $("#run").click(function () {
+                var nombre = $("#nombre").val();
+//                 var url = "https://webstagram.org/api?api_key=0&username="+nombre+"&source=instagram";
+                var url = "https://api.social-searcher.com/v2/users?q="+nombre+" &network=instagram&key=b1b5cf4a1870af7dca04dc916acc6167";
+//                var url = "https://codeofaninja.com/tools/find-instagram-id-answer.php?instagram_username="+nombre+"";
+                document.getElementById('lista').setAttribute("src",url);
+                $("#result_1").show();
+                const myframe = document.getElementById("lista");
+                const iframeWindow = myframe.contentWindow;
+                const iframeDocument = myframe.contentDocument;
+                //console.log(iframeDocument);
+            });
+        });
+    
+    $("#botonTabla").click(function(){
+//        datostable = document.getElementById("cuadro").value;
+        creaTabla();
+        
+    });
+    
+    function saveTextAsFile() {
+          var textToWrite = document.getElementById('cuadro').value;
+          var textFileAsBlob = new Blob([ textToWrite ], { type: 'text/plain' });
+          var fileNameToSaveAs = "data.json";
+
+          var downloadLink = document.createElement("a");
+          downloadLink.download = fileNameToSaveAs;
+          downloadLink.innerHTML = "Download File";
+          if (window.webkitURL != null) {
+            // Chrome allows the link to be clicked without actually adding it to the DOM.
+            downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+          } else {
+            // Firefox requires the link to be added to the DOM before it can be clicked.
+            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+          }
+
+          downloadLink.click();
+    }
+    
+    var button = document.getElementById('save');
+    button.addEventListener('click', saveTextAsFile);
+//    $("#buscaarchivo").show();
+    
+    function destroyClickedElement(event) {
+        // remove the link from the DOM
+        document.body.removeChild(event.target);
+}
+    
+//    var datostable;
+    
+    function creaTabla(){
+        var path = document.getElementById("myFile").value;
+//        alert(path);
+        var filename = path.replace(/^.*[\\\/]/, '');
+//        alert(filename);
+        $('#data-table').DataTable({  
+           "ajax": {
+                "url": filename,
+                "dataSrc": "posts"
+            }, 
+//           "data" : datostable,
+           "columns"     :     [  
+                {     "data"     :     "name"     },  
+                {     "data"     :     "network"}, 
+                {     "data"     :     "userid"}, 
+                {     "data"     :     "image"}, 
+                {     "data"     :     "url"}  
+           ]  
+      });  
+        $("#tabla_usuarios").show();
+    }
+    
+    
+ 
+        
+    
+    </script>
+</html>
