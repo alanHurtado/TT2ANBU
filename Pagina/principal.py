@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template ## permite renderisar templates
 from flask import request, redirect, url_for   ## permite el manejo de los datos del formulario
-from model.Bd_conect import insertar_busqueda, res_bus   # importamos los registros a la BD
+from model.Bd_conect import insertar_busqueda, res_bus, res_per  # importamos los registros a la BD
 from model import formulario    #importamos el formulario
 
 app = Flask(__name__)
@@ -12,8 +12,8 @@ def index():
 
 @app.route('/busqueda', methods = ['GET', 'POST']) # indicamos solocitudes get y post en la pagina   
 def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
-    coment_form = formulario.ComentForm(request.form)    # generamos la instacia al formulario
-    if request.method == 'POST':    #   si se reciben datos
+    coment_form = formulario.ComentFormBus(request.form)    # generamos la instacia al formulario
+    if request.method == 'POST' and coment_form.validate():    #   si se reciben datos
         nombre = coment_form.nombre.data # se guarda con form en la variable declarada segun busqueda.html
         nombre_usuario = coment_form.nombre_usuario.data
         ubicacion = coment_form.ubicacion.data
@@ -26,18 +26,21 @@ def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
 
 @app.route('/resultado_busqueda')
 def resultado_busqueda():
-    data=res_bus()
-    return render_template('resultadobusqueda.html', Busqueda = data)
+    data_bus=res_bus()
+    data_per=res_per()
+    return render_template('resultadobusqueda.html', Busqueda = data_bus, Perfil = data_per)
 
 @app.route('/consulta', methods = ['GET', 'POST'])
 def consulta():
-    coment_form = formulario.ComentForm(request.form)
-    if request.method == 'POST':    #   si se reciben datos
+    coment_form = formulario.ComentFormCon(request.form)
+    if request.method == 'POST' and coment_form.validate():    #   se agrega coment_form para validar el formulario 
         id_busqueda = coment_form.id_busqueda.data
         nombre = coment_form.nombre.data # se guarda con form en la variable declarada segun busqueda.html
         nombre_usuario = coment_form.nombre_usuario.data
         ubicacion = coment_form.ubicacion.data
-        fecha = coment_form.fecha.data
+        fecha_in = coment_form.fecha_in.data
+        fecha_fin = coment_form.fecha_fin.data
+    
         next = request.args.get('next', 'resultado_consulta') ## especificamos la ruta si se enviaron los datos
         if next:    # comprobamos si paso por la url
            return redirect(next) # Se manda a la ruta

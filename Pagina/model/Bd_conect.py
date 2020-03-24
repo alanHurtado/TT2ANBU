@@ -25,3 +25,11 @@ def res_bus():
     data = cursor.fetchall()
     cursor.close()
     return data
+
+def res_per():
+    conn = mysql.connect()  # conectamos a la BD
+    cursor = conn.cursor()  
+    cursor.execute('SELECT * FROM Perfil')
+    data = cursor.fetchall()
+    cursor.close()
+    return data

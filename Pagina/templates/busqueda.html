@@ -10,21 +10,12 @@
         <form action="" method="post" novalidate>
         <div class='texST'>
             {{ render_field(form.nombre) }} 
-                {% for error in form.nombre.errors %}
-                    <span> style="color: red;">{{ error }} </span>
-                 {% endfor %}
         </div>
         <div class='texST'>
             {{ render_field(form.nombre_usuario) }} 
-                {% for error in form.nombre_usuario.errors %}
-                    <span> style="color: red;">{{ error }} </span>
-                {% endfor %}
         </div>
         <div class='texST'>
-            {{ render_field(form.ubicacion) }} 
-                {% for error in form.ubicacion.errors %}
-                    <span> style="color: red;">{{ error }} </span>
-                {% endfor %}
+            {{ render_field(form.ubicacion) }}        
         </div>
         <div class='texST'>
             </br>

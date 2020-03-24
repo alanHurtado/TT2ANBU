@@ -8,34 +8,30 @@
     <form action="" method="post" Consulta>
         <div class='texST'>
             {{ render_field(form.id_busqueda) }} 
-                {% for error in form.id_busqueda.errors %}
-                    <span> style="color: red;">{{ error }} </span>
-                {% endfor %}
         </div>
         <div class='texST'>
             {{ render_field(form.nombre) }} 
-                {% for error in form.nombre.errors %}
-                    <span> style="color: red;">{{ error }} </span>
-                {% endfor %}
         </div>
         <div class='texST'>
             {{ render_field(form.nombre_usuario) }} 
-                {% for error in form.nombre_usuario.errors %}
-                    <span> style="color: red;">{{ error }} </span>
-                {% endfor %}
         </div>
         <div class='texST'>
             {{ render_field(form.ubicacion) }} 
-                {% for error in form.ubicacion.errors %}
-                    <span> style="color: red;">{{ error }} </span>
-                {% endfor %}
         </div>
         <div class='texST'>
-            {{ render_field(form.fecha) }} 
-                {% for error in form.fecha.errors %}
-                    <span> style="color: red;">{{ error }} </span>
+            {{form.fecha_in.label}}
+            </br>
+            {{ form.fecha_in(type ='date', min='08/08/2018', max='08/08/2022' ) }} 
+                {% for error in form.fecha_in.errors %}
+                    <span style="color: red;">{{ error }}</span>
                 {% endfor %}
-        </div>
+            {{form.fecha_fin.label}}
+            {{ form.fecha_fin(type ='date', min='08/08/2018', max='08/08/2022' ) }} 
+            </br>
+                {% for error in form.fecha_fin.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+        </div> 
         <div class='texST'>
             </br>
             {{ form.submit(value='Consultar') }} </br>
