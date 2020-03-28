@@ -12,11 +12,11 @@ mysql = MySQL(app)
 
 app.secret_key = "mysecretkey" 
 
-def insertar_busqueda(nombre, usuario, ubicacion ):
+def insertar_busqueda(in_name):
     conn = mysql.connect()  # conectamos a la BD
     cursor = conn.cursor()     # creamos cursos para manejar la BD
-    cursor.execute("INSERT INTO Busqueda (nombre_buscado) VALUES (%s,%s,%s)", (usuario, nombre, ubicacion))
-    conn.commit()
+    cursor.execute("INSERT INTO Busqueda (nombre_buscado) VALUES (%s)", (in_name))
+    print(conn.commit())
 
 def res_bus():
     conn = mysql.connect()  # conectamos a la BD

@@ -22,15 +22,11 @@ def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
         answJSON = search_profiles(in_name,no_profiles)
         
         if not answJSON:
-            error = 'Servicio de búsqueda no disponible, inténtelo de nuevo.'
+            error = 'El servicio de búsqueda no está disponible, intente de nuevo.'
             return render_template('busqueda.html',error=error,form = coment_form)
         else:
+            insertar_busqueda(in_name)
             return render_template('resultadobusqueda.html', json = answJSON)
-
-        # nombre = coment_form.nombre.data # se guarda con form en la variable declarada segun busqueda.html
-        # nombre_usuario = coment_form.nombre_usuario.data
-        # ubicacion = coment_form.ubicacion.data
-        # insertar_busqueda(nombre, nombre_usuario, ubicacion)    #mandamos los datos para ser insetardos en la BD
 
         # next = request.args.get('next', 'resultado_busqueda') ## especificamos la ruta si se enviaron los datos
         # if next:    # comprobamos si paso por la url
