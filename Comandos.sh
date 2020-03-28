@@ -6,6 +6,8 @@ sudo pip install Flask
 sudo pip install flask-mysql
 ##::::::::::: Formularios for flask ::::::::::: ##
 pip install Flask-WTF
+##::::::::::: Solicitudes Request para API :::::##
+pip3 install request
 
  
 # ejecutar pagina

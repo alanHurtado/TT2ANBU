@@ -1,10 +1,12 @@
+from ctlBusqueda import *
 from flask import Flask
 from flask import render_template ## permite renderisar templates
-from flask import request, redirect, url_for   ## permite el manejo de los datos del formulario
+from flask import request, redirect, url_for, flash   ## permite el manejo de los datos del formulario
 from model.Bd_conect import insertar_busqueda, res_bus, res_per  # importamos los registros a la BD
 from model import formulario    #importamos el formulario
 
 app = Flask(__name__)
+app.secret_key = 'anotherSecretKey'
 
 @app.route('/')
 def index():
@@ -14,14 +16,26 @@ def index():
 def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
     coment_form = formulario.ComentFormBus(request.form)    # generamos la instacia al formulario
     if request.method == 'POST' and coment_form.validate():    #   si se reciben datos
-        nombre = coment_form.nombre.data # se guarda con form en la variable declarada segun busqueda.html
-        nombre_usuario = coment_form.nombre_usuario.data
-        ubicacion = coment_form.ubicacion.data
-        insertar_busqueda(nombre, nombre_usuario, ubicacion)    #mandamos los datos para ser insetardos en la BD
-        next = request.args.get('next', 'resultado_busqueda') ## especificamos la ruta si se enviaron los datos
-        if next:    # comprobamos si paso por la url
-           return redirect(next) # Se manda a la ruta
-        return redirect(url_for('index')) #si no mandamos a la ruta o parametro definido
+        error = None
+        in_name = coment_form.in_name.data
+        no_profiles = coment_form.no_profiles.data            
+        answJSON = search_profiles(in_name,no_profiles)
+        
+        if not answJSON:
+            error = 'Servicio de búsqueda no disponible, inténtelo de nuevo.'
+            return render_template('busqueda.html',error=error,form = coment_form)
+        else:
+            return render_template('resultadobusqueda.html', json = answJSON)
+
+        # nombre = coment_form.nombre.data # se guarda con form en la variable declarada segun busqueda.html
+        # nombre_usuario = coment_form.nombre_usuario.data
+        # ubicacion = coment_form.ubicacion.data
+        # insertar_busqueda(nombre, nombre_usuario, ubicacion)    #mandamos los datos para ser insetardos en la BD
+
+        # next = request.args.get('next', 'resultado_busqueda') ## especificamos la ruta si se enviaron los datos
+        # if next:    # comprobamos si paso por la url
+        #    return redirect(next) # Se manda a la ruta
+        # return redirect(url_for('index')) #si no mandamos a la ruta o parametro definido
     return render_template('busqueda.html', form = coment_form) # mandamos el formulario
 
 @app.route('/resultado_busqueda')

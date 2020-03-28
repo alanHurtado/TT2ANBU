@@ -6,7 +6,7 @@ app = Flask(__name__)
 ### Coneccion a la base de datos ####
 app.config['MYSQL_DATABASE_USER'] = 'ANBU'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'ANBUTT2'
-app.config['MYSQL_DATABASE_DB'] = 'mydb'
+app.config['MYSQL_DATABASE_DB'] = 'ANBU_DB'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql = MySQL(app)
 
@@ -15,7 +15,7 @@ app.secret_key = "mysecretkey"
 def insertar_busqueda(nombre, usuario, ubicacion ):
     conn = mysql.connect()  # conectamos a la BD
     cursor = conn.cursor()     # creamos cursos para manejar la BD
-    cursor.execute("INSERT INTO Busqueda (username_buscado, nombre_buscado, ubicacion) VALUES (%s,%s,%s)", (usuario, nombre, ubicacion))
+    cursor.execute("INSERT INTO Busqueda (nombre_buscado) VALUES (%s,%s,%s)", (usuario, nombre, ubicacion))
     conn.commit()
 
 def res_bus():

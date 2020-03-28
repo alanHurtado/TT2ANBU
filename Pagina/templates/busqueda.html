@@ -6,23 +6,33 @@
     </br>
     <h5 class = 'texT' > BÚSQUEDA </h5>
     </br>
+    {% if error %}
+        <p class='error'><strong>Error:</strong> {{ error }}
+    {% endif %}
+    <center><div class="loader" id="loader" style="visibility: hidden" ></div></center>
     <div class = 'contenido'>
         <form action="" method="post" novalidate>
         <div class='texST'>
-            {{ render_field(form.nombre) }} 
+            {{ render_field(form.in_name) }}            
         </div>
-        <div class='texST'>
-            {{ render_field(form.nombre_usuario) }} 
-        </div>
-        <div class='texST'>
-            {{ render_field(form.ubicacion) }}        
+        <div class="texST">
+            {{render_field(form.no_profiles)}}             
         </div>
         <div class='texST'>
             </br>
-            {{ form.submit(value='Búscar') }} </br>
-        </div
+            {{ form.submit(value='Buscar',onclick="funcDiv()") }} </br>
+        </div>
    </form>    
    </div>
 </div>
+<script type="text/javascript">
+function funcDiv(){
+    el = document.getElementById('loader');
+    if(el.style.visibility == 'hidden'){
+        el.style.visibility = 'visible'
+    }else{
+        el.style.visibility = 'hidden'
+    }
+}/*funcDIV*/    
+</script>
 {% endblock contenido %}
-    
