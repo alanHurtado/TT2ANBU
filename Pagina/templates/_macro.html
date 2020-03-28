@@ -1,7 +1,7 @@
 <!-- Archivo que hace general el uso de  "funciones o etiquetas" en nuestro caso los formularios -->
 {% macro render_field(field) %}     <!-- Definimos el nombre del marco y su argumento -->
-<td> {{ field.label }}  <!--Mostramos el nombre-->
-<dd> {{ field(**kwargs)|safe }}  <!-- Mostramos el campo y indicamos que lo muestre como html-->
+<br>{{ field.label }}  <!--Mostramos el nombre-->
+<br>{{ field(**kwargs)|safe }}  <!-- Mostramos el campo y indicamos que lo muestre como html-->
 
 {% if field.errors %}
     <ul>

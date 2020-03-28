@@ -3,15 +3,14 @@
 <div class='cuerpo'>
 <!-- Formulario para los campos de la búsqueda -->
     {% from "_macro.html" import render_field %}   <!-- Hacemos uso del macro render_field-->
-    </br>
-    <h5 class = 'texT' > BÚSQUEDA </h5>
-    </br>
-    {% if error %}
-        <p class='error'><strong>Error:</strong> {{ error }}
-    {% endif %}
-    <center><div class="loader" id="loader" style="visibility: hidden" ></div></center>
+    <h5 class = 'texT' > BÚSQUEDA </h5>   
+    
     <div class = 'contenido'>
-        <form action="" method="post" novalidate>
+    <form action="" method="post" novalidate>
+        {% if error %}
+            <p class='error'><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <center><div class="loader" id="loader" style="visibility: hidden;" ></div></center>
         <div class='texST'>
             {{ render_field(form.in_name) }}            
         </div>
@@ -19,8 +18,7 @@
             {{render_field(form.no_profiles)}}             
         </div>
         <div class='texST'>
-            </br>
-            {{ form.submit(value='Buscar',onclick="funcDiv()") }} </br>
+            <br>{{ form.submit(value='Buscar',onclick="funcDiv()") }}<br>
         </div>
    </form>    
    </div>
@@ -33,6 +31,10 @@ function funcDiv(){
     }else{
         el.style.visibility = 'hidden'
     }
-}/*funcDIV*/    
+}/*funcDIV*/
+
+function hide_loader(){
+    document.getElementById('loader').style.visibility = 'hidden'
+}    
 </script>
 {% endblock contenido %}
