@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema ANBUDB
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema ANBUDB
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `ANBUDB` DEFAULT CHARACTER SET utf8 ;
+USE `ANBUDB` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Busqueda`
+-- Table `ANBUDB`.`Busqueda`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Busqueda` (
+CREATE TABLE IF NOT EXISTS `ANBUDB`.`Busqueda` (
   `idBusqueda` INT NOT NULL AUTO_INCREMENT,
   `nombre_buscado` VARCHAR(30) NOT NULL,
   `fecha` VARCHAR(45) NOT NULL,
@@ -29,9 +29,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Perfil`
+-- Table `ANBUDB`.`Perfil`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Perfil` (
+CREATE TABLE IF NOT EXISTS `ANBUDB`.`Perfil` (
   `idPerfil` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(30) NOT NULL,
   `nombre` VARCHAR(30) NOT NULL,
@@ -41,9 +41,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Publicacion`
+-- Table `ANBUDB`.`Publicacion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Publicacion` (
+CREATE TABLE IF NOT EXISTS `ANBUDB`.`Publicacion` (
   `idPublicacion` INT NOT NULL AUTO_INCREMENT,
   `idPerfil` INT NULL,
   `ubicacion` VARCHAR(100) NULL,
@@ -57,16 +57,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Publicacion` (
   INDEX `idPerfil_idx` (`idPerfil` ASC),
   CONSTRAINT `idPerfil`
     FOREIGN KEY (`idPerfil`)
-    REFERENCES `mydb`.`Perfil` (`idPerfil`)
+    REFERENCES `ANBUDB`.`Perfil` (`idPerfil`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Reporte`
+-- Table `ANBUDB`.`Reporte`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Reporte` (
+CREATE TABLE IF NOT EXISTS `ANBUDB`.`Reporte` (
   `idReporte` INT NOT NULL AUTO_INCREMENT,
   `numPerfiles` INT NULL,
   `numPerfilesArma` INT NULL,
@@ -76,9 +76,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`reporte_busqueda`
+-- Table `ANBUDB`.`reporte_busqueda`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`reporte_busqueda` (
+CREATE TABLE IF NOT EXISTS `ANBUDB`.`reporte_busqueda` (
   `idBusqueda` INT NOT NULL,
   `idReporte` INT NOT NULL,
   `fecha` DATETIME NULL,
@@ -86,42 +86,42 @@ CREATE TABLE IF NOT EXISTS `mydb`.`reporte_busqueda` (
   INDEX `fk_reporte_busquedas_2_idx` (`idReporte` ASC),
   CONSTRAINT `fk_reporte_busquedas_1`
     FOREIGN KEY (`idBusqueda`)
-    REFERENCES `mydb`.`Busqueda` (`idBusqueda`)
+    REFERENCES `ANBUDB`.`Busqueda` (`idBusqueda`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_reporte_busquedas_2`
     FOREIGN KEY (`idReporte`)
-    REFERENCES `mydb`.`Reporte` (`idReporte`)
+    REFERENCES `ANBUDB`.`Reporte` (`idReporte`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`busqueda_perfil`
+-- Table `ANBUDB`.`busqueda_perfil`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`busqueda_perfil` (
+CREATE TABLE IF NOT EXISTS `ANBUDB`.`busqueda_perfil` (
   `idBusqueda` INT NOT NULL,
   `idPerfil` INT NOT NULL,
   PRIMARY KEY (`idBusqueda`, `idPerfil`),
   INDEX `fk_busqueda_perfil_2_idx` (`idPerfil` ASC),
   CONSTRAINT `fk_busqueda_perfil_1`
     FOREIGN KEY (`idBusqueda`)
-    REFERENCES `mydb`.`Busqueda` (`idBusqueda`)
+    REFERENCES `ANBUDB`.`Busqueda` (`idBusqueda`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_busqueda_perfil_2`
     FOREIGN KEY (`idPerfil`)
-    REFERENCES `mydb`.`Perfil` (`idPerfil`)
+    REFERENCES `ANBUDB`.`Perfil` (`idPerfil`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Rostro`
+-- Table `ANBUDB`.`Rostro`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Rostro` (
+CREATE TABLE IF NOT EXISTS `ANBUDB`.`Rostro` (
   `idRostro` INT NOT NULL AUTO_INCREMENT,
   `idPublicacion` INT NULL,
   `rostro_oval` INT NULL,
@@ -138,16 +138,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Rostro` (
   INDEX `fk_Rostro_1_idx` (`idPublicacion` ASC),
   CONSTRAINT `fk_Rostro_1`
     FOREIGN KEY (`idPublicacion`)
-    REFERENCES `mydb`.`Publicacion` (`idPublicacion`)
+    REFERENCES `ANBUDB`.`Publicacion` (`idPublicacion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Arma`
+-- Table `ANBUDB`.`Arma`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Arma` (
+CREATE TABLE IF NOT EXISTS `ANBUDB`.`Arma` (
   `idArma` INT NOT NULL,
   `idPublicacion` INT NULL,
   `porcentaje` INT NULL,
@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Arma` (
   INDEX `fk_Arma_1_idx` (`idPublicacion` ASC),
   CONSTRAINT `fk_Arma_1`
     FOREIGN KEY (`idPublicacion`)
-    REFERENCES `mydb`.`Publicacion` (`idPublicacion`)
+    REFERENCES `ANBUDB`.`Publicacion` (`idPublicacion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
