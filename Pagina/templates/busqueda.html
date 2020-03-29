@@ -1,40 +1,46 @@
 {% extends 'general/general.html' %}
 {% block contenido %}
+<!--BÚSQUEDA-->
 <div class='cuerpo'>
-<!-- Formulario para los campos de la búsqueda -->
-    {% from "_macro.html" import render_field %}   <!-- Hacemos uso del macro render_field-->
-    <h5 class = 'texT' > BÚSQUEDA </h5>   
-    
+    {% from "_macro.html" import render_field %}
+    <h5 class = 'texT' > BÚSQUEDA </h5>    
+    <!--Contenido-->
     <div class = 'contenido'>
-    <form action="" method="post" novalidate>
-        {% if error %}
-            <p class='error'><strong>Error:</strong> {{ error }}
-        {% endif %}
-        <center><div class="loader" id="loader" style="visibility: hidden;" ></div></center>
-        <div class='texST'>
-            {{ render_field(form.in_name) }}            
-        </div>
-        <div class="texST">
-            {{render_field(form.no_profiles)}}             
-        </div>
-        <div class='texST'>
-            <br>{{ form.submit(value='Buscar',onclick="funcDiv()") }}<br>
-        </div>
-   </form>    
+        <form action="" method="post" novalidate>
+            {% if error %}
+                <p class='error'><strong>Error:</strong> {{ error }}
+            {% endif %}
+            <center>
+                <div class="loader" id="loader" style="visibility: hidden;" ></div>
+            </center>
+            <div class='texST'>
+                {{ render_field(form.in_name) }}            
+            </div>
+            <div class="texST">
+                {{render_field(form.no_profiles)}}             
+            </div>
+            <div class='texST'>
+                <br>
+                {{form.submit(value='Buscar',onclick="runLoader()")}}
+                <br>
+            </div>
+        </form>  
    </div>
+   <!--//Contenido//-->
 </div>
 <script type="text/javascript">
-function funcDiv(){
-    el = document.getElementById('loader');
-    if(el.style.visibility == 'hidden'){
-        el.style.visibility = 'visible'
-    }else{
-        el.style.visibility = 'hidden'
-    }
-}/*funcDIV*/
+    function runLoader(){        
+        el = document.getElementById('loader');
+        if(el.style.visibility == 'hidden'){
+            el.style.visibility = 'visible'
+        }else{
+            el.style.visibility = 'hidden'    
+        }
+    }/*funcDIV*/
 
-function hide_loader(){
-    document.getElementById('loader').style.visibility = 'hidden'
-}    
+    function hide_loader(){
+        document.getElementById('loader').style.visibility = 'hidden'
+    }  
 </script>
+<!--//BÚSQUEDA//-->
 {% endblock contenido %}

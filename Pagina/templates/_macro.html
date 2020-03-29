@@ -1,13 +1,14 @@
 <!-- Archivo que hace general el uso de  "funciones o etiquetas" en nuestro caso los formularios -->
-{% macro render_field(field) %}     <!-- Definimos el nombre del marco y su argumento -->
-<br>{{ field.label }}  <!--Mostramos el nombre-->
-<br>{{ field(**kwargs)|safe }}  <!-- Mostramos el campo y indicamos que lo muestre como html-->
-
-{% if field.errors %}
-    <ul>
-        {% for error in field.errors %}
-             <span style="color: red;">{{ error }} </span> 
-        {% endfor %}
-    </ul>
-{% endif %}
+{% macro render_field(field) %}<!-- Definimos el nombre del marco y su argumento -->
+	<br>
+	{{ field.label }} <!--Mostramos el nombre-->
+	<br>
+	{{ field(**kwargs)|safe }} <!-- Mostramos el campo y indicamos que lo muestre como html-->
+	{% if field.errors %}
+		<ul>
+			{% for error in field.errors %}
+			<span style="color: red;">{{ error }} </span> 
+	        {% endfor %}
+	    </ul>
+	{% endif %}
 {% endmacro%}

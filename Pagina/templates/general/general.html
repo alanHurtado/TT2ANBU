@@ -1,54 +1,56 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset='utf-8'>
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>ANBU</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-  
-  <!--bootstrap4-->
-  <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <!--bootstrap4-->
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
+    <!-- estilos propios -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+    <!-- Agregamos libreria Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Agreamos la ruta de los archivos js -->
+    <script type="{{url_for('static',filename='js/archivo.js')}}"></script>
+    
+    <title>ANBU</title>
+  </head>
 
-  <!-- estilos propios -->
-  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
-
-  <!-- Agregamos libreria Jquery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-  <!-- Agreamos la ruta de los archivos js -->
-  <script type="{{url_for('static',filename='js/archivo.js')}}"></script>
-</head>
-
-<body>
-  <!-- Barra de navegacion -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href='/'> <img src="/static/img/ANBU.jpg"> </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/busqueda"> <h5> Búsqueda </h5> <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/consulta"> <h5> Consulta </h5> </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/reportes"> <h5> Reportes </h5> </a>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        <a class="nav-link" href="/Conocenos"> <h5> Conocenos </h5> </a>
-      </span>
+  <!--MAIN_BODY-->
+  <body>
+    <!-- Barra de navegacion -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href='/'> <img src="/static/img/ANBU.jpg"> </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/busqueda"> <h4> Búsqueda </h4> <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/consulta"> <h4> Consulta </h4> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/reportes"> <h4> Reportes </h4> </a>
+          </li>
+        </ul>
+        <span class="navbar-text">
+          <a class="nav-link" href="/Conocenos"> <h4> Conocenos </h4> </a>
+        </span>
+      </div>
+    </nav>
+    <!--//Barra de navegación-->
+    
+    <!--Contenido-->
+    <div id="fondo">
+      {% block contenido %}
+      {% endblock contenido %}
     </div>
-  </nav>
-  <div id="fondo">
-        {% block contenido %}
-        {% endblock contenido %}
-  </div>
-
-   
-</body>
+    <!--//Contenido//-->
+  </body>
+  <!--//MAIN_BODY//-->
 </html>
