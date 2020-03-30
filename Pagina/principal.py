@@ -19,15 +19,15 @@ def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
         error = None
         in_name = coment_form.in_name.data
         no_profiles = coment_form.no_profiles.data            
-        #answJSON = search_profiles(in_name,no_profiles)
-        answJSON = True
-        if not answJSON:
+        
+        #------TEST-------#
+        if not do_search(in_name,no_profiles):
             error = 'El servicio de búsqueda no está disponible, intente de nuevo.'
             return render_template('busqueda.html',error=error,form = coment_form)
-        else:
-            insertar_busqueda(in_name)            
-            return render_template('resultadobusqueda.html', json = answJSON)
-
+        else:            
+            return render_template('resultadobusqueda.html', json = [{"foo","var"}])
+        #---------------------------#
+        
         # next = request.args.get('next', 'resultado_busqueda') ## especificamos la ruta si se enviaron los datos
         # if next:    # comprobamos si paso por la url
         #    return redirect(next) # Se manda a la ruta
