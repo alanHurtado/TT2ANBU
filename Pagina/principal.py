@@ -2,7 +2,7 @@ from ctlBusqueda import *
 from flask import Flask
 from flask import render_template ## permite renderisar templates
 from flask import request, redirect, url_for, flash   ## permite el manejo de los datos del formulario
-from model.Bd_conect import insertar_busqueda, res_bus, res_per  # importamos los registros a la BD
+from model.Bd_conect import *  # importamos los registros a la BD
 from model import formulario    #importamos el formulario
 
 app = Flask(__name__)
@@ -19,26 +19,41 @@ def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
         error = None
         in_name = coment_form.in_name.data
         no_profiles = coment_form.no_profiles.data            
+        id_srch = 14
+        #id_srch = do_search(in_name,no_profiles)
         
-        #------TEST-------#
-        if not do_search(in_name,no_profiles):
-            error = 'El servicio de búsqueda no está disponible, intente de nuevo.'
+        if not id_srch:#
+            error = 'El servicio de búsqueda falló, intente de nuevo.'
             return render_template('busqueda.html',error=error,form = coment_form)
-        else:            
-            return render_template('resultadobusqueda.html', json = [{"foo","var"}])
-        #---------------------------#
-        
-        # next = request.args.get('next', 'resultado_busqueda') ## especificamos la ruta si se enviaron los datos
-        # if next:    # comprobamos si paso por la url
-        #    return redirect(next) # Se manda a la ruta
-        # return redirect(url_for('index')) #si no mandamos a la ruta o parametro definido
+        else:                        
+            #redirect (url_for('resultado_busqueda'))
+            next = request.args.get('next', 'resultado_busqueda') # especificamos la ruta si se enviaron los datos            
+            if next:    # comprobamos si paso por la url
+               return redirect(url_for('resultado_busqueda', id_srch=id_srch)) # Se manda a la ruta
+            return redirect(url_for('index')) #si no mandamos a la ruta o parametro definido
     return render_template('busqueda.html', form = coment_form) # mandamos el formulario
 
-@app.route('/resultado_busqueda')
-def resultado_busqueda():
-    data_bus=res_bus()
-    data_per=res_per()
-    return render_template('resultadobusqueda.html', Busqueda = data_bus, Perfil = data_per)
+@app.route('/resultado_busqueda/<int:id_srch>', methods=['GET','POST'])
+def resultado_busqueda(id_srch):    
+    try:
+        data_srch=select_srch(id_srch)
+        data_prof=select_profiles(id_srch)                
+        data = list()
+        
+        
+        for prof in data_prof:
+            profiles = list()          
+            data_post=select_posts(prof[0])
+            posts = list(data_post)
+            profiles.append(prof)
+            profiles.append(posts)
+            data.append(profiles)                    
+        return render_template('resultadobusqueda.html', Busqueda = data_srch, Perfiles = data, noResults = len(data))
+    except Exception as e:
+        print("ERROR recuperando los datos de la búsqueda: "+str(e))
+        return False
+    
+    
 
 @app.route('/consulta', methods = ['GET', 'POST'])
 def consulta():

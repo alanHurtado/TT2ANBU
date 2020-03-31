@@ -45,13 +45,11 @@ def do_search(srch_name,srch_limit):
 						#insert_post(dbProfId,date,url,desc,location)					
 						################################################################	
 						insert_post(dbProfId,date,"https://scontent-mad1.com","Lorem ipsum dolor sit amet",location)						
-				#----------------------#								
+				#----------------------#
+			return dbSrchId
 		except Exception as e:
-			print("Errore ::"+str(e))			
-		
-	
-
-		return True
+			print("Errore ::"+str(e))
+			return False
 
 def search_profiles(data_name,data_limit):
 	URL = "https://api.apify.com/v2/actor-tasks/"+actorTaskId+"/run-sync?token="+token+"&outputRecordKey=OUTPUT/"	

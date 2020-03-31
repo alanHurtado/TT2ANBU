@@ -1,55 +1,77 @@
 {% extends 'general/general.html' %}
 {% block contenido %}
-{% if json %}
-        <p class='error'><strong>Error:</strong> {{ json }}
-{% endif %}
 <div class='Scuerpo'>
-   </br>
+   <br>
    <h5 class = 'texT' > RESULTADOS DE BÚSQUEDA </h5>
-    <table>
+    <table class="type2">
 		<tr>
-			<th colspan='4'> Busqueda </th>
+			<th>Nombre o Username Buscado</th>			
+			<th>Fecha</th>
+			<th>Número de Perfiles Resultantes</th>			
 		</tr>
 		<tr>
-			<th>@Username</th>
-			<th>Nombre</th>
-			<th>Url del perfil</th>
-			<th>Ubicación</th>		
-		<tr>
-		  <td>The</td>
-		  <td>Tick</td>
-		  <td>Crimefighter Sorta</td>
-		  <td>Blue</td>
-		</tr>
+			
+			<td><b>{{Busqueda[0][1]}}</b></td>
+			<td><b>{{Busqueda[0][2]}}</b></td>
+			<td><b>{{noResults}}</b></td>
+
+		</tr>				  
 	</table>
     <div class='espacio'></div>
+    <t8 class='subtitle'> Perfiles Resultantes </t8>   
 <div>
- 	<table class="table table-striped table-hover table-bordered table-sm bg-white">
-        <thead>
-        <tr>
-			<th colspan='5'> Datos de las publicaciones </th>
-		</tr>
-        <tr>
-			<th>Url publicacion</th>
-			<th>N° de rostros</th>
-			<th>Arma detectadal</th>
-			<th>Rostro agresivo detectado</th>
-            <th>Diagnostico del perfil</th>			
+	{%for prof in Perfiles%}
+	<table class="type2">
+ 		<tr>
+ 			<th>Username</th>
+			<th>Nombre</th>
+			<th>URL del Perfil</th>
+		</tr>			      				
 		<tr>
-		</thead>
-        <tbody>
-          {% for bus in Busqueda %}
-          <tr>
-            <td>{{bus.0}}</td>
-            <td>{{bus.1}}</td>
-            <td>{{bus.2}}</td>
-            <td>{{bus.3}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-	  <div> <a href="/" class="btn btn-secondary"> Generar Reporte </a> </div>
-	  
-  </div>
+    		<td><b>{{prof[0][1]}}</b></td>
+			<td><b>{{prof[0][2]}}</b></td>
+			<td><b>
+				<a href="{{prof[0][3]}}" target='_blank'>{{prof[0][3]}}</a>
+				</b>
+			</td>		
+    	</tr>
+    	<!--TABLA de PUBLICACIONES-->
+    	<tr>
+    		<td colspan="3">
+    		<table class="type3">
+    			<tr><th colspan="7">Publicaciones</th></tr>
+    			<tr>
+    				<th>#</th>
+    				<th>Fecha de Publicación</th>
+    				<th>Desc</th>
+    				<th>Ubicación</th>
+    				<th>URL</th>
+    				<th>Val. Rostro</th>
+    				<th>Val. Arma</th>
+    			</tr>
+    			{%for post in prof[1]%}
+    			<tr>
+    				<td>{{loop.index}}</td>
+    				<td>{{post[3]}}</td>
+    				<td>{{post[5]}}</td>
+    				<td>{{post[2]}}</td>
+    				<td>
+    					<a href="{{post[4]}}" target='_blank'>Ver Imagen</a>    					
+    				</td>
+    				<td>{{post[6]}}</td>
+    				<td>{{post[7]}}</td>
+    			</tr>
+    			{%endfor%}
+    		</table>
+    		</td>
+		</tr>
+    	<!--//TABLA de PUBLICACIONES//-->
+    </table>
+    <div class='espacio'></div>
+    {%endfor%}
+    <!--FOR PERFILES-->   
+	 <div> <a href="/" class="btn btn-secondary"> Generar Reporte </a> </div>
+		  
+</div>
 </div>
     {% endblock contenido %}

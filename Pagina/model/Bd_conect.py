@@ -13,10 +13,10 @@ app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql = MySQL(app)
 
 conn = mysql.connect()  #conectamos a la BD
-cursor = conn.cursor()  #creamos cursos para manejar la BD
 
 #----Funciones INSERT INTO --------#
 def insertar_busqueda(in_name):
+    cursor = conn.cursor()
     x = datetime.now()
     formatted_date = x.strftime('%Y-%m-%d %H:%M:%S')
     try:
@@ -28,6 +28,7 @@ def insertar_busqueda(in_name):
         return False    
 
 def insert_profile(username, name, url):
+    cursor = conn.cursor()
     try:
         cursor.execute("INSERT INTO Perfil (username,nombre,urlPerfil) VALUES (%s,%s,%s)",(username,name,url))
         conn.commit()
@@ -36,7 +37,8 @@ def insert_profile(username, name, url):
         print("ERROR al realizar insert_profile: "+str(e))
         return False        
 
-def insert_srch_prof(idSearch,idProfile):    
+def insert_srch_prof(idSearch,idProfile):
+    cursor = conn.cursor()
     try:
         cursor.execute("INSERT INTO busqueda_perfil (idBusqueda,idPerfil) VALUES (%s,%s)",(idSearch,idProfile))
         conn.commit()
@@ -46,6 +48,7 @@ def insert_srch_prof(idSearch,idProfile):
         return False
 
 def insert_post(idProfile,date,url,desc,location):
+    cursor = conn.cursor()
     try:
         date = datetime.strptime(date,'%Y-%m-%d %H:%M:%S')          
         cursor.execute("INSERT INTO Publicacion (idPerfil,fecha,url,descripcion,ubicacion) VALUES (%s,%s,%s,%s,%s)",(idProfile,date,url,desc,location))
@@ -57,24 +60,48 @@ def insert_post(idProfile,date,url,desc,location):
     pass
 #------------------------------------------------------------------#
 
-def res_bus():    
+#------Funciones SELECT ------------#
+def select_srch(idBusqueda):
+    cursor = conn.cursor()    
     try:
-        cursor.execute('SELECT * FROM Busqueda')
+        cursor.execute('SELECT * from Busqueda where idBusqueda ='+str(idBusqueda))
         data = cursor.fetchall()
-        cursor.close()
+        cursor.close()       
         return data
     except Exception as e:
-        print("ERROR al realizar SELECT FROM en la BD: "+str(e))
+        print("ERROR al realizar select_srch(): "+str(e))
         return False        
 
-def res_per(): 
+def select_profiles(idBusqueda):
+    cursor = conn.cursor()
     try:
-        cursor.execute('SELECT * FROM Perfil')
+        query = """select p.*
+        from Busqueda b, Perfil p, busqueda_perfil x
+        where b.idBusqueda = """+str(idBusqueda)+"""
+        and x.idBusqueda = b.idBusqueda
+        and x.idPerfil = p.idPerfil;"""
+        cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
         return data
     except Exception as e:
-        print("ERROR al realizar SELECT FROM en la BD: "+str(e))
+        print("ERROR al realizar select_profiles(): "+str(e))
         return False
-        
-    
+
+def select_posts(idPerfil):
+    cursor = conn.cursor()
+    try:
+        query="""select x.*
+        from Publicacion x, Perfil y
+        where y.idPerfil = """+str(idPerfil)+"""
+        and x.idPerfil=y.idPerfil;"""
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        return data
+    except Exception as e:
+        print("ERROR al realizar select_posts(): "+str(e))
+        return False
+
+
+#------------------------------------------------------------------#
