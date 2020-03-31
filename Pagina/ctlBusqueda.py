@@ -44,7 +44,7 @@ def do_search(srch_name,srch_limit):
 						##########DESCOMENTAR línea en fase de pruebas y muestra#######
 						#insert_post(dbProfId,date,url,desc,location)					
 						################################################################	
-						insert_post(dbProfId,date,"https://scontent-mad1.com","Lorem ipsum dolor sit amet",location)						
+						insert_post(dbProfId,date,url,desc,location)						
 				#----------------------#
 			return dbSrchId
 		except Exception as e:
@@ -74,6 +74,21 @@ def search_profiles(data_name,data_limit):
 	else:
 		return False
 
+def result_data_for_view(id_srch):
+	try:
+		data_prof=select_profiles(id_srch)
+		data = list()
+		for prof in data_prof:
+			profiles = list()
+			data_post=select_posts(prof[0])
+			posts = list(data_post)
+			profiles.append(prof)
+			profiles.append(posts)
+			data.append(profiles)
+		return data
+	except Exception as e:
+		print("ERROR recuperando los datos de la búsqueda result_data_for_view(): "+str(e))
+	return False
 
 def jsonTEST():
 	jsonTxt = """[{

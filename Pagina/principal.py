@@ -19,11 +19,11 @@ def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
         error = None
         in_name = coment_form.in_name.data
         no_profiles = coment_form.no_profiles.data            
-        id_srch = 14
-        #id_srch = do_search(in_name,no_profiles)
+        #id_srch = 14
+        id_srch = do_search(in_name,no_profiles)
         
         if not id_srch:#
-            error = 'El servicio de búsqueda falló, intente de nuevo.'
+            error = 'El servicio de búsqueda falló, por favor intente de nuevo.'
             return render_template('busqueda.html',error=error,form = coment_form)
         else:                        
             #redirect (url_for('resultado_busqueda'))
@@ -34,26 +34,14 @@ def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
     return render_template('busqueda.html', form = coment_form) # mandamos el formulario
 
 @app.route('/resultado_busqueda/<int:id_srch>', methods=['GET','POST'])
-def resultado_busqueda(id_srch):    
-    try:
-        data_srch=select_srch(id_srch)
-        data_prof=select_profiles(id_srch)                
-        data = list()
-        
-        
-        for prof in data_prof:
-            profiles = list()          
-            data_post=select_posts(prof[0])
-            posts = list(data_post)
-            profiles.append(prof)
-            profiles.append(posts)
-            data.append(profiles)                    
+def resultado_busqueda(id_srch):
+    data_srch=select_srch(id_srch)
+    data = result_data_for_view(id_srch)
+    if data:                        
         return render_template('resultadobusqueda.html', Busqueda = data_srch, Perfiles = data, noResults = len(data))
-    except Exception as e:
-        print("ERROR recuperando los datos de la búsqueda: "+str(e))
-        return False
-    
-    
+    else:
+        error = 'ERROR al mostrar los resultados, por favor intente de nuevo.'
+        return render_template('busqueda.html',error=error,form = coment_form)
 
 @app.route('/consulta', methods = ['GET', 'POST'])
 def consulta():
