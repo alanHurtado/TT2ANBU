@@ -19,7 +19,7 @@ def val_nombre(form, field):
 #     	raise validators.ValidationError('Username no válido')        
 ##########################################################################3
 
-#####--------------------- Validaciones formulario Consulta-------------- ################
+#############----------------- Validaciones formulario Consulta-------------- ################
 def val_id (form, field):
     nombre = field.data
     validar = re.match('^[0-9]*$', nombre, re.I)
@@ -44,8 +44,7 @@ class ComentFormBus(Form):
     [
         val_nombre
     ])
-    no_profiles = SelectField('Número  máximo de perfiles a buscar:', choices=[('1',1),('2',2),('3',3),('4',4),('5',5)])
-    #no_profiles = SelectField('Número de cuentas por perfil a buscar', choices=[('1',1),('2',2),('3',3),('4',4),('5',5)])
+    no_profiles = SelectField('Número  máximo de perfiles a buscar:', choices=[('1',1),('2',2),('3',3),('4',4),('5',5)])    
     submit = SubmitField('')
 
 class ComentFormCon(Form):
@@ -71,4 +70,3 @@ class ComentFormCon(Form):
         validators.input_required(message='Fecha requerida')
     ])
     submit = SubmitField('')
-

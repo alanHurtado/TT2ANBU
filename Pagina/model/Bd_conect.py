@@ -14,7 +14,7 @@ mysql = MySQL(app)
 
 conn = mysql.connect()  #conectamos a la BD
 
-#----Funciones INSERT INTO --------#
+#-------Funciones INSERT INTO --------#
 def insertar_busqueda(in_name):
     cursor = conn.cursor()
     x = datetime.now()
@@ -55,16 +55,15 @@ def insert_post(idProfile,date,url,desc,location):
         conn.commit()
         return cursor.lastrowid
     except Exception as e:
-        print("ERROR al realizar insert_post: "+str(e))
-        return False
-    pass
-#------------------------------------------------------------------#
+        print("ERROR al realizar insert_post: "+str(e))        
+        return False    
+#################################################################
 
-#------Funciones SELECT ------------#
+#---------Funciones SELECT ------------#
 def select_srch(idBusqueda):
     cursor = conn.cursor()    
     try:
-        cursor.execute('SELECT * from Busqueda where idBusqueda ='+str(idBusqueda))
+        cursor.execute('SELECT * FROM Busqueda WHERE idBusqueda ='+str(idBusqueda))
         data = cursor.fetchall()
         cursor.close()       
         return data
@@ -72,14 +71,14 @@ def select_srch(idBusqueda):
         print("ERROR al realizar select_srch(): "+str(e))
         return False        
 
-def select_profiles(idBusqueda):
+def select_profiles_by_srch(idBusqueda):
     cursor = conn.cursor()
     try:
-        query = """select p.*
-        from Busqueda b, Perfil p, busqueda_perfil x
-        where b.idBusqueda = """+str(idBusqueda)+"""
-        and x.idBusqueda = b.idBusqueda
-        and x.idPerfil = p.idPerfil;"""
+        query = """SELECT p.*
+        FROM Busqueda b, Perfil p, busqueda_perfil x
+        WHERE b.idBusqueda = """+str(idBusqueda)+"""
+        AND x.idBusqueda = b.idBusqueda
+        AND x.idPerfil = p.idPerfil;"""
         cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
@@ -91,10 +90,10 @@ def select_profiles(idBusqueda):
 def select_posts(idPerfil):
     cursor = conn.cursor()
     try:
-        query="""select x.*
-        from Publicacion x, Perfil y
-        where y.idPerfil = """+str(idPerfil)+"""
-        and x.idPerfil=y.idPerfil;"""
+        query="""SELECT x.*
+        FROM Publicacion x, Perfil y
+        WHERE y.idPerfil = """+str(idPerfil)+"""
+        AND x.idPerfil=y.idPerfil;"""
         cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
@@ -102,6 +101,20 @@ def select_posts(idPerfil):
     except Exception as e:
         print("ERROR al realizar select_posts(): "+str(e))
         return False
+#################################################################
 
-
-#------------------------------------------------------------------#
+#--------------Funciones Update------------------#
+def upd_img_path(idPost,path):
+    cursor = conn.cursor()
+    try:
+        query = """UPDATE Publicacion
+        SET ruta_imagen = %s
+        WHERE idPublicacion = %s"""       
+        cursor.execute(query,(path,idPost))
+        conn.commit();
+        cursor.close()
+        return True
+    except Exception as e:
+        print("ERROR al realizar upd_img_path(): "+str(e))
+        return False    
+#################################################################

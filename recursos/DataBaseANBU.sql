@@ -14,7 +14,10 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema anbuDB
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `anbuDB` DEFAULT CHARACTER SET utf8 ;
+CREATE DATABASE IF NOT EXISTS `anbuDB`;
+ALTER DATABASE anbuDB
+CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci;
 USE `anbuDB` ;
 
 -- -----------------------------------------------------

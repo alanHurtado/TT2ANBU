@@ -1,4 +1,5 @@
 from ctlBusqueda import *
+from ctlAnalisis import *
 from flask import Flask
 from flask import render_template ## permite renderisar templates
 from flask import request, redirect, url_for, flash   ## permite el manejo de los datos del formulario
@@ -35,13 +36,18 @@ def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
 
 @app.route('/resultado_busqueda/<int:id_srch>', methods=['GET','POST'])
 def resultado_busqueda(id_srch):
-    data_srch=select_srch(id_srch)
-    data = result_data_for_view(id_srch)
-    if data:                        
-        return render_template('resultadobusqueda.html', Busqueda = data_srch, Perfiles = data, noResults = len(data))
+    if request.method == 'GET':
+        data_srch=select_srch(id_srch)
+        data = result_data_for_view(id_srch)
+        if data:                        
+            return render_template('resultadobusqueda.html', Busqueda = data_srch, Perfiles = data, noResults = len(data))
+        else:
+            error = 'ERROR al mostrar los resultados, por favor intente de nuevo.'
+            return render_template('busqueda.html',error=error)
     else:
-        error = 'ERROR al mostrar los resultados, por favor intente de nuevo.'
-        return render_template('busqueda.html',error=error,form = coment_form)
+        chekList = request.form.getlist('analisis')
+        getImages(chekList)
+        return render_template('show.html', message=request.form.getlist('analisis'))        
 
 @app.route('/consulta', methods = ['GET', 'POST'])
 def consulta():

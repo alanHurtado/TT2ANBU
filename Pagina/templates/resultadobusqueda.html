@@ -3,14 +3,14 @@
 <div class='Scuerpo'>
    <br>
    <h5 class = 'texT' > RESULTADOS DE BÚSQUEDA </h5>
+   <form method="POST" action="">    
     <table class="type2">
 		<tr>
 			<th>Nombre o Username Buscado</th>			
 			<th>Fecha</th>
 			<th>Número de Perfiles Resultantes</th>			
 		</tr>
-		<tr>
-			
+		<tr>			
 			<td><b>{{Busqueda[0][1]}}</b></td>
 			<td><b>{{Busqueda[0][2]}}</b></td>
 			<td><b>{{noResults}}</b></td>
@@ -19,59 +19,83 @@
 	</table>
     <div class='espacio'></div>
     <t8 class='subtitle'> Perfiles Resultantes </t8>   
-<div>
-	{%for prof in Perfiles%}
-	<table class="type2">
- 		<tr>
- 			<th>Username</th>
-			<th>Nombre</th>
-			<th>URL del Perfil</th>
-		</tr>			      				
-		<tr>
-    		<td><b>{{prof[0][1]}}</b></td>
-			<td><b>{{prof[0][2]}}</b></td>
-			<td><b>
-				<a href="{{prof[0][3]}}" target='_blank'>{{prof[0][3]}}</a>
-				</b>
-			</td>		
-    	</tr>
-    	<!--TABLA de PUBLICACIONES-->
-    	<tr>
-    		<td colspan="3">
-    		<table class="type3">
-    			<tr><th colspan="7">Publicaciones</th></tr>
-    			<tr>
-    				<th>#</th>
-    				<th>Fecha de Publicación</th>
-    				<th>Desc</th>
-    				<th>Ubicación</th>
-    				<th>URL</th>
-    				<th>Val. Rostro</th>
-    				<th>Val. Arma</th>
-    			</tr>
-    			{%for post in prof[1]%}
-    			<tr>
-    				<td>{{loop.index}}</td>
-    				<td>{{post[3]}}</td>
-    				<td>{{post[5]}}</td>
-    				<td>{{post[2]}}</td>
-    				<td>
-    					<a href="{{post[4]}}" target='_blank'>Ver Imagen</a>    					
-    				</td>
-    				<td>{{post[6]}}</td>
-    				<td>{{post[7]}}</td>
-    			</tr>
-    			{%endfor%}
-    		</table>
-    		</td>
-		</tr>
-    	<!--//TABLA de PUBLICACIONES//-->
-    </table>
-    <div class='espacio'></div>
-    {%endfor%}
-    <!--FOR PERFILES-->   
-	 <div> <a href="/" class="btn btn-secondary"> Generar Reporte </a> </div>
-		  
+    <div>
+        {%for prof in Perfiles%}
+    	<table class="type2">
+     		<tr>
+                <th>#</th>
+     			<th>Username</th>
+    			<th>Nombre</th>
+    			<th>URL del Perfil</th>
+                <th>Realizar Análisis</th>
+    		</tr>			      				
+    		<tr>
+        		<td><b>Perfil {{loop.index}}</b></td>
+                <td><b>{{prof[0][1]}}</b></td>
+    			<td><b>{{prof[0][2]}}</b></td>
+    			<td><b>
+    				<a href="{{prof[0][3]}}" target='_blank'>{{prof[0][3]}}</a>
+    				</b>
+    			</td>
+                <td>
+                    <input type="checkbox" name="analisis" value="{{prof[0][0]}}">
+                </td>
+            </tr>
+        	<!--TABLA de PUBLICACIONES-->
+        	<tr>
+        		<td colspan="5">
+                <button class="accordion" type="button"><b>Publicaciones</b></button>
+                <div class="panel">
+            		<table class="type3">
+            			<!--<tr><th colspan="7">Publicaciones</th></tr>-->
+            			<tr>
+            				<th>#</th>
+            				<th>Fecha de Publicación</th>
+            				<th>Descripción</th>
+            				<th>Ubicación</th>
+            				<th>URL</th>    				
+            			</tr>
+            			{%for post in prof[1]%}
+            			<tr>
+            				<td>{{loop.index}}</td>
+            				<td>{{post[3]}}</td>
+            				<td>{{post[5]}}</td>
+            				<td>{{post[2]}}</td>
+            				<td>
+            					<a href="{{post[4]}}" target='_blank'>Ver Imagen</a>    					
+            				</td>
+            			</tr>
+            			{%endfor%}
+            		</table>
+                </div>
+        		</td>
+    		</tr>
+        	<!--//TABLA de PUBLICACIONES//-->
+        </table>
+        <div class='espacio'></div>
+        {%endfor%}
+        <!--FOR PERFILES-->   
+    	<div>
+            <button type="submit"class="btn btn-secondary">Analizar Perfiles</button>           
+            <!--<a href="/" class="btn btn-secondary"> Generar Reporte </a>-->
+        </div>
+    </div>
+    </form>
 </div>
-</div>
-    {% endblock contenido %}
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+{% endblock contenido %}

@@ -10,10 +10,10 @@ import json
 
 def do_search(srch_name,srch_limit):	
 	dbSrchId = insertar_busqueda(srch_name)
-	##########DESCOMENTAR línea en fase de pruebas y muestra#######
+	##########-DESCOMENTAR línea en fase de pruebas y muestra#######
 	#data = search_profiles(srch_name,srch_limit).replace('\n', '')
 	#############################################################
-	data = jsonTEST().replace('\n', '')
+	data = jsonTEST().replace('\n', '')	
 	
 	if not data:
 		return False
@@ -41,7 +41,7 @@ def do_search(srch_name,srch_limit):
 						url = post['displayUrl']
 						desc = post['caption']
 						location = post['locationName']
-						##########DESCOMENTAR línea en fase de pruebas y muestra#######
+						##########-DESCOMENTAR línea en fase de pruebas y muestra#######
 						#insert_post(dbProfId,date,url,desc,location)					
 						################################################################	
 						insert_post(dbProfId,date,url,desc,location)						
@@ -63,9 +63,11 @@ def search_profiles(data_name,data_limit):
 	      "useApifyProxy": true,
 	      "apifyProxyGroups": []
 	    }
-	}"""	
+	}"""
+	###------TEST----------------###
 	#r = requests.post(url=URL,data=data,headers={'Content-Type':'application/json'})	
 	rstatus_code = 201
+	###################################
 	if rstatus_code == 201:
 		URL = "https://api.apify.com/v2/actor-tasks/"+actorTaskId+"/runs/last/dataset/items?token="+token+"&status=SUCCEEDED"
 		answ = requests.get(url=URL,headers={'Content-Type':'application/json'})
@@ -76,7 +78,7 @@ def search_profiles(data_name,data_limit):
 
 def result_data_for_view(id_srch):
 	try:
-		data_prof=select_profiles(id_srch)
+		data_prof=select_profiles_by_srch(id_srch)
 		data = list()
 		for prof in data_prof:
 			profiles = list()
