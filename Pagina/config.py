@@ -6,7 +6,7 @@ token = "RR2h79SdNi6nrWecwM5XGAutQ"
 ##################################
 
 #------------Sistema--------------#
-IMG_PROFILES_DIR = "prof_img/"
+IMG_PROFILES_DIR = "posts_img/"
 
 ###################################
 
