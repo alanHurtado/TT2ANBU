@@ -47,7 +47,7 @@ def resultado_busqueda(id_srch):
     else:
         chekList = request.form.getlist('analisis')
         getImages(chekList)
-        return render_template('show.html', message=request.form.getlist('analisis'))        
+        return render_template('show.html', message="....Resultados de Análisis.....")        
 
 @app.route('/consulta', methods = ['GET', 'POST'])
 def consulta():
