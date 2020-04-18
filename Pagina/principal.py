@@ -20,14 +20,12 @@ def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
         error = None
         in_name = coment_form.in_name.data
         no_profiles = coment_form.no_profiles.data            
-        #id_srch = 14
         id_srch = do_search(in_name,no_profiles)
         
         if not id_srch:#
             error = 'El servicio de búsqueda falló, por favor intente de nuevo.'
             return render_template('busqueda.html',error=error,form = coment_form)
         else:                        
-            #redirect (url_for('resultado_busqueda'))
             next = request.args.get('next', 'resultado_busqueda') # especificamos la ruta si se enviaron los datos            
             if next:    # comprobamos si paso por la url
                return redirect(url_for('resultado_busqueda', id_srch=id_srch)) # Se manda a la ruta
@@ -46,8 +44,11 @@ def resultado_busqueda(id_srch):
             return render_template('busqueda.html',error=error)
     else:
         chekList = request.form.getlist('analisis')
-        getImages(chekList)
-        return render_template('show.html', message="....Resultados de Análisis.....")        
+        if getImages(chekList):
+            return render_template('show.html', message="....Resultados de Análisis.....")
+        else:
+            error = 'ERROR al comenzar el análisis, por favor intente de nuevo.'
+            return render_template('show.html', message=error)
 
 @app.route('/consulta', methods = ['GET', 'POST'])
 def consulta():

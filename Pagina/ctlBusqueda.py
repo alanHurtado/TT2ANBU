@@ -10,15 +10,17 @@ import json
 
 def do_search(srch_name,srch_limit):	
 	dbSrchId = insertar_busqueda(srch_name)
-	##########-DESCOMENTAR línea en fase de pruebas y muestra#######
-	#data = search_profiles(srch_name,srch_limit).replace('\n', '')
+	###########--------------TEST----------------------#########
+	##########----DESCOMENTAR línea en fase de pruebas y muestra------#######
+	#data = search_profiles(srch_name,srch_limit)
+	data = jsonTEST()
 	#############################################################
-	data = jsonTEST().replace('\n', '')	
-	
+		
 	if not data:
 		return False
 	else:
 		try:
+			data = clean_txt_data(data)
 			dataObj = json.loads(data)
 			for obj in dataObj:
 				#--Insert para Perfil--#
@@ -40,15 +42,12 @@ def do_search(srch_name,srch_limit):
 						date = date.replace('.000Z','')									
 						url = post['displayUrl']
 						desc = post['caption']
-						location = post['locationName']
-						##########-DESCOMENTAR línea en fase de pruebas y muestra#######
-						#insert_post(dbProfId,date,url,desc,location)					
-						################################################################	
+						location = post['locationName']							
 						insert_post(dbProfId,date,url,desc,location)						
 				#----------------------#
 			return dbSrchId
 		except Exception as e:
-			print("Errore ::"+str(e))
+			print("ERROR al ejecutar la funcion do_search() :"+str(e))
 			return False
 
 def search_profiles(data_name,data_limit):
@@ -59,16 +58,16 @@ def search_profiles(data_name,data_limit):
 	    "searchLimit": """+data_limit+""",
 	    "resultsType": "posts",
 	    "resultsLimit": 3,
+	    "extendOutputFunction": "($) => { return {} }",
 	    "proxy":{
 	      "useApifyProxy": true,
 	      "apifyProxyGroups": []
 	    }
 	}"""
-	###------TEST----------------###
-	#r = requests.post(url=URL,data=data,headers={'Content-Type':'application/json'})	
-	rstatus_code = 201
-	###################################
-	if rstatus_code == 201:
+
+	r = requests.post(url=URL,data=data,headers={'Content-Type':'application/json'})	
+	
+	if r.status_code == 201:
 		URL = "https://api.apify.com/v2/actor-tasks/"+actorTaskId+"/runs/last/dataset/items?token="+token+"&status=SUCCEEDED"
 		answ = requests.get(url=URL,headers={'Content-Type':'application/json'})
 		if answ.status_code == 200:
@@ -91,6 +90,10 @@ def result_data_for_view(id_srch):
 	except Exception as e:
 		print("ERROR recuperando los datos de la búsqueda result_data_for_view(): "+str(e))
 	return False
+
+def clean_txt_data(inputString):
+	inputString = inputString.replace('\n', '')
+	return inputString.encode('ascii', 'ignore').decode('ascii')
 
 def jsonTEST():
 	jsonTxt = """[{
