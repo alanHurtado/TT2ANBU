@@ -10,7 +10,7 @@ def getImages(idsProfiles):
 		for idProf in idsProfiles:
 			posts = select_posts(idProf)
 			for p in posts:
-				imgurl =p[4]
+				imgurl =p[9]
 				name = str(idProf)+"-"+str(p[0])+".jpg"
 				path = IMG_PROFILES_DIR+name
 				req.urlretrieve(imgurl, path)

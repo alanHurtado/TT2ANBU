@@ -44,7 +44,9 @@ class ComentFormBus(Form):
     [
         val_nombre
     ])
-    no_profiles = SelectField('Número  máximo de perfiles a buscar:', choices=[('1',1),('2',2),('3',3),('4',4),('5',5)])    
+    no_profiles = SelectField('Número  máximo de perfiles a buscar:', choices=[
+        ('1',1),('2',2),('3',3),('4',4),('5',5),
+        ('6',6),('7',7),('8',8),('9',9),('10',10)])
     submit = SubmitField('')
 
 class ComentFormCon(Form):

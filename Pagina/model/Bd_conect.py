@@ -47,15 +47,16 @@ def insert_srch_prof(idSearch,idProfile):
         print("ERROR al realizar insert_srch_prof: "+str(e))
         return False
 
-def insert_post(idProfile,date,url,desc,location):
+def insert_post(idProfile,date,urlPost,desc,location,urlImage):
     cursor = conn.cursor()
     try:
         date = datetime.strptime(date,'%Y-%m-%d %H:%M:%S')          
-        cursor.execute("INSERT INTO Publicacion (idPerfil,fecha,url,descripcion,ubicacion) VALUES (%s,%s,%s,%s,%s)",(idProfile,date,url,desc,location))
+        cursor.execute("INSERT INTO Publicacion (idPerfil,fecha,urlPublicacion,descripcion,ubicacion,urlImagen) VALUES (%s,%s,%s,%s,%s,%s)",(idProfile,date,urlPost,desc,location,urlImage))
         conn.commit()
         return cursor.lastrowid
     except Exception as e:
-        print("ERROR al realizar insert_post: "+str(e))        
+        print("ERROR al realizar insert_post: "+str(e))
+        print(desc)       
         return False    
 #################################################################
 

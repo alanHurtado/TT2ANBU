@@ -1,8 +1,9 @@
 ##---Valores comunes para todo el sistema---##
 
 #------------APIFY--------------#
-actorTaskId = "KyKeGHsHHbBfhmorY"
-token = "9oKq8NAJZkhe6Kd486xFhzQmH"
+#actorTaskId = "shu8hvrXbJbY3Eb9W"
+taskId = "HGYMshTG6oksXdBfx"
+token = "sX3XNABWjLt9yokBNiufqym3y"
 ##################################
 
 #------------Sistema--------------#
