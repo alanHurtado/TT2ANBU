@@ -19,8 +19,9 @@ def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
     if request.method == 'POST' and coment_form.validate():    #   si se reciben datos
         error = None
         in_name = coment_form.in_name.data
-        no_profiles = coment_form.no_profiles.data            
-        id_srch = do_search(in_name,no_profiles)
+        no_profiles = coment_form.no_profiles.data
+        no_posts = coment_form.no_posts.data           
+        id_srch = do_search(in_name,no_profiles,no_posts)
         
         if not id_srch:#
             error = 'El servicio de búsqueda falló, por favor intente de nuevo.'

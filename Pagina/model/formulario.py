@@ -3,21 +3,15 @@ from wtforms import Form    # para importar formularios
 from wtforms import StringField, SubmitField , SelectField# Para usar campos de texto
 from wtforms import validators  #realizar validaciones
 
-## Validaciones para Formulario de busqueda ###
+########### ---------------Validaciones para Formulario de busqueda -----------------##########
 def val_nombre(form, field):
     nombre = field.data
     validar = re.match('^@?[a-z\s_áéíóúàèìòùäëïöüñ]+[0-9a-z]*$', nombre, re.I)
     if nombre == "":
     	raise validators.ValidationError('Introduzca un Nombre o Username')
     if not validar :
-        raise validators.ValidationError('Nombre no válido')
- 
-# def val_userName(form, field):
-#     nombre = field.data
-#     validar = re.match('^@?[a-z0-9\._sáéíóúàèìòùäëïöüñ]*$', nombre, re.I)
-#     if not validar:
-#     	raise validators.ValidationError('Username no válido')        
-##########################################################################3
+        raise validators.ValidationError('Nombre no válido')     
+##########################################################################################
 
 #############----------------- Validaciones formulario Consulta-------------- ################
 def val_id (form, field):
@@ -36,7 +30,7 @@ def val_nombrec(form, field):
     validar = re.match('^[a-z\sáéíóúàèìòùäëïöüñ]*[0-9a-z]*$', nombre, re.I)
     if not validar :
         raise validators.ValidationError('Nombre incorrecto')
-#######################################################
+##########################################################################################
 
 
 class ComentFormBus(Form):
@@ -47,6 +41,10 @@ class ComentFormBus(Form):
     no_profiles = SelectField('Número  máximo de perfiles a buscar:', choices=[
         ('1',1),('2',2),('3',3),('4',4),('5',5),
         ('6',6),('7',7),('8',8),('9',9),('10',10)])
+    no_posts = SelectField('Número  máximo de publicaciones por perfil:', choices=[
+        ('1',1),('2',2),('3',3),('4',4),('5',5),
+        ('6',6),('7',7),('8',8),('9',9),('10',10),
+        ('11',11),('12',12),('13',13),('14',14),('15',15)])
     submit = SubmitField('')
 
 class ComentFormCon(Form):

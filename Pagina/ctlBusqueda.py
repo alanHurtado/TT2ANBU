@@ -8,14 +8,9 @@ from model.Bd_conect import *
 import requests
 import json
 
-def do_search(srch_name,srch_limit):	
+def do_search(srch_name,srch_limit,no_posts):	
 	dbSrchId = insertar_busqueda(srch_name)
-	###########--------------TEST----------------------#########
-	##########----DESCOMENTAR línea en fase de pruebas y muestra------#######
-	data = search_profiles(srch_name,srch_limit)
-	#data = jsonTEST()
-	#############################################################
-	
+	data = search_profiles(srch_name,srch_limit,no_posts)
 	if not data:
 		return False
 	else:
@@ -55,14 +50,14 @@ def do_search(srch_name,srch_limit):
 			print("ERROR al ejecutar la funcion do_search() :"+str(e))			
 			return False
 
-def search_profiles(data_name,data_limit):
+def search_profiles(data_name,data_limit,data_posts):
 	URL = "https://api.apify.com/v2/actor-tasks/"+taskId+"/run-sync?token="+token+"&outputRecordKey=OUTPUT/"	
 	data = """{
 	    "search": """+'"'+data_name+'"'+""",
 	    "searchType": "user",
 	    "searchLimit": """+data_limit+""",
 	    "resultsType": "posts",
-	    "resultsLimit": 5,
+	    "resultsLimit": """+data_posts+""",
 	    "extendOutputFunction": "($) => { return {} }",
 	    "proxy":{
 	      "useApifyProxy": true,
@@ -72,10 +67,6 @@ def search_profiles(data_name,data_limit):
 
 	r = requests.post(url=URL,data=data,headers={'Content-Type':'application/json'})
 	
-	#####------TEST-------------###
-	#r_status_code = 201	
-	############################
-
 	if r.status_code == 201:
 		URL = "https://api.apify.com/v2/actor-tasks/"+taskId+"/runs/last/dataset/items?token="+token+"&status=SUCCEEDED"
 		answ = requests.get(url=URL,headers={'Content-Type':'application/json'})
