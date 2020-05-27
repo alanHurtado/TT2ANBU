@@ -102,6 +102,22 @@ def select_posts(idPerfil):
     except Exception as e:
         print("ERROR al realizar select_posts(): "+str(e))
         return False
+
+def result_data_for_view(id_srch):
+    try:
+        data_prof=select_profiles_by_srch(id_srch)
+        data = list()
+        for prof in data_prof:
+            profiles = list()
+            data_post=select_posts(prof[0])
+            posts = list(data_post)
+            profiles.append(prof)
+            profiles.append(posts)
+            data.append(profiles)
+        return data
+    except Exception as e:
+        print("ERROR recuperando los datos de la búsqueda result_data_for_view(): "+str(e))
+    return False
 #################################################################
 
 #--------------Funciones Update------------------#
