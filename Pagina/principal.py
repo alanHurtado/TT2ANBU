@@ -75,5 +75,5 @@ def resultado_consulta():
 
 # valifamos que se ejecute el programa principal
 if __name__ == '__main__':
-    app.run(debug = True, port = 8000) # Actualizar servdor automaticamente y se indica el puerto 
-
+    app.debug = True
+    app.run(host = '0.0.0.0', port = 8000) # Actualizar servdor automaticamente y se indica el puerto 
