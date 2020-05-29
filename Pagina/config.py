@@ -1,7 +1,12 @@
 #####---Valores comunes para todo el sistema---#####
 
-#------------APIFY--------------#
-buildVersion = "0.1.5"
+##--------------APIFY--------------##
+#BUILD_VERSION 
+#--> 0.2 (TEST)
+#--> 0.1 (beta)
+#--> 0.0 (Latest)
+
+buildVersion = "0.0.88"
 taskId = "HGYMshTG6oksXdBfx"
 token = "sX3XNABWjLt9yokBNiufqym3y"
 ##################################
