@@ -55,13 +55,10 @@ def resultado_busqueda(id_srch):
 def consulta():
     coment_form = formulario.ComentFormCon(request.form)
     if request.method == 'POST' and coment_form.validate():    #   se agrega coment_form para validar el formulario 
-        id_busqueda = coment_form.id_busqueda.data
-        nombre = coment_form.nombre.data # se guarda con form en la variable declarada segun busqueda.html
-        nombre_usuario = coment_form.nombre_usuario.data
-        ubicacion = coment_form.ubicacion.data
+        #id_busqueda = coment_form.id_busqueda.data
+        in_name = coment_form.in_name.data # se guarda con form en la variable declarada segun busqueda.html
         fecha_in = coment_form.fecha_in.data
-        fecha_fin = coment_form.fecha_fin.data
-    
+        fecha_fin = coment_form.fecha_fin.data    
         next = request.args.get('next', 'resultado_consulta') ## especificamos la ruta si se enviaron los datos
         if next:    # comprobamos si paso por la url
            return redirect(next) # Se manda a la ruta

@@ -48,19 +48,10 @@ class ComentFormBus(Form):
     submit = SubmitField('')
 
 class ComentFormCon(Form):
-    id_busqueda = StringField('Id Búsqueda: ', 
+    in_name = StringField('Nombre: ',
     [
-        val_id
-    ])
-    nombre = StringField('Nombre: ',
-    [
-        val_nombrec
-    ]) 
-    nombre_usuario = StringField('Nombre de usuario: ', 
-    [   
         val_nombre
-    ])
-    ubicacion = StringField('Ubicación: ')
+    ]) 
     fecha_in = StringField('Fecha del : ', 
     [
         validators.InputRequired(message ='Fecha requerida')

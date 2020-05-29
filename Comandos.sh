@@ -30,13 +30,23 @@ sudo yum install -y community-mysql
 # Al instalar el server-MySQL el cliente ya esta instalado
 # Configurar MySQL
 # Geramos la contraseña a root
+sudo mysql_secure_installation #via remota
+indicar no
+password
+repeter password
+yes
+yes
+yes
+yes
+###### equipo local####
 mysql -u root
 # entrando a mysql ingreamos la contraseña 
 alter user root@localhost identified by 'password';
 # refrescamos la tabla de permisos
 flush privileges;
 exit
-# ingresar a mysql
+
+# ingresar a mysql euipo local equipo remoto con sudo
 mysql -h localhost -u root -p
 # creamos el usuario ANBU para el proyecto
 create user ANBU identified by 'ANBUTT2';
@@ -53,7 +63,7 @@ sudo firewall-cmd --permanent --add-service=mysql
 sudo firewall-cmd --reload
 ###::::::::::::Fin Instalacion MySQL ::::::::::::::##
 
-##::::::: Generar la BD para ANBU :::::::::::##
+##::::::: Genaltsoyperar la BD para ANBU :::::::::::##
 # ejecutar el script en el usuario ANBU
 source DataBaseANBU.sql
 
