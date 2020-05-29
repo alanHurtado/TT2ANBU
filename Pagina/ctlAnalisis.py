@@ -1,5 +1,4 @@
 ####----Controlador de Analisis------#####
-# ---
 
 from config import *
 from model.Bd_conect import *
