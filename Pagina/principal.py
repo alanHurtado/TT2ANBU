@@ -58,19 +58,29 @@ def consulta():
         #id_busqueda = coment_form.id_busqueda.data
         in_name = coment_form.in_name.data # se guarda con form en la variable declarada segun busqueda.html
         fecha_in = coment_form.fecha_in.data
-        fecha_fin = coment_form.fecha_fin.data    
+        fecha_fin = coment_form.fecha_fin.data       
+        ## Creamos una lista con los valores de la consulta
+        consulta=[in_name, fecha_in, fecha_fin]
+        
         next = request.args.get('next', 'resultado_consulta') ## especificamos la ruta si se enviaron los datos
         if next:    # comprobamos si paso por la url
-           return redirect(next) # Se manda a la ruta
+           return redirect(url_for('resultado_consulta', consulta=consulta)) # Se manda a la ruta
         return redirect(url_for('index'))
     return render_template('consulta.html', form=coment_form) 
 
-@app.route('/resultado_consulta')
-def resultado_consulta():
+@app.route('/resultado_consulta/<consulta>', methods=['GET','POST'])
+def resultado_consulta(consulta):
+    print(consulta)
+    print(":::::::::::::::::::::::hoolalksdf")
+    if request.method == 'GET':
+        print(consulta)
+        data_con=consulta_busqueda()
     
-    return render_template('resultadoconsulta.html') 
-
+    return render_template('resultadoconsulta.html', Consulta = data_con, consulta=consulta )
 # valifamos que se ejecute el programa principal
+
+
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host = '0.0.0.0', port = 8000) # Actualizar servdor automaticamente y se indica el puerto 

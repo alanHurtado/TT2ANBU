@@ -3,5 +3,19 @@
 <div class='Scuerpo'>
    </br>
    <h5 class = 'texT' > CONSULTAS </h5>
+    <form method="POST" action=""> 
+    <table class="type2">
+		<tr>
+			<th>Nombre o Username Buscado</th>			
+			<th>Fecha Inicio</th>
+			<th>Fecha Limite</th>			
+		</tr>
+		<tr>			
+			<td><b>{{Consulta[0][0]}}</b></td>
+			<td><b>{{consulta[1:16]}}</b></td>
+			<td><b>{{consulta[17:35]}}</b></td>
+
+		</tr>				  
+	</table>
 {% endblock contenido %}
 </div>    

@@ -61,6 +61,18 @@ def insert_post(idProfile,date,urlPost,desc,location,urlImage):
 #################################################################
 
 #---------Funciones SELECT ------------#
+def consulta_busqueda():
+    cursor = conn.cursor()
+    try:  
+        cursor.execute('SELECT * FROM Busqueda')
+        data = cursor.fetchall()
+        cursor.close()
+        return data
+    except Exception as e:
+        print("Error al realizar la consulta"+str(e))
+        return False
+
+
 def select_srch(idBusqueda):
     cursor = conn.cursor()    
     try:
