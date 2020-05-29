@@ -81,6 +81,9 @@ def resultado_consulta(consulta):
 def reportes():
     return render_template('reportes.html')
 
+@app.route('/conocenos')
+def conocenos():
+    return render_template('conocenos.html')
 
 # valifamos que se ejecute el programa principal
 if __name__ == '__main__':
