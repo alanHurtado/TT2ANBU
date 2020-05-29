@@ -74,13 +74,15 @@ def resultado_consulta(consulta):
     print(":::::::::::::::::::::::hoolalksdf")
     if request.method == 'GET':
         print(consulta)
-        data_con=consulta_busqueda()
-    
+        data_con=consulta_busqueda()    
     return render_template('resultadoconsulta.html', Consulta = data_con, consulta=consulta )
+
+@app.route('/reportes')
+def reportes():
+    return render_template('reportes.html')
+
+
 # valifamos que se ejecute el programa principal
-
-
-
 if __name__ == '__main__':
     app.debug = True
     app.run(host = '0.0.0.0', port = 8000) # Actualizar servdor automaticamente y se indica el puerto 
