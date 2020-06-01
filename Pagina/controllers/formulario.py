@@ -1,9 +1,11 @@
-import sys, re, time
-from wtforms import Form    # para importar formularios
-from wtforms import StringField, SubmitField , SelectField# Para usar campos de texto
-from wtforms import validators  #realizar validaciones
+###---------------- ESTRUCTURAS Y VALIDACIONES DE FORMULARIOS ----------------###
 
-########### ---------------Validaciones para Formulario de busqueda -----------------##########
+import sys, re, time
+from wtforms import Form  # Importar instancia de los formularios
+from wtforms import StringField, SubmitField , SelectField  # Tipos de campos en formularios
+from wtforms import validators  # Realizar validaciones
+
+#::::::::::::::::::::: Validaciones para formulario de BUSQUEDA :::::::::::::::::::::#
 def val_nombre(form, field):
     nombre = field.data
     validar = re.match('^@?[a-z\s_áéíóúàèìòùäëïöüñ]+[0-9a-z]*$', nombre, re.I)
@@ -11,9 +13,9 @@ def val_nombre(form, field):
     	raise validators.ValidationError('Introduzca un Nombre o Username')
     if not validar :
         raise validators.ValidationError('Nombre no válido')     
-##########################################################################################
+#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 
-#############----------------- Validaciones formulario Consulta-------------- ################
+#::::::::::::::::::::: Validaciones para formulario de CONSULTA :::::::::::::::::::::#
 def val_id (form, field):
     nombre = field.data
     validar = re.match('^[0-9]*$', nombre, re.I)
@@ -30,9 +32,10 @@ def val_nombrec(form, field):
     validar = re.match('^[a-z\sáéíóúàèìòùäëïöüñ]*[0-9a-z]*$', nombre, re.I)
     if not validar :
         raise validators.ValidationError('Nombre incorrecto')
-##########################################################################################
+#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 
 
+#:::::::::::::::: Definciones de campos para Formulario de BUSQUEDA ::::::::::::::::#
 class ComentFormBus(Form):
     in_name = StringField('Nombre o Username: ',
     [
@@ -46,7 +49,9 @@ class ComentFormBus(Form):
         ('6',6),('7',7),('8',8),('9',9),('10',10),
         ('11',11),('12',12),('13',13),('14',14),('15',15)])
     submit = SubmitField('')
+#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 
+#:::::::::::::::: Definciones de campos para Formulario de CONSULTA ::::::::::::::::#
 class ComentFormCon(Form):
     in_name = StringField('Nombre: ',
     [
@@ -61,3 +66,4 @@ class ComentFormCon(Form):
         validators.input_required(message='Fecha requerida')
     ])
     submit = SubmitField('')
+#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#

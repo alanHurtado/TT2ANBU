@@ -1,6 +1,6 @@
-####----Controlador de Analisis------#####
+###---------------- CONTROLADOR DE ANÁLISIS ----------------###
 
-from config import *
+from controllers.config import *
 from model.Bd_conect import *
 import urllib.request as req
 

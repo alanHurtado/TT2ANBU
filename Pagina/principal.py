@@ -1,10 +1,11 @@
-from ctlBusqueda import *
-from ctlAnalisis import *
+###---------------- CONTROLADOR PRINCIPAL DEL SISTEMA ----------------###
+from controllers.ctlBusqueda import *
+from controllers.ctlAnalisis import *
+from controllers import formulario
 from flask import Flask
-from flask import render_template ## permite renderisar templates
-from flask import request, redirect, url_for, flash   ## permite el manejo de los datos del formulario
-from model.Bd_conect import *  # importamos los registros a la BD
-from model import formulario    #importamos el formulario
+from flask import render_template  # Permite renderizar templates (Archivos HTML)
+from flask import request, redirect, url_for, flash  # Permite manejo de los datos del formulario
+from model.Bd_conect import *  # Funciones del modelo para uso de la base de datos
 
 app = Flask(__name__)
 app.secret_key = 'anotherSecretKey'
