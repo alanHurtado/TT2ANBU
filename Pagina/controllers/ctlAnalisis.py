@@ -1,5 +1,9 @@
 ###---------------- CONTROLADOR DE ANÁLISIS ----------------###
 
+#:::: Este controlador se encarga de los procesos y código
+# que están relacionados con el análisis de la publicaciones
+# tanto para el análisis de arma con el análisis de rostro.
+
 from controllers.config import *
 from model.Bd_conect import *
 import urllib.request as req

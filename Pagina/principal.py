@@ -1,4 +1,10 @@
 ###---------------- CONTROLADOR PRINCIPAL DEL SISTEMA ----------------###
+
+#:::: Este controlador procesa todas las peticiones que
+# recibe la página del sistema, se encarga de redirigir al
+# usuario a las secciones correspondientes y también de ejecutar
+# el código para la lógica del negocio.
+
 from controllers.ctlBusqueda import *
 from controllers.ctlAnalisis import *
 from controllers import formulario

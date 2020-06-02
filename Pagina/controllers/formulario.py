@@ -1,11 +1,15 @@
-###---------------- ESTRUCTURAS Y VALIDACIONES DE FORMULARIOS ----------------###
+###---------------- DEFINICIONES Y VALIDACIONES DE FORMULARIOS ----------------###
+
+#:::: Este componente define los tipos y nombres de los campos utilizados
+# en los formularios del sistema, también define las funciones correspondientes
+# de cada campo para evaluar y condicionar los datos de entrada. 
 
 import sys, re, time
 from wtforms import Form  # Importar instancia de los formularios
 from wtforms import StringField, SubmitField , SelectField  # Tipos de campos en formularios
 from wtforms import validators  # Realizar validaciones
 
-#::::::::::::::::::::: Validaciones para formulario de BUSQUEDA :::::::::::::::::::::#
+#::::::::::::::::: VALIDACIONES para el formulario de BUSQUEDA :::::::::::::::::#
 def val_nombre(form, field):
     nombre = field.data
     validar = re.match('^@?[a-z\s_áéíóúàèìòùäëïöüñ]+[0-9a-z]*$', nombre, re.I)
@@ -13,9 +17,9 @@ def val_nombre(form, field):
     	raise validators.ValidationError('Introduzca un Nombre o Username')
     if not validar :
         raise validators.ValidationError('Nombre no válido')     
-#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
+#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 
-#::::::::::::::::::::: Validaciones para formulario de CONSULTA :::::::::::::::::::::#
+#::::::::::::::: VALIDACIONES para el formulario de CONSULTA :::::::::::::::#
 def val_id (form, field):
     nombre = field.data
     validar = re.match('^[0-9]*$', nombre, re.I)
@@ -32,26 +36,30 @@ def val_nombrec(form, field):
     validar = re.match('^[a-z\sáéíóúàèìòùäëïöüñ]*[0-9a-z]*$', nombre, re.I)
     if not validar :
         raise validators.ValidationError('Nombre incorrecto')
-#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
+#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 
 
-#:::::::::::::::: Definciones de campos para Formulario de BUSQUEDA ::::::::::::::::#
+#:::::::::: DEFINICIONES de campos para el formulario de BUSQUEDA ::::::::::#
 class ComentFormBus(Form):
     in_name = StringField('Nombre o Username: ',
     [
         val_nombre
     ])
-    no_profiles = SelectField('Número  máximo de perfiles a buscar:', choices=[
-        ('1',1),('2',2),('3',3),('4',4),('5',5),
-        ('6',6),('7',7),('8',8),('9',9),('10',10)])
-    no_posts = SelectField('Número  máximo de publicaciones por perfil:', choices=[
-        ('1',1),('2',2),('3',3),('4',4),('5',5),
-        ('6',6),('7',7),('8',8),('9',9),('10',10),
-        ('11',11),('12',12),('13',13),('14',14),('15',15)])
+    no_profiles = SelectField('Número  máximo de perfiles a buscar:',
+            choices=[
+                ('1',1),('2',2),('3',3),('4',4),('5',5),
+                ('6',6),('7',7),('8',8),('9',9),('10',10)]
+            )
+    no_posts = SelectField('Número  máximo de publicaciones por perfil:',
+            choices=[
+                ('1',1),('2',2),('3',3),('4',4),('5',5),
+                ('6',6),('7',7),('8',8),('9',9),('10',10),
+                ('11',11),('12',12),('13',13),('14',14),('15',15)]
+            )
     submit = SubmitField('')
-#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 
-#:::::::::::::::: Definciones de campos para Formulario de CONSULTA ::::::::::::::::#
+#::::: DEFINICIONES de campos para el formulario de CONSULTA :::::#
 class ComentFormCon(Form):
     in_name = StringField('Nombre: ',
     [
@@ -66,4 +74,4 @@ class ComentFormCon(Form):
         validators.input_required(message='Fecha requerida')
     ])
     submit = SubmitField('')
-#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#

@@ -1,8 +1,8 @@
 ###---------------- CONTROLADOR DE BÚSQUEDA ----------------###
 
-# :::Este controlador realiza solicitudes a la API del sítio APIFY.com para 
-# buscar y obtener perfiles públicos de Instagram. La búsqueda se realiza con
-# base en un nombre proporcionado.
+#:::: Este controlador realiza las solicitudes a la API
+# del sítio APIFY.com para buscar y obtener los perfiles públicos
+# de Instagram coincidentes con el nombre proporcionado.
 
 from controllers.config import *
 from model.Bd_conect import *
@@ -21,19 +21,19 @@ def do_search(srch_name,srch_limit,no_posts):
 			dataObj = json.loads(data)		
 			ownerId = ""
 			for obj in dataObj:
-				#::: Insert para Perfil ::#
+				#::::::::::::::: Insert para Perfil ::::::::::::::#
 				if ownerId != obj['#debug']['userId']:
 					ownerId = obj['#debug']['userId']
 					username = obj['#debug']['userUsername']
 					name = obj['#debug']['userFullName']
 					url=obj['#debug']['url']
 					dbProfId = insert_profile(username, name, url)
-					#::: Insert para busqueda_perfil :::#
+					#:::: Insert para busqueda_perfil ::::#
 					insert_srch_prof(dbSrchId,dbProfId)				
-					#:::::::::::::::::::::::::::::::::#
-				#::::::::::::::::::::::::::#
+					#:::::::::::::::::::::::::::::::::::::#
+				#:::::::::::::::::::::::::::::::::::::::::::::::::#
 
-				#::: Insert para Publicacion :::#
+				#:::::::::::::::: Insert para Publicacion ::::::::::::::::#
 				date = obj['timestamp']
 				date = date.replace('T',' ')
 				date = date.replace('.000Z','')
@@ -46,7 +46,7 @@ def do_search(srch_name,srch_limit,no_posts):
 				except Exception as e:
 					desc = ""
 				insert_post(dbProfId,date,urlPost,desc,location,urlImage)						
-				#:::::::::::::::::::::::::::::#
+				#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 			return dbSrchId
 		except Exception as e:
 			print("ERROR al ejecutar la funcion do_search() :"+str(e))			
@@ -73,9 +73,11 @@ def search_profiles(data_name,data_limit,data_posts):
 	r = requests.post(url=URL,data=data,headers={'Content-Type':'application/json'})
 	
 	if r.status_code == 201:
-		URL = ("https://api.apify.com/v2/actor-tasks/"+
+		URL = (
+			"https://api.apify.com/v2/actor-tasks/"+
 			taskId+"/runs/last/dataset/items?token="+
 			token+"&status=SUCCEEDED")
+		
 		answ = requests.get(url=URL,headers={'Content-Type':'application/json'})
 
 		if answ.status_code == 200:
@@ -85,4 +87,10 @@ def search_profiles(data_name,data_limit,data_posts):
 
 def clean_txt_data(inputString):
 	inputString = inputString.replace('\n', '')
+	inputString = inputString.replace('á', 'a',)
+	inputString = inputString.replace('é', 'e',)
+	inputString = inputString.replace('í', 'i',)
+	inputString = inputString.replace('ó', 'o',)
+	inputString = inputString.replace('ú', 'u',)
+	inputString = inputString.replace('ñ', 'n',)
 	return inputString.encode('ascii', 'ignore').decode('ascii')
