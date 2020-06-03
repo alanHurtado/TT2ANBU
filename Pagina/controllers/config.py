@@ -8,7 +8,7 @@
 #--> 0.2 (TEST)
 #--> 0.1 (beta)
 #--> 0.0 (Latest)*
-buildVersion = "0.0.88"
+buildVersion = "latest"
 taskId = "HGYMshTG6oksXdBfx"
 token = "sX3XNABWjLt9yokBNiufqym3y"
 #:::::::::::::::::::::::::::::::::::#

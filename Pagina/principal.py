@@ -55,7 +55,7 @@ def resultado_busqueda(id_srch):
             return render_template('busqueda.html',error=error)
     else:
         chekList = request.form.getlist('analisis')
-        if getImages(chekList):
+        if getImages(chekList,id_srch):
             return render_template('resultado_analisis.html', message="....Resultados de Análisis.....")
         else:
             error = 'ERROR al comenzar el análisis, por favor intente de nuevo.'
