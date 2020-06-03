@@ -72,9 +72,9 @@ def search_profiles(data_name,data_limit,data_posts):
 	    }
 	}"""
 
-	#r = requests.post(url=URL,data=data,headers={'Content-Type':'application/json'})
-	rstatus_code = 201
-	if rstatus_code == 201:
+	r = requests.post(url=URL,data=data,headers={'Content-Type':'application/json'})
+	#rstatus_code = 201
+	if r.status_code == 201:
 		URL = (
 			"https://api.apify.com/v2/actor-tasks/"+
 			taskId+"/runs/last/dataset/items?token="+
