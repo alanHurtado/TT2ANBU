@@ -30,8 +30,11 @@ def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
         no_posts = coment_form.no_posts.data           
         id_srch = do_search(in_name,no_profiles,no_posts)
         
-        if not id_srch:#
-            error = 'El servicio de búsqueda falló, por favor intente de nuevo.'
+        if id_srch == NO_PROFILES_FOUND:
+            error = ("No se encontraron perfiles de Instagram con el username o nombre: "+in_name)
+            return render_template('busqueda.html',error=error,form = coment_form)
+        if not id_srch:
+            error = 'ERROR: El servicio de búsqueda falló, por favor intente de nuevo.'
             return render_template('busqueda.html',error=error,form = coment_form)
         else:                        
             next = request.args.get('next', 'resultado_busqueda') # especificamos la ruta si se enviaron los datos            

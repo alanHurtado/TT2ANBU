@@ -13,6 +13,9 @@ taskId = "HGYMshTG6oksXdBfx"
 token = "sX3XNABWjLt9yokBNiufqym3y"
 #:::::::::::::::::::::::::::::::::::#
 
-#::::::::::::: Sistema :::::::::::::#
+#::::::::::::: SISTEMA :::::::::::::#
 IMG_PROFILES_DIR = "tmp/post_img/"
+
+#::: Codigos de ERROR :::#
+NO_PROFILES_FOUND = -2
 #:::::::::::::::::::::::::::::::::::#
