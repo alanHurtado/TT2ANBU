@@ -8,10 +8,13 @@
 from controllers.ctlBusqueda import *
 from controllers.ctlAnalisis import *
 from controllers import formulario
+from controllers import generarpdf
+import pdfkit
 from flask import Flask
-from flask import render_template  # Permite renderizar templates (Archivos HTML)
+from flask import render_template, make_response  # Permite renderizar templates (Archivos HTML)
 from flask import request, redirect, url_for, flash  # Permite manejo de los datos del formulario
 from model.Bd_conect import *  # Funciones del modelo para uso de la base de datos
+
 
 app = Flask(__name__)
 app.secret_key = 'anotherSecretKey'
@@ -94,6 +97,24 @@ def reportes():
 @app.route('/conocenos')
 def conocenos():
     return render_template('conocenos.html')
+
+@app.route('/generar_reportes')
+def generar_reportes():
+    x=2
+    config = pdfkit.configuration(wkhtmltopdf='/opt/bin/wkhtmltopdf')
+    pdfkit.from_string(generarpdf(), 'static/pdf/reporte'+str(x)+'.pdf')
+    pdf = pdfkit.from_string(generarpdf(), True)   #configuration=config
+    
+    response = make_response(pdf)
+    response.headers['Content-type'] = 'static/pdf'
+    response.headers['Content-Disposition'] = 'attachment; filename = reporte'+str(x)+'.pdf'
+    
+    return response
+
+@app.route('/reporte')
+def reporte():
+    return render_template('reporte.html')
+
 
 # valifamos que se ejecute el programa principal
 if __name__ == '__main__':
