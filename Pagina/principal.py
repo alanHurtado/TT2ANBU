@@ -8,7 +8,7 @@
 from controllers.ctlBusqueda import *
 from controllers.ctlAnalisis import *
 from controllers import formulario
-from controllers import generarpdf
+from controllers.generarpdf import *
 import pdfkit
 from flask import Flask
 from flask import render_template, make_response  # Permite renderizar templates (Archivos HTML)
@@ -101,15 +101,15 @@ def conocenos():
 @app.route('/generar_reportes')
 def generar_reportes():
     x=2
-    config = pdfkit.configuration(wkhtmltopdf='/opt/bin/wkhtmltopdf')
+    #config = pdfkit.configuration(wkhtmltopdf='/opt/bin/wkhtmltopdf')
     pdfkit.from_string(generarpdf(), 'static/pdf/reporte'+str(x)+'.pdf')
-    pdf = pdfkit.from_string(generarpdf(), True)   #configuration=config
+    pdf = pdfkit.from_string(generarpdf(), False)   #configuration=config
     
     response = make_response(pdf)
     response.headers['Content-type'] = 'static/pdf'
     response.headers['Content-Disposition'] = 'attachment; filename = reporte'+str(x)+'.pdf'
     
-    return response
+    return response 
 
 @app.route('/reporte')
 def reporte():

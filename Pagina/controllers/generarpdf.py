@@ -6,8 +6,10 @@ def generarpdf():
     datos = {
         'name': 'Alan',
         'course': 10,
-        'img_per' : 'static/img/ANBU.jpg'
+        'img_per' : 'static/img/ANBU.jpg',
+        
     }
 
     html = template.render(datos)
+    #print(html)
     return html
