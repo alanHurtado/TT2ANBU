@@ -1,9 +1,17 @@
-.formato {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: medium;
-    background-color: rgb(red, green, blue);
-}
-
-}
 table {
-}
+    width: 600px;
+    border: 1px solid #000;
+ }
+ th, td {
+    width: 25%;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid #000;
+ }
+ .carta {
+    background-color: lightblue;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: xx-large;
+     width: 612px;
+     height: 799px;
+ }

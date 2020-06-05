@@ -4,10 +4,13 @@ def generarpdf():
     env = Environment(loader=FileSystemLoader('templates'))
     template = env.get_template('reporte.html')
     datos = {
-        'name': 'Alan',
-        'course': 10,
-        'img_per' : 'static/img/ANBU.jpg',
-        
+        'num_busqueda': 10,
+        'fecha_busqueda' : '10/08/2020',
+        'username': 'Ferrer',
+        'no_perfiles' : 8,
+        'no_publicaciones' : 6
+
+
     }
 
     html = template.render(datos)

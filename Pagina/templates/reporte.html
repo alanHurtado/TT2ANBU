@@ -1,31 +1,40 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    
+     
     <!--bootstrap4-->
     <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
     <!-- estilos propios -->
-    <link rel=”stylesheet” type=”text/css” href= ”..static/css/reporte.css”>
-    <!-- Agregamos libreria Jquery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Agreamos la ruta de los archivos js -->
-    <script src="Pagina/static/js/reporte.js"></script>
-    
+    <link rel = "stylesheet" type= "text/css" href="../static/css/reporte.css" >
     <title>REPORTE</title>
     
-  </head>
+</head>
   
-<body class ="formato">
-
-Hola mundo!{{name}}<br>
-
-<b>Esto es negrita{{course}}.</b><br>
-
-<i>Y esto it&aacute;lica.</i><br>
-
+<body>
+<div class = 'carta'>
+  <h3> Reporte Resultados de an&aacute;lisis "ANBU" </h3>
+  <table border>
+    <tr>
+      <th>B&uacute;squeda No </th>
+      <th COLSPAN=2> {{num_busqueda}}</th>
+      <th>Fecha de b&uacute;squeda </th>
+      <th COLSPAN=2> {{fecha_busqueda}} </th>
+    </tr> 
+    <tr>
+      <td COLSPAN=6>  </td>
+    </tr>
+    <tr>
+      <td COLSPAN=6> Parametros de b&uacute;squeda </td>
+    </tr>
+    <tr>
+      <td>  Nombre: </td>
+      <td>  {{username}} </td>
+      <td>  N&uacute;mero de perfiles buscados </td>
+      <td>  {{no_perfiles}} </td>
+      <td>  N&uacute;mero de publicaciones buscadas por perfil </td>
+      <td>  {{no_publicaciones}} </td>
+    </tr>
+  </table>
+</div>
 </body>
 
 </html>
