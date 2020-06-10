@@ -4,7 +4,7 @@
 # recibe la página del sistema, se encarga de redirigir al
 # usuario a las secciones correspondientes y también de ejecutar
 # el código para la lógica del negocio.
-
+from datetime import *
 from controllers.ctlBusqueda import *
 from controllers.ctlAnalisis import *
 from controllers import formulario
@@ -100,15 +100,16 @@ def conocenos():
 
 @app.route('/generar_reportes')
 def generar_reportes():
-    x=2
+    x = datetime.now()
+    date =str(x.year)+str(x.month)+str(x.day)+str(x.minute)
     #config = pdfkit.configuration(wkhtmltopdf='/opt/bin/wkhtmltopdf')
-    pdfkit.from_string(generarpdf(), 'static/pdf/reporte'+str(x)+'.pdf')
+    pdfkit.from_string(generarpdf(), 'static/pdf/reporte'+date+'.pdf')
     pdf = pdfkit.from_string(generarpdf(), False)   #configuration=config
     
     response = make_response(pdf)
     response.headers['Content-type'] = 'static/pdf'
-    response.headers['Content-Disposition'] = 'attachment; filename = reporte'+str(x)+'.pdf'
-    
+    response.headers['Content-Disposition'] = 'attachment; filename = reporte'+date+'.pdf'
+    print(date)
     return response 
 
 @app.route('/reporte')
