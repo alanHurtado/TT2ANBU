@@ -1,10 +1,9 @@
 table {
-    width: 600px;
+    width: 7.8in;
     border: 1px solid #000;
  }
  th, td {
     width: 25%;
-    text-align: left;
     vertical-align: top;
     border: 1px solid #000;
  }
@@ -12,6 +11,6 @@ table {
     background-color: lightblue;
     font-family: Arial, Helvetica, sans-serif;
     font-size: xx-large;
-     width: 612px;
-     height: 799px;
+    width: 8.5in;
+    height: 11in;
  }

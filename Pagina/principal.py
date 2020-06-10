@@ -92,7 +92,8 @@ def resultado_consulta(consulta):
 
 @app.route('/reportes')
 def reportes():
-    return render_template('reportes.html')
+    lis_reportes = os.listdir('static/pdf')
+    return render_template('reportes.html', Reportes=lis_reportes)
 
 @app.route('/conocenos')
 def conocenos():
