@@ -4,13 +4,17 @@
 # recibe la página del sistema, se encarga de redirigir al
 # usuario a las secciones correspondientes y también de ejecutar
 # el código para la lógica del negocio.
-
+from datetime import *
 from controllers.ctlBusqueda import *
 from controllers.ctlAnalisis import *
 from controllers import formulario
+from controllers.generarpdf import *
+import pdfkit
 from flask import Flask
 from flask import render_template  # Permite renderizar templates (Archivos HTML)
 from flask import Flask, Response, jsonify, send_from_directory, abort, request, redirect, url_for, flash  # Permite manejo de los datos del formulario
+from flask import render_template, make_response  # Permite renderizar templates (Archivos HTML)
+from flask import request, redirect, url_for, flash  # Permite manejo de los datos del formulario
 from model.Bd_conect import *  # Funciones del modelo para uso de la base de datos
 from absl import app, logging
 from yolov3_tf2.models import (
@@ -48,6 +52,7 @@ print('weights loaded')
 
 class_names = [c.strip() for c in open(classes_path).readlines()]
 print('classes loaded')
+
 
 app = Flask(__name__)
 app.secret_key = 'anotherSecretKey'
@@ -135,12 +140,14 @@ def resultado_consulta(consulta):
 
 @app.route('/reportes')
 def reportes():
-    return render_template('reportes.html')
+    lis_reportes = os.listdir('static/pdf')
+    return render_template('reportes.html', Reportes=lis_reportes)
 
 @app.route('/conocenos')
 def conocenos():
     return render_template('conocenos.html')
 
+<<<<<<< HEAD
 # la api que regresa las detecciones
 @app.route('/detections/<int:id_srch>', methods=['GET','POST'])
 def detections(id_srch):
@@ -190,6 +197,47 @@ def detections(id_srch):
         return jsonify(responses), 200
     except FileNotFoundError:
         abort(404)
+
+@app.route('/generar_reportes')
+def generar_reportes():
+    x = datetime.now()
+    date =str(x.year)+str(x.month)+str(x.day)+str(x.minute)
+    
+    options = {
+        'page-size': 'Letter',
+        'margin-top': '0.75in',
+        'margin-right': '0.75in',
+        'margin-bottom': '0.75in',
+        'margin-left': '0.75in',
+        'encoding': "UTF-8",
+        'custom-header' : [
+            ('Accept-Encoding', 'gzip')
+        ],
+        'cookie': [
+            ('cookie-name1', 'cookie-value1'),
+            ('cookie-name2', 'cookie-value2'),
+        ],
+        'no-outline': None
+    }
+    css = 'static/css/reporte.css'
+    
+    #config = pdfkit.configuration(wkhtmltopdf='/opt/bin/wkhtmltopdf')
+    generarpdf()
+    pdfkit.from_file('templates/reporte2.html', 'static/pdf/reporte'+date+'.pdf', options=options, css=css)
+    #pdfkit.from_string(generarpdf(), 'static/pdf/reporte'+date+'.pdf')
+    pdf =  pdfkit.from_file('templates/reporte2.html', False)   #configuration=config
+    os.remove('templates/reporte2.html')
+   
+    response = make_response(pdf)
+    response.headers['Content-type'] = 'static/pdf'
+    response.headers['Content-Disposition'] = 'attachment; filename = reporte'+date+'.pdf'
+    return response 
+
+@app.route('/reporte')
+def reporte():
+    return render_template('reporte.html')
+
+
 
 # valifamos que se ejecute el programa principal
 if __name__ == '__main__':

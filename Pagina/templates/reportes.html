@@ -3,5 +3,13 @@
 <div class='Scuerpo'>
    </br>
    <h5 class = 'texT' > REPORTES ANBU </h5>
+   <table>
+   {% for reporte in Reportes %}
+		   <tr>
+            <td>
+            <a href="../static/pdf/reportereporte20206941.pdf">{{reporte}}</a> </td>
+         </tr>
+          {% endfor %}
+   </tabel>
 </div>        
 {% endblock contenido %}

@@ -1,0 +1,120 @@
+<html>
+<head>
+     
+    <!--bootstrap4-->
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
+    <!-- estilos propios -->
+    <link rel = "stylesheet" type= "text/css" href="../static/css/reporte.css" >
+    <title>REPORTE</title>
+    
+</head>
+  
+<body>
+<div class = 'carta'>
+  <h1> "ANBU" </h1> 
+  <img src="../static/img/arma.jpeg">
+  <h3> Reporte de Resultados de An&aacute;lisis  </h3>
+  <table>
+    <tr>
+      <th>B&uacute;squeda No </th>
+      <th COLSPAN=2> {{num_busqueda}}</th>
+      <th>Fecha de b&uacute;squeda </th>
+      <th COLSPAN=2> {{fecha_busqueda}} </th>
+    </tr> 
+    <tr>
+      <td COLSPAN=6>  </td>
+    </tr>
+    <tr>
+      <td COLSPAN=6> Parametros de b&uacute;squeda </td>
+    </tr>
+    <tr>
+      <td COLSPAN=6>  </td>
+    </tr>
+    <tr>
+      <td>  Nombre: </td>
+      <td>  {{username}} </td>
+      <td>  N&uacute;mero de perfiles buscados </td>
+      <td>  {{no_perfiles}} </td>
+      <td>  N&uacute;mero de publicaciones buscadas por perfil </td>
+      <td>  {{no_publicaciones}} </td>
+    </tr>
+    <tr>
+      <td COLSPAN=6> 
+        <p>En esta b&uacute;squeda se encontraron {{no_armas}} armas 
+          de fuego calibre corto y {{no_rostros}} rostros agresivos en un total <br>
+          de {{no_publicaciones}} publicaciones, encontradas en {{no_perfiles}} 
+          perfiles con los siguientes parametros a se&ntilde;alar.
+        </p>
+      </td>
+    </tr>
+    
+  </table>
+<br>
+<br>
+
+{%for perfil in perfiles%}
+<table >
+    <tr>
+      <th> Perfil No </th>
+      <th COLSPAN=2> {{perfil}}</th>
+    </tr>
+    <tr> 
+      <td>Nombre del perfil: </td>
+      <td COLSPAN=2> {{name_perfil}} </td>
+    </tr>
+    <tr> 
+      <td>Nombre de usuario: </td>
+      <td COLSPAN=2> {{username}} </td>
+    </tr>  
+    <tr>
+      <td>Biografia: </td>
+      <td COLSPAN=2> {{biografia}} </td>>
+    </tr>
+    
+    {%for publicacon in publicaciones%}
+    <tr>
+      <td> Publicaci&oacute;n </td>
+      <th COLSPAN=2> {{publicacon}}</th>
+    </tr>
+    <tr>
+      <td COLSPAN=6>  </td>
+    </tr>
+    <tr>
+      <td ROWSPAN=8>   <img src="../static/img/arma.jpeg">  </td>
+      <!--<img src="{{ruta_imagen}}" >-->
+    </tr>
+    <tr>
+      <td>  Ubicaci&oacuten </td>
+      <td>  {{ubi_publi}} </td>
+    </tr>  
+    <tr>
+      <td>  Fecha </td>
+      <td>  {{fecha_publi}} </td>
+    </tr>
+    <tr>
+      <td> Enlace: </td>
+      <td>  {{enlace}} </td>
+    </tr>
+    <tr>
+      <td> Pie de imagen </td>
+      <td>{{pie_img}}</td>
+    </tr>
+    <tr>
+      <td> No de armas detectadas </td>
+      <td>{{no_arma_pub}}</td>
+    </tr>
+    <tr>
+      <td> No de rostros detectados </td>
+      <td>{{no_rostro_pub}}</td>
+    </tr>
+    <tr>
+      <td> Resultado: </td>
+      <td>{{resultado}}</td>
+    </tr>
+     {%endfor%}
+  {%endfor%}
+  </table>
+</div>
+</body>
+
+</html>

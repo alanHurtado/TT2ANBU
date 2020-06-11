@@ -7,10 +7,12 @@
 #--BUILD_VERSION--#
 #--> 0.2 (TEST)
 #--> 0.1 (beta)
-#--> 0.0 (Latest)*
+#--> 0.0 (latest)*
 buildVersion = "latest"
-taskId = "HGYMshTG6oksXdBfx"
-token = "sX3XNABWjLt9yokBNiufqym3y"
+#taskId = "HGYMshTG6oksXdBfx"
+taskId = "rQJWXu7oKZ2yXnKCf"
+#token = "sX3XNABWjLt9yokBNiufqym3y"
+token = "6gfJwzebdrLR5T7BSiAALAhZf"
 #:::::::::::::::::::::::::::::::::::#
 
 #::::::::::::: SISTEMA :::::::::::::#
