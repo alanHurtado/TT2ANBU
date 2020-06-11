@@ -32,5 +32,8 @@ def generarpdf():
     }
 
     html = template.render(datos)
+    f = open('templates/reporte2.html', 'w')
+    f.write(html)
+    f.close() 
     #print(html)
-    return html
+    

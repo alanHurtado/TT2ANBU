@@ -11,9 +11,10 @@
   
 <body>
 <div class = 'carta'>
-  <h1> "ANBU" </h1>
+  <h1> "ANBU" </h1> 
+  <img src="../static/img/arma.jpeg">
   <h3> Reporte de Resultados de An&aacute;lisis  </h3>
-  <table border>
+  <table>
     <tr>
       <th>B&uacute;squeda No </th>
       <th COLSPAN=2> {{num_busqueda}}</th>
@@ -52,7 +53,7 @@
 <br>
 
 {%for perfil in perfiles%}
-<table border >
+<table >
     <tr>
       <th> Perfil No </th>
       <th COLSPAN=2> {{perfil}}</th>
@@ -79,7 +80,8 @@
       <td COLSPAN=6>  </td>
     </tr>
     <tr>
-      <td ROWSPAN=8>  <img src="arma.jpeg"><!--<img src="{{ruta_imagen}}" >--> </td>
+      <td ROWSPAN=8>   <img src="../static/img/arma.jpeg">  </td>
+      <!--<img src="{{ruta_imagen}}" >-->
     </tr>
     <tr>
       <td>  Ubicaci&oacuten </td>
