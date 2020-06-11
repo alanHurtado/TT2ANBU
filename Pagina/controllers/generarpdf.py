@@ -4,8 +4,8 @@ def generarpdf():
     env = Environment(loader=FileSystemLoader('templates'))
     template = env.get_template('reporte.html')
     x = 19
-    a_perfiles = 5+1 #total perfiles analisados
-    a_publicaciones = 3+1 #total de publicaciones por perfil
+    a_perfiles = [1,2]  #5+1 #total perfiles analisados
+    a_publicaciones = {1,2} #3+1 #total de publicaciones por perfil
     datos = {
         'num_busqueda': 10,
         'fecha_busqueda' : '10/08/2020',

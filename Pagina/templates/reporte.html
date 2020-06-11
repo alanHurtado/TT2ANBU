@@ -51,7 +51,7 @@
 <br>
 <br>
 
-<!-- for perfil == perfiles-->
+{%for perfil in perfiles%}
 <table border >
     <tr>
       <th> Perfil No </th>
@@ -70,7 +70,7 @@
       <td COLSPAN=2> {{biografia}} </td>>
     </tr>
     
-    <!--while publicacon == publicaciones-->
+    {%for publicacon in publicaciones%}
     <tr>
       <td> Publicaci&oacute;n </td>
       <th COLSPAN=2> {{publicacon}}</th>
@@ -79,7 +79,7 @@
       <td COLSPAN=6>  </td>
     </tr>
     <tr>
-      <td ROWSPAN=8>  <img src="{{ruta_imagen}}" > </td>
+      <td ROWSPAN=8>  <img src="arma.jpeg"><!--<img src="{{ruta_imagen}}" >--> </td>
     </tr>
     <tr>
       <td>  Ubicaci&oacuten </td>
@@ -109,8 +109,8 @@
       <td> Resultado: </td>
       <td>{{resultado}}</td>
     </tr>
-    <!-- endfor-->
-<!-- endfor }-->
+     {%endfor%}
+  {%endfor%}
   </table>
 </div>
 </body>
