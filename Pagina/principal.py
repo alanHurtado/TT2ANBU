@@ -147,7 +147,7 @@ def reportes():
 def conocenos():
     return render_template('conocenos.html')
 
-<<<<<<< HEAD
+
 # la api que regresa las detecciones
 @app.route('/detections/<int:id_srch>', methods=['GET','POST'])
 def detections(id_srch):
