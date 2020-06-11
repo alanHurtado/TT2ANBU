@@ -149,7 +149,7 @@ ENGINE = InnoDB;
 -- Table `anbuDB`.`Arma`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `anbuDB`.`Arma` (
-  `idArma` INT NOT NULL,
+  `idArma` INT NOT NULL AUTO_INCREMENT,
   `idPublicacion` INT NULL,
   `porcentaje` INT NULL,
   `evaluacion_arma` INT NULL,

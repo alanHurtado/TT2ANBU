@@ -85,6 +85,21 @@ def insert_post(idProfile,date,urlPost,desc,location,urlImage):
         print("ERROR al realizar insert_post: "+str(e))
         print(desc)       
         return False    
+
+def insert_arma(idPublicacion,porcentaje,evaluacion):
+    cursor = conn.cursor()
+    try:
+        query = (
+            "INSERT INTO Arma (idPublicacion,porcentaje,evaluacion_arma)"
+            " VALUES (%s,%s,%s)"
+        )
+        data = (idPublicacion,porcentaje,evaluacion)
+        cursor.execute(query,data)
+        conn.commit()        
+        return True
+    except Exception as e:
+        print("ERROR al realizar insert_arma: "+str(e))
+        return False
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 
 #:::::::::::::::::::::: Funciones SELECT ::::::::::::::::::::::#
@@ -112,6 +127,17 @@ def select_srch(idBusqueda):
         return data
     except Exception as e:
         print("ERROR al realizar select_srch(): "+str(e))
+        return False
+
+def select_last_id():
+    cursor = conn.cursor()
+    try:  
+        cursor.execute("SELECT idBusqueda from Busqueda ORDER BY fecha DESC LIMIT 1")
+        data = cursor.fetchone()
+        cursor.close()
+        return str(data[0])
+    except Exception as e:
+        print("Error al realizar la consulta"+str(e))
         return False        
 
 def select_profiles_by_srch(idBusqueda):

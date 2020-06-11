@@ -1,0 +1,1 @@
+TXT para no tener la carpeta vacía en git.

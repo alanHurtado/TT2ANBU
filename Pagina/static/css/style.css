@@ -113,6 +113,12 @@ td{
     border: 1px solid #ccc; 
     text-align: left; 
 }
+td.type2{ 
+    color: black; 
+    padding: 6px; 
+    border: 1px solid #ccc; 
+    text-align: left; 
+}
 
 table.type2 {
     width: 100%;
