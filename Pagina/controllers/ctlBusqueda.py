@@ -24,12 +24,12 @@ def do_search(srch_name,srch_limit,no_posts):
 			ownerId = ""
 			for obj in dataObj:
 				#::::::::::::::: Insert para Perfil ::::::::::::::#
-				if ownerId != obj['#debug']['userId']:
-					ownerId = obj['#debug']['userId']
+				if ownerId != obj['ownerId']:
+					ownerId = obj['ownerId']
 					username = obj['#debug']['userUsername']
 					name = obj['#debug']['userFullName']
-					url=obj['#debug']['url']
-					dbProfId = insert_profile(username, name, url)
+					url_profile="https://www.instagram.com/"+username
+					dbProfId = insert_profile(username, name, url_profile)
 					#:::: Insert para busqueda_perfil ::::#
 					insert_srch_prof(dbSrchId,dbProfId)				
 					#:::::::::::::::::::::::::::::::::::::#
@@ -40,14 +40,14 @@ def do_search(srch_name,srch_limit,no_posts):
 				date = date.replace('T',' ')
 				date = date.replace('.000Z','')
 
-				urlPost = obj['url']
-				urlImage = obj['imageUrl']
+				url_Post = obj['url']
+				url_Image = obj['displayUrl']
 				location = obj['locationName']
 				try:
 					desc = obj['firstComment']
 				except Exception as e:
 					desc = ""
-				insert_post(dbProfId,date,urlPost,desc,location,urlImage)						
+				insert_post(dbProfId,date,url_Post,desc,location,url_Image)						
 				#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 			return dbSrchId
 		except Exception as e:
@@ -89,10 +89,10 @@ def search_profiles(data_name,data_limit,data_posts):
 
 def clean_txt_data(inputString):
 	inputString = inputString.replace('\n', '')
-	inputString = inputString.replace('á', 'a',)
-	inputString = inputString.replace('é', 'e',)
-	inputString = inputString.replace('í', 'i',)
-	inputString = inputString.replace('ó', 'o',)
-	inputString = inputString.replace('ú', 'u',)
-	inputString = inputString.replace('ñ', 'n',)
+	inputString = inputString.replace('á', 'a')
+	inputString = inputString.replace('é', 'e')
+	inputString = inputString.replace('í', 'i')
+	inputString = inputString.replace('ó', 'o')
+	inputString = inputString.replace('ú', 'u')
+	inputString = inputString.replace('ñ', 'n')
 	return inputString.encode('ascii', 'ignore').decode('ascii')

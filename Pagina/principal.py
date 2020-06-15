@@ -31,7 +31,7 @@ import os
 
 # customize your API through the following parameters
 classes_path = './data/labels/coco.names'
-weights_path = './weights/yolov3.tf'
+weights_path = '../../weights/yolov3.tf'
 tiny = False                    # dejar en False dado que no se usa tiny yolo
 size = 416                      # tamaño de las imagenes resultantes
 output_path = './detecciones/'   # carpeta destino de los resultados
