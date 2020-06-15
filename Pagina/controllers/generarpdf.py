@@ -18,7 +18,7 @@ def generarpdf():
         'perfil': 1,
         'name_perfil':'Roberto Sanchez',
         'usernamw': '@Roberto24',
-        'biodrafia': 'Soy provedor de servicios externos en consul..... ',
+        'biografia': 'Soy provedor de servicios externos en consul..... ',
         'publicacion': 1,
         'publicaciones': a_publicaciones,
         'ruta_imagen':'../static/img/ANBU.jpg',
@@ -29,6 +29,7 @@ def generarpdf():
         'no_arma_pub': 2,
         'no_rostro_pub':1,
         'resultado': 'Es posible violento'
+       
     }
 
     html = template.render(datos)
