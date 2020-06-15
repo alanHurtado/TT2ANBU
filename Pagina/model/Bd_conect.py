@@ -190,6 +190,32 @@ def result_data_for_view(id_srch):
     except Exception as e:
         print("ERROR recuperando los datos de la búsqueda result_data_for_view(): "+str(e))
     return False
+
+##_:::::::::::::::::::::::::::::::::::::::::::::::#
+# :::::::::::::::::::::Para proceso de consultas
+
+def select_consulta(fechain, fechafin):
+    cursor = conn.cursor()    
+    try:
+        query = (
+            "SELECT * "
+            "FROM Busqueda "
+            "WHERE fecha BETWEEN "+ str(fechain)+ "AND" + str(fechafin)
+        )     
+
+        
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()       
+        return data
+    except Exception as e:
+        print("ERROR al realizar select_consulta(): "+str(e))
+        return False
+
+
+
+
+
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 
 #:::::::::::::::::::: Funciones UPDATE ::::::::::::::::::::#

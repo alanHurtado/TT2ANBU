@@ -116,27 +116,37 @@ def resultado_busqueda(id_srch):
 def consulta():
     coment_form = formulario.ComentFormCon(request.form)
     if request.method == 'POST' and coment_form.validate():    #   se agrega coment_form para validar el formulario 
-        #id_busqueda = coment_form.id_busqueda.data
         in_name = coment_form.in_name.data # se guarda con form en la variable declarada segun busqueda.html
         fecha_in = coment_form.fecha_in.data
         fecha_fin = coment_form.fecha_fin.data       
+        datos=[in_name, fecha_in, fecha_fin]
         ## Creamos una lista con los valores de la consulta
-        consulta=[in_name, fecha_in, fecha_fin]
-        
         next = request.args.get('next', 'resultado_consulta') ## especificamos la ruta si se enviaron los datos
         if next:    # comprobamos si paso por la url
-           return redirect(url_for('resultado_consulta', consulta=consulta)) # Se manda a la ruta
+           return redirect(url_for('resultado_consulta', datos=datos)) # Se manda a la ruta
         return redirect(url_for('index'))
     return render_template('consulta.html', form=coment_form) 
 
-@app.route('/resultado_consulta/<consulta>', methods=['GET','POST'])
-def resultado_consulta(consulta):
-    print(consulta)
-    print(":::::::::::::::::::::::hoolalksdf")
-    if request.method == 'GET':
-        print(consulta)
-        data_con=consulta_busqueda()    
-    return render_template('resultadoconsulta.html', Consulta = data_con, consulta=consulta )
+@app.route('/resultado_consulta/<string:datos>', methods=['GET','POST'])
+def resultado_consulta(datos):
+    datos=datos[1:len(datos)-1]
+    datos2=datos.split()
+    name=datos2[0]
+    fecha1=datos2[1]
+    fecha2=datos2[2]
+    name=name[1:len(name)-2]
+
+    fecha1=fecha1[0:len(fecha1)-1]
+    
+    consultas=select_consulta(fecha1,fecha2)
+    print(consultas)
+    print(type(consultas))
+
+    fecha1=fecha1[1:len(fecha1)-1]
+    fecha2=fecha2[1:len(fecha2)-1]
+
+    
+    return render_template('resultadoconsulta.html', name=name, fecha1=fecha1, fecha2=fecha2, consultas=consultas)
 
 @app.route('/reportes')
 def reportes():
