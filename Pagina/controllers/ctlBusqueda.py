@@ -57,7 +57,9 @@ def do_search(srch_name,srch_limit,no_posts):
 def search_profiles(data_name,data_limit,data_posts):
 	URL = ("https://api.apify.com/v2/actor-tasks/"+taskId+
 		"/run-sync?token="+token+
-		"&outputRecordKey=OUTPUT&build="+buildVersion)
+		"&outputRecordKey=OUTPUT"+
+		"&timeout=290"+
+		"&build="+buildVersion)
 
 	data = """{
 	    "search": """+'"'+data_name+'"'+""",

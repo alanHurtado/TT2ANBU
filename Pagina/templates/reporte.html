@@ -10,191 +10,111 @@
 </head>
   
 <body>
-  <br/>
-  <br/>
+<div class = 'carta'>
   <h1> "ANBU" </h1> 
-  <h2> Reporte de Resultados de B&uacute;squeda  </h2>
-  <br/>
-  <br/>
-
+  <img src="../static/img/arma.jpeg">
+  <h3> Reporte de Resultados de An&aacute;lisis  </h3>
   <table>
-    <tr class='espacio'>
-      <td class='espacio'> 
-        <br/>
-        <p class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; B&uacute;squeda No </p> 
-      </td>
-      <td class='espacio'>
-        <br/>
-        <p class='datoindicado'> {{num_busqueda}} </p>
-      </td>
-      <td COLSPAN=2 class='espacio'> 
-        <br/>
-        <p class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fecha de b&uacute;squeda </p>
-      </td>
-      <td COLSPAN=2 class='espacio'>  
-        <br/>
-        <p class ='datoindicado'> {{fecha_busqueda}} </p>  
-      </td>
-    </tr>  
-    <tr class='espacio'>
-      <td COLSPAN=6 class='espacio'> 
-      <br/>
-      <p class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Parametros de b&uacute;squeda <p> 
-      </td>
-    </tr>
-    <tr class='espacio'>
-      <td class="espacio" COLSPAN=2>
-        <br/>
-        <p class='dato'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nombre: &nbsp;&nbsp; <a class='datoindicado'> {{username}} </a> </p>
-      </td>
-      <td COLSPAN=2 class="espacio">
-        <br/>
-        <p class='dato'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No. de perfiles: &nbsp;&nbsp; <a class='datoindicado'> {{no_perfiles}} </a> </p>
-      </td>
-      <td class="espacio" COLSPAN=2>
-        <br/>
-        <p class='dato'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No. de publicaciones: &nbsp;&nbsp; <a class='datoindicado'> {{no_publicaciones}} </a> </p>
-      </td>
-    </tr>
-    <tr class="color">
-      <td COLSPAN=6> </td>
+    <tr>
+      <th>B&uacute;squeda No </th>
+      <th COLSPAN=2> {{num_busqueda}}</th>
+      <th>Fecha de b&uacute;squeda </th>
+      <th COLSPAN=2> {{fecha_busqueda}} </th>
+    </tr> 
+    <tr>
+      <td COLSPAN=6>  </td>
     </tr>
     <tr>
-    <td COLSPAN=6 >
-    <div class='cont'>
-      <br/>
-        <p class='p2'> En la b&uacute;squeda {{num_busqueda}}
-        realizada el {{fecha_busqueda}}, mediante el nombre "{{username}}"
-        se accedio a {{no_perfiles}} perfiles de los cuales se recopilaron un total de {{no_publicaciones*no_perfiles}} 
-        publicaciones, para su respectivo an&aacute;lisis, donde se detetar&oacute;n un total de {{no_armas}} publicaciones 
-         con portacion de arma tipo escuadra calibre corto y un total {{no_rostros}}
-        rostros que podr&iacute;an indicar
-        rasgos agresivos.  
-        En las tablas mostradas acontinuaci&oacute;n se detallar&aacute; cada una de las publicaciones por perfil.
+      <td COLSPAN=6> Parametros de b&uacute;squeda </td>
+    </tr>
+    <tr>
+      <td COLSPAN=6>  </td>
+    </tr>
+    <tr>
+      <td>  Nombre: </td>
+      <td>  {{username}} </td>
+      <td>  N&uacute;mero de perfiles buscados </td>
+      <td>  {{no_perfiles}} </td>
+      <td>  N&uacute;mero de publicaciones buscadas por perfil </td>
+      <td>  {{no_publicaciones}} </td>
+    </tr>
+    <tr>
+      <td COLSPAN=6> 
+        <p>En esta b&uacute;squeda se encontraron {{no_armas}} armas 
+          de fuego calibre corto y {{no_rostros}} rostros agresivos en un total <br>
+          de {{no_publicaciones}} publicaciones, encontradas en {{no_perfiles}} 
+          perfiles con los siguientes parametros a se&ntilde;alar.
         </p>
-    </div>    
       </td>
-    </tr>  
-  </table>
-
-
-<br/>
-<br/>
-
-{%for perfil in perfiles%}
-<table class='espacio'>
-
-    <tr class="color">
-      <td COLSPAN=3> </td>
-    </tr>
-    <tr class='espacio'>
-      <td COLSPAN=3 class='espacio'> 
-        <br/>
-        <i class='datoindicado'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Perfil No: &nbsp;&nbsp;&nbsp; {{perfil}} </i>
-      </td>
-    </tr>
-    <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
-        <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nombre del perfil:
-        <i class='datoindicado'> {{name_perfil}} </i> </i>
-      </td>
-      <td class='espacio'>  </td>
-    </tr>
-    <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
-        <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Username:
-        <i class='datoindicado'> {{username}} </i> </i>
-      </td>
-      <td class='espacio'>  </td>
-    </tr>
-    <tr class='espacio'> 
-      <td  COLSPAN=3 class='espacio'>
-        <br/>
-        <p class='cont'>  Biografia:</i>
-        {{biografia}} </p>
-        <br>
-        </td>
-    </tr>
-    <tr class="color">
-      <td COLSPAN=6> </td>
     </tr>
     
-     {%for publicacon in publicaciones%}
+  </table>
+<br>
+<br>
 
-    <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
-        <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Publicaci&oacute;n:
-        <i class='datoindicado'> {{publicacon}} </i> </i>
-        <br/>
-        <br/>
-      </td>
-      <td class='espacio'>  </td>
+{%for perfil in perfiles%}
+<table >
+    <tr>
+      <th> Perfil No </th>
+      <th COLSPAN=2> {{perfil}}</th>
     </tr>
-
-    <tr class="espacio">
-      <td ROWSPAN=8 class='espacio'>   <img src="../static/img/arma.jpeg"> <br/><br/> </td>
+    <tr> 
+      <td>Nombre del perfil: </td>
+      <td COLSPAN=2> {{name_perfil}} </td>
+    </tr>
+    <tr> 
+      <td>Nombre de usuario: </td>
+      <td COLSPAN=2> {{username}} </td>
+    </tr>  
+    <tr>
+      <td>Biografia: </td>
+      <td COLSPAN=2> {{biografia}} </td>>
+    </tr>
+    
+    {%for publicacon in publicaciones%}
+    <tr>
+      <td> Publicaci&oacute;n </td>
+      <th COLSPAN=2> {{publicacon}}</th>
+    </tr>
+    <tr>
+      <td COLSPAN=6>  </td>
+    </tr>
+    <tr>
+      <td ROWSPAN=8>   <img src="../static/img/arma.jpeg">  </td>
       <!--<img src="{{ruta_imagen}}" >-->
-      <td class='espacio'> </td>
-      <td class='espacio'> </td>
     </tr>
-    <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
-        <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ubicaci&oacuten:
-        <i class='datoindicado'> {{ubi_publi}} </i> </i>
+    <tr>
+      <td>  Ubicaci&oacuten </td>
+      <td>  {{ubi_publi}} </td>
+    </tr>  
+    <tr>
+      <td>  Fecha </td>
+      <td>  {{fecha_publi}} </td>
     </tr>
-    <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
-        <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha:
-        <i class='datoindicado'> {{fecha_publi}} </i> </i>
+    <tr>
+      <td> Enlace: </td>
+      <td>  {{enlace}} </td>
     </tr>
-    <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
-        <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enlace:
-        <i class='datoindicado'> {{enlace}} </i> </i>
+    <tr>
+      <td> Pie de imagen </td>
+      <td>{{pie_img}}</td>
     </tr>
-    <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
-        <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pie de imagen:
-        <i class='datoindicado'> {{pie_img}} </i> </i>
+    <tr>
+      <td> No de armas detectadas </td>
+      <td>{{no_arma_pub}}</td>
     </tr>
-    <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
-        <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No de armas detectadas:
-        <i class='datoindicado'> {{no_arma_pub}} </i> </i>
+    <tr>
+      <td> No de rostros detectados </td>
+      <td>{{no_rostro_pub}}</td>
     </tr>
-    <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
-        <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No de rostros detectados:
-        <i class='datoindicado'> {{no_rostro_pub}} </i> </i>
-    </tr>
-    <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
-        <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resultado:
-        <i class='datoindicado'> {{resultado}} </i> </i>
-        <br/>
-        <br/>
-    </tr>
-    <tr class='espacio'>
-      <td COLSPAN=3 class='espacio'>
-        <br/>
-        <br/>
-      </td>
+    <tr>
+      <td> Resultado: </td>
+      <td>{{resultado}}</td>
     </tr>
      {%endfor%}
   {%endfor%}
   </table>
+</div>
 </body>
 
 </html>

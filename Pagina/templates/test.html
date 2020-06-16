@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TEST load img</title>
+</head>
+<body>
+<img src="https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/19761718_1910122779246726_2496210481056841728_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=106&_nc_ohc=qm_l01SqMiYAX8tzrlB&oh=3e0d805b80375097d04fc52ce78da6ac&oe=5F10FB71" id="my-image">
+
+<script type="text/javascript">
+function getDataUrl(img) {
+    // Create canvas
+   const canvas = document.createElement('canvas');
+   const ctx = canvas.getContext('2d');
+   // Set width and height
+   canvas.width = img.width;
+   canvas.height = img.height;
+   // Draw the image
+   ctx.drawImage(img, 0, 0);   
+   //data=canvas.toDataURL('image/jpeg');
+   data=canvas.toDataURL();
+   return true 
+}
+// Select the image
+const img = document.querySelector('#my-image');
+img.addEventListener('load', function (event) {
+   const dataUrl = getDataUrl(event.currentTarget);
+   console.log(dataUrl);
+});
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -191,30 +191,27 @@ def result_data_for_view(id_srch):
         print("ERROR recuperando los datos de la búsqueda result_data_for_view(): "+str(e))
     return False
 
-##_:::::::::::::::::::::::::::::::::::::::::::::::#
-# :::::::::::::::::::::Para proceso de consultas
-
-def select_consulta(fechain, fechafin):
-    cursor = conn.cursor()    
+def get_url_post(ids_profiles):
+    cursor = conn.cursor()
     try:
-        query = (
-            "SELECT * "
-            "FROM Busqueda "
-            "WHERE fecha BETWEEN "+ str(fechain)+ "AND" + str(fechafin)
-        )     
-
-        
-        cursor.execute(query)
-        data = cursor.fetchall()
-        cursor.close()       
+        data = list()
+        for idProf in ids_profiles:
+            aux = list()
+            aux.append(idProf)
+            query = (
+                "SELECT idPublicacion, urlImagen "
+                "FROM Publicacion "
+                "WHERE idPerfil = "+str(idProf)
+            )
+            cursor.execute(query)
+            url_list = list(cursor.fetchall())
+            aux.append(url_list)
+            data.append(aux)
+        cursor.close()
         return data
     except Exception as e:
-        print("ERROR al realizar select_consulta(): "+str(e))
-        return False
-
-
-
-
+        print("ERROR recuperando los datos de la búsqueda get_url_post(): "+str(e))
+    return False
 
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 

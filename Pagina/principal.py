@@ -7,8 +7,8 @@
 from datetime import *
 from controllers.ctlBusqueda import *
 from controllers.ctlAnalisis import *
-from controllers import formulario
 from controllers.generarpdf import *
+from controllers import formulario
 import pdfkit
 from flask import Flask
 from flask import render_template  # Permite renderizar templates (Archivos HTML)
@@ -16,43 +16,6 @@ from flask import Flask, Response, jsonify, send_from_directory, abort, request,
 from flask import render_template, make_response  # Permite renderizar templates (Archivos HTML)
 from flask import request, redirect, url_for, flash  # Permite manejo de los datos del formulario
 from model.Bd_conect import *  # Funciones del modelo para uso de la base de datos
-from absl import app, logging
-from yolov3_tf2.models import (
-    YoloV3, YoloV3Tiny
-)
-from yolov3_tf2.dataset import transform_images, load_tfrecord_dataset
-from yolov3_tf2.utils import draw_outputs
-from distutils.dir_util import copy_tree
-import time
-import cv2
-import numpy as np
-import tensorflow as tf 
-import os
-
-# customize your API through the following parameters
-classes_path = './data/labels/coco.names'
-weights_path = '../../weights/yolov3.tf'
-tiny = False                    # dejar en False dado que no se usa tiny yolo
-size = 416                      # tamaño de las imagenes resultantes
-output_path = './detecciones/'   # carpeta destino de los resultados
-num_classes = 1                # numero de clases del modelo
-
-# load in weights and classes
-physical_devices = tf.config.experimental.list_physical_devices('GPU')
-if len(physical_devices) > 0:
-    tf.config.experimental.set_memory_growth(physical_devices[0], True)
-
-if tiny:
-    yolo = YoloV3Tiny(classes=num_classes)
-else:
-    yolo = YoloV3(classes=num_classes)
-
-yolo.load_weights(weights_path).expect_partial()
-print('weights loaded')
-
-class_names = [c.strip() for c in open(classes_path).readlines()]
-print('classes loaded')
-
 
 app = Flask(__name__)
 app.secret_key = 'anotherSecretKey'
@@ -96,57 +59,50 @@ def resultado_busqueda(id_srch):
             return render_template('busqueda.html',error=error)
     else:
         chekList = request.form.getlist('analisis')
-        #if getImages(chekList,id_srch):
-        getImages(chekList,id_srch)
-        creaCarpeta(id_srch)
-        analisisArma(id_srch)
-        mypath = output_path + str(id_srch) #carpeta de imagenes analizadas
-        pics = [f for f in listdir(mypath) if isfile(join(mypath, f))] #lista de esas imagenes
+        try:
+            data_url=get_url_post(chekList)
+            getImages(chekList,id_srch)
+            creaCarpeta(id_srch)
+            analisisArma(id_srch)
+            mypath = DETECTIONS_PATH + str(id_srch) #carpeta de imagenes analizadas
+            pics = [f for f in listdir(mypath) if isfile(join(mypath, f))] #lista de esas imagenes
 
-        for imagen in pics:
-            fromDirectory = mypath
-            toDirectory = "./static/detecciones/" + str(id_srch)
-            copy_tree(fromDirectory, toDirectory)
-        return render_template("resultado_analisis.html", pics=pics, id=id_srch)
-        #else:
-            #error = 'ERROR al comenzar el análisis, por favor intente de nuevo.'
-            #return render_template('show.html', message=error)
+            for imagen in pics:
+                fromDirectory = mypath
+                toDirectory = "./static/detecciones/" + str(id_srch)
+                copy_tree(fromDirectory, toDirectory)
+
+            return render_template("resultado_analisis.html", pics=pics, id=id_srch, url_img_posts = data_url)
+        except Exception as e:
+            print("--ERROR-- en getImages, creaCarpeta, analisisArma. Exception: "+str(e))
+            error = 'ERROR al comenzar el análisis, por favor intente de nuevo.'
+            return render_template('/resultado_busqueda/', message=error, id_srch = id_srch)
 
 @app.route('/consulta', methods = ['GET', 'POST'])
 def consulta():
     coment_form = formulario.ComentFormCon(request.form)
     if request.method == 'POST' and coment_form.validate():    #   se agrega coment_form para validar el formulario 
+        #id_busqueda = coment_form.id_busqueda.data
         in_name = coment_form.in_name.data # se guarda con form en la variable declarada segun busqueda.html
         fecha_in = coment_form.fecha_in.data
         fecha_fin = coment_form.fecha_fin.data       
-        datos=[in_name, fecha_in, fecha_fin]
         ## Creamos una lista con los valores de la consulta
+        consulta=[in_name, fecha_in, fecha_fin]
+        
         next = request.args.get('next', 'resultado_consulta') ## especificamos la ruta si se enviaron los datos
         if next:    # comprobamos si paso por la url
-           return redirect(url_for('resultado_consulta', datos=datos)) # Se manda a la ruta
+           return redirect(url_for('resultado_consulta', consulta=consulta)) # Se manda a la ruta
         return redirect(url_for('index'))
     return render_template('consulta.html', form=coment_form) 
 
-@app.route('/resultado_consulta/<string:datos>', methods=['GET','POST'])
-def resultado_consulta(datos):
-    datos=datos[1:len(datos)-1]
-    datos2=datos.split()
-    name=datos2[0]
-    fecha1=datos2[1]
-    fecha2=datos2[2]
-    name=name[1:len(name)-2]
-
-    fecha1=fecha1[0:len(fecha1)-1]
-    
-    consultas=select_consulta(fecha1,fecha2)
-    print(consultas)
-    print(type(consultas))
-
-    fecha1=fecha1[1:len(fecha1)-1]
-    fecha2=fecha2[1:len(fecha2)-1]
-
-    
-    return render_template('resultadoconsulta.html', name=name, fecha1=fecha1, fecha2=fecha2, consultas=consultas)
+@app.route('/resultado_consulta/<consulta>', methods=['GET','POST'])
+def resultado_consulta(consulta):
+    print(consulta)
+    print(":::::::::::::::::::::::hoolalksdf")
+    if request.method == 'GET':
+        print(consulta)
+        data_con=consulta_busqueda()    
+    return render_template('resultadoconsulta.html', Consulta = data_con, consulta=consulta )
 
 @app.route('/reportes')
 def reportes():
@@ -156,57 +112,6 @@ def reportes():
 @app.route('/conocenos')
 def conocenos():
     return render_template('conocenos.html')
-
-
-# la api que regresa las detecciones
-@app.route('/detections/<int:id_srch>', methods=['GET','POST'])
-def detections(id_srch):
-    raw_images = []
-    images = request.files.getlist("images")
-    image_names = []
-    for image in images:
-        image_name = image.filename
-        image_names.append(image_name)
-        image.save(os.path.join(os.getcwd(), image_name))
-        img_raw = tf.image.decode_image(
-            open(image_name, 'rb').read(), channels=3)
-        raw_images.append(img_raw)
-        
-    num = 0
-    
-    # se crea lista en caso de ser mas de una
-    response = []
-
-    for j in range(len(raw_images)):
-        # se arma el resultado
-        responses = []
-        raw_img = raw_images[j]
-        num+=1
-        img = tf.expand_dims(raw_img, 0)
-        img = transform_images(img, size)
-
-        t1 = time.time()
-        boxes, scores, classes, nums = yolo(img)
-        t2 = time.time()
-
-        for i in range(nums[0]):
-            responses.append({
-                "arma": "SI",
-                "porcentaje": float("{0:.2f}".format(np.array(scores[0][i])*100))
-            })
-        img = cv2.cvtColor(raw_img.numpy(), cv2.COLOR_RGB2BGR)
-        img = draw_outputs(img, (boxes, scores, classes, nums), class_names)
-        nombre = randomString()
-        final_path = output_path + str(id_srch) + "/" + image_names[0] + "-" + nombre + '.jpg'
-        cv2.imwrite(final_path, img)
-
-    #remove temporary images
-    for name in image_names:
-        os.remove(name)
-    try:
-        return jsonify(responses), 200
-    except FileNotFoundError:
-        abort(404)
 
 @app.route('/generar_reportes')
 def generar_reportes():
@@ -247,9 +152,6 @@ def generar_reportes():
 def reporte():
     return render_template('reporte.html')
 
-
-
-# valifamos que se ejecute el programa principal
 if __name__ == '__main__':
     app.debug = True
-    app.run(host = '0.0.0.0', port = 8000) # Actualizar servdor automaticamente y se indica el puerto 
+    app.run(host = '0.0.0.0', port = 8000)

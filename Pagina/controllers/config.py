@@ -16,7 +16,8 @@ token = "6gfJwzebdrLR5T7BSiAALAhZf"
 #:::::::::::::::::::::::::::::::::::#
 
 #::::::::::::: SISTEMA :::::::::::::#
-IMG_PROFILES_DIR = "tmp/post_img/"
+IMG_POSTS_PATH = "tmp/post_img/"
+DETECTIONS_PATH = './detecciones/'   # carpeta destino de los resultados
 
 #::: Codigos de ERROR :::#
 NO_PROFILES_FOUND = -2

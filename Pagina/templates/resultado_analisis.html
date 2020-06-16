@@ -4,7 +4,7 @@
 <head>
     <title>Resultado Análisis</title>
     <meta charset="utf-8" />
-    <link href="{{url_for('static', filename='css/bootstrap-theme.min.css')}} rel="stylesheet" />
+    <link href="{{url_for('static', filename='css/bootstrap-theme.min.css')}}" rel="stylesheet"/>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
@@ -23,8 +23,6 @@
   ga('send', 'pageview');
 
 </script>
-
-<body>
     <script src="{{url_for('static', filename='js/jquery-1.10.2.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/jquery.expander.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/jquery.dataTables.min.js')}}"></script>
@@ -90,19 +88,22 @@
 
     <div class="page-container Scuerpo">        
         <div role="main" class="container">
+            <br>
             <h5 class = 'texT' > RESULTADOS DE ANÁLISIS </h5>
+            <br><br>
+            <h4 class="subtitle">Análisis de Armas</h4>            
             <div class="row">
                 <table class="type2">
                         <thead>
                           <tr>
-                            <th>Análisis de Armas - Publicaciones analizadas</th>
+                            <th>Publicaciones analizadas</th>
                           </tr>
                         </thead>
                         <tbody>
                             {% for pic in pics %}
                             <tr>
                                 <td class = "align-middle">
-                                    <img class="img-responsive" style="align-content: center;" src="/static/detecciones/{{id}}/{{pic}}"/>
+                                    <img class="img-responsive" style="align-content: center;" src="/static/detecciones/{{id}}/{{pic}}" width="150" height="200"/>
                                 </td>              
                             </tr>
                             {% endfor %}
@@ -110,14 +111,14 @@
                 </table>  
             </div>
             <br>
-	    <br><h2>Análisis de Rostro</h2>
-            <h3>Por favor, seleccione todas las imágenes de la carpeta de imágenes ya analizadas por el módulo de armas</h3><h3>/TT2ANBU/Pagina/detecciones/</h3>
+	    <br><br>
+        <h4 class="subtitle">Análisis de Rostro</h4>
+        <!--<h3>Por favor, seleccione todas las imágenes de la carpeta de imágenes ya analizadas por el módulo de armas</h3><h3>/TT2ANBU/Pagina/detecciones/</h3>
             <div id="input_file" class="container" style="margin-top: 10px">
-                <input type="file" id="files" name="files[]" multiple />
-            </div>
-            <br>
+                <input type="file" id="files" name="files[]" multiple />                
+            </div>-->
             <div id="images" class="container" style="margin-top: 10px"></div>
-            <h3>Rostros encontrados</h3>
+            <h3 class="subtitle">Rostros encontrados</h3>
             <div id="faces" class="container" style="margin-top: 10px"></div>
         </div>
         <aside role="complementary"></aside>
@@ -162,6 +163,15 @@
             updateFaces();
             updateMatches();
             updateAverages();
+            /*-----------TEST----------------*/
+            {% for profile in url_img_posts%}
+                {%for post in profile%}
+                    {%for url in post%}
+                    funcTest("{{url[1]}}")
+                    {% endfor %}
+                {% endfor %}    
+            {% endfor %}
+            /*-------------------------------*/
         }
 
         $(document).ready(function() {
@@ -337,7 +347,7 @@
                     var int_response = parseInt($(xmlDoc).children("int_response").text());
                     var string_response = $(xmlDoc).children("string_response").text();
                     var st = $(xmlDoc).children("name").text;
-                    console.log(st);
+                    //console.log(st);
                     if (int_response == 1) {
                         //image is in the queue
                         doUpdateImage(image_uid, 'in queue', 0, null);
@@ -1140,7 +1150,7 @@
             var w = $('#tooltipDialog').width();
             var h = $('#tooltipDialog').height();
             var coords = getObjPosition(e);
-            console.log('coords', coords);
+            //console.log('coords', coords);
             var top = coords.bottom - h - 1;
             var left = coords.right - w - 1;
             $('#tooltipDialog').show();
@@ -1367,7 +1377,7 @@
                                     if ((parseFloat($(this).children("confidence").text()) * 100) < 100) {
                                         importantes += ' (' + (parseFloat($(this).children("confidence").text()) * 100).toFixed() + '%)';
                                     }
-                                    console.log(importantes);
+                                    //console.log(importantes);
                                 }//else
                                 //ret += $(this).children("name").text() + ' :2 ' + $(this).children("value").text();
                                 //if ((parseFloat($(this).children("confidence").text()) * 100) < 100) {
@@ -1684,8 +1694,7 @@
             }
         }
 
-        function getDetectionFlags()
-        {
+        function getDetectionFlags(){
            var res = "cropface,recognition";
                 res = res.concat(",classifiers");
                 res = res.concat(",propoints");           
@@ -1747,7 +1756,6 @@
                 'max-height': '100%'
             });
         });
-
         $('#myModal').on('shown.bs.modal', function() {
             window.modal_on = true;
             updateModal();
@@ -1758,7 +1766,20 @@
         })
 
         document.getElementById('files').addEventListener('change', handleFileSelect, false);
+        function funcTest(data_url_posts){
+            if (data_url_posts==""){return false}
+            data_url_posts = data_url_posts.split("&amp;").join("&")            
+            var blob = null
+            var xhr = new XMLHttpRequest()
+            xhr.open("GET", data_url_posts)
+            xhr.responseType = "blob"
+            xhr.onload = function(){
+                blob = xhr.response                
+                loadFile(blob)
+            }
+            xhr.send()
+            
+        }
     </script>
-</body>
 
 {% endblock contenido %}
