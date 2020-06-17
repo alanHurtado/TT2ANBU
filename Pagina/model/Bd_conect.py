@@ -215,6 +215,29 @@ def get_url_post(ids_profiles):
 
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 
+# :::::::::::::::::::::Para proceso de consultas
+
+def select_consulta(fechain, fechafin):
+    cursor = conn.cursor()    
+    try:
+        query = (
+            "SELECT * "
+            "FROM Busqueda "
+            "WHERE fecha BETWEEN "+ str(fechain)+ "AND" + str(fechafin)
+        )     
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()       
+        return data
+    except Exception as e:
+        print("ERROR al realizar select_consulta(): "+str(e))
+        return False
+
+
+
+
+
+
 #:::::::::::::::::::: Funciones UPDATE ::::::::::::::::::::#
 def upd_img_path(idPost,path):
     cursor = conn.cursor()

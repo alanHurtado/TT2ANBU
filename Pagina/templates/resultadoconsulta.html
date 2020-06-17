@@ -11,12 +11,31 @@
 			<th>Fecha Limite</th>			
 		</tr>
 		<tr>			
-			<td><b>{{Consulta[0][0]}}</b></td>
-			<td><b>{{consulta[1:16]}}</b></td>
-			<td><b>{{consulta[17:35]}}</b></td>
+			<td><b>{{name}}</b></td>
+			<td><b>{{fecha1}}</b></td>
+			<td><b>{{fecha2}}</b></td>
 
 		</tr>		  
 	</table>
-	<div> <a href="/generar_reportes" class="btn btn-secondary"> Generar Reporte </a> </div>
+	<br/>
+	<br/>
+
+	<table class="type2">
+		<tr>
+			<th>Id B&uacute;squeda</th>			
+			<th>Nombre_buscado</th>
+			<th>Fecha b&uacute;squeda</th>	
+			<th>Reporte</th>		
+		</tr>
+		{%for consul in consultas%}			
+		<tr>
+			<td><b>{{consul[0]}}</b></td>
+			<td><b>{{consul[1]}}</b></td>
+			<td><b>{{consul[2]}}</b></td>
+			<td><b><a href="/generar_reportes" class="btn btn-secondary"> Generar Reporte </a> </b></td>
+		</tr>	
+		{% endfor %}	  
+	</table>
+
 {% endblock contenido %}
 </div>    
