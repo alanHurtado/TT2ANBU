@@ -95,24 +95,30 @@ def consulta():
 
 @app.route('/resultado_consulta/<string:datos>', methods=['GET','POST'])
 def resultado_consulta(datos):
-    datos=datos[1:len(datos)-1]
-    datos2=datos.split()
-    name=datos2[0]
-    fecha1=datos2[1]
-    fecha2=datos2[2]
-    name=name[1:len(name)-2]
+    coment_form = formulario.ComentFormReport(request.form)
+    if request.method == 'POST' and coment_form.validate():    #   se agrega coment_form para validar el formulario 
+        id_con = coment_form.id_con.data# se guarda con form en la variable declarada segun busqueda.html
+        ## Creamos una lista con los valores de la consulta
+        next = request.args.get('next', 'generar_reportes') ## especificamos la ruta si se enviaron los datos
+        if next:    # comprobamos si paso por la url
+           return redirect(url_for('generar_reportes', id_con=id_con)) # Se manda a la ruta
+        return redirect(url_for('index'))
+    else :
+        datos=datos[1:len(datos)-1]
+        datos2=datos.split()
+        name=datos2[0]
+        fecha1=datos2[1]
+        fecha2=datos2[2]
+        name=name[1:len(name)-2]
 
-    fecha1=fecha1[0:len(fecha1)-1]
+        fecha1=fecha1[0:len(fecha1)-1]
     
-    consultas=select_consulta(fecha1,fecha2)
-    print(consultas)
-    print(type(consultas))
-
-    fecha1=fecha1[1:len(fecha1)-1]
-    fecha2=fecha2[1:len(fecha2)-1]
-
+        consultas=select_consulta(fecha1,fecha2)
     
-    return render_template('resultadoconsulta.html', name=name, fecha1=fecha1, fecha2=fecha2, consultas=consultas)
+        fecha1=fecha1[1:len(fecha1)-1]
+        fecha2=fecha2[1:len(fecha2)-1]
+ 
+    return render_template('resultadoconsulta.html', name=name, form=coment_form, fecha1=fecha1, fecha2=fecha2, consultas=consultas)
 
 @app.route('/reportes')
 def reportes():
@@ -123,8 +129,8 @@ def reportes():
 def conocenos():
     return render_template('conocenos.html')
 
-@app.route('/generar_reportes')
-def generar_reportes():
+@app.route('/generar_reportes/<string:id_con>', methods=['GET','POST'])
+def generar_reportes(id_con):
     x = datetime.now()
     date =str(x.year)+str(x.month)+str(x.day)+str(x.minute)
     
@@ -147,7 +153,7 @@ def generar_reportes():
     css = 'static/css/reporte.css'
     
     #config = pdfkit.configuration(wkhtmltopdf='/opt/bin/wkhtmltopdf')
-    generarpdf()
+    generarpdf(id_con)
     pdfkit.from_file('templates/reporte2.html', 'static/pdf/reporte'+date+'.pdf', options=options, css=css)
     #pdfkit.from_string(generarpdf(), 'static/pdf/reporte'+date+'.pdf')
     pdf =  pdfkit.from_file('templates/reporte2.html', False)   #configuration=config

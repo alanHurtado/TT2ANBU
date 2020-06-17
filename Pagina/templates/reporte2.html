@@ -25,7 +25,7 @@
       </td>
       <td class='espacio'>
         <br/>
-        <p class='datoindicado'> {{num_busqueda}} </p>
+        <p class='datoindicado'> 36 </p>
       </td>
       <td COLSPAN=2 class='espacio'> 
         <br/>
@@ -35,7 +35,7 @@
       </td>
       <td COLSPAN=2 class='espacio'>  
         <br/>
-        <p class ='datoindicado'> {{fecha_busqueda[0][1]}} </p>  
+        <p class ='datoindicado'> 2020-06-17 17:08:29 </p>  
       </td>]
     </tr>  
     <tr class='espacio'>
@@ -47,15 +47,15 @@
     <tr class='espacio'>
       <td class="espacio" COLSPAN=2>
         <br/>
-        <p class='dato'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nombre: &nbsp;&nbsp; <a class='datoindicado'> {{nombre_buscado[0][0]}} </a> </p>
+        <p class='dato'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nombre: &nbsp;&nbsp; <a class='datoindicado'> xanat </a> </p>
       </td>
       <td COLSPAN=2 class="espacio">
         <br/>
-        <p class='dato'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No. de perfiles: &nbsp;&nbsp; <a class='datoindicado'> {{no_perfiles[0][0]}} </a> </p>
+        <p class='dato'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No. de perfiles: &nbsp;&nbsp; <a class='datoindicado'> 1 </a> </p>
       </td>
       <td class="espacio" COLSPAN=2>
         <br/>
-        <p class='dato'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No. de publicaciones: &nbsp;&nbsp; <a class='datoindicado'> {{no_publicaciones[0][0]}} </a> </p>
+        <p class='dato'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No. de publicaciones: &nbsp;&nbsp; <a class='datoindicado'> 2 </a> </p>
       </td>
     </tr>
     <tr class="color">
@@ -65,11 +65,11 @@
     <td COLSPAN=6 >
     <div class='cont'>
       <br/>
-        <p class='p2'> En la b&uacute;squeda {{num_busqueda}}
-        realizada el {{fecha_busqueda[0][1]}}, mediante el nombre "{{nombre_buscado[0][0]}}"
-        se accedio a {{no_perfiles[0][0]}} perfiles de los cuales se recopilaron un total de {{no_publicaciones[0][0]}} 
-        publicaciones, para su respectivo an&aacute;lisis, donde se detetar&oacute;n un total de {{no_armas[0][0]}} publicaciones 
-         con portacion de arma tipo escuadra calibre corto y un total {{no_rostros[0][0]}}
+        <p class='p2'> En la b&uacute;squeda 36
+        realizada el 2020-06-17 17:08:29, mediante el nombre "xanat"
+        se accedio a 1 perfiles de los cuales se recopilaron un total de 2 
+        publicaciones, para su respectivo an&aacute;lisis, donde se detetar&oacute;n un total de 0 publicaciones 
+         con portacion de arma tipo escuadra calibre corto y un total 0
         rostros que podr&iacute;an indicar
         rasgos agresivos.  
         En las tablas mostradas acontinuaci&oacute;n se detallar&aacute; cada una de las publicaciones por perfil.
@@ -83,7 +83,7 @@
 <br/>
 <br/>
 
-{%for perfil in perfiles%}
+
 <table class='espacio'>
 
     <tr class="color">
@@ -92,14 +92,14 @@
     <tr class='espacio'>
       <td COLSPAN=3 class='espacio'> 
         <br/>
-        <i class='datoindicado'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ID Perfil  &nbsp;&nbsp;&nbsp; {{perfil[0]}} </i>
+        <i class='datoindicado'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ID Perfil  &nbsp;&nbsp;&nbsp; 32 </i>
       </td>
     </tr>
     <tr class='espacio'> 
       <td  COLSPAN=2 class='espacio'>
         <br/>
         <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nombre del perfil:
-        <i class='datoindicado'> {{perfil[2]}} </i> </i>
+        <i class='datoindicado'> Xanat Hernandez </i> </i>
       </td>
       <td class='espacio'>  </td>
     </tr>
@@ -107,7 +107,7 @@
       <td  COLSPAN=2 class='espacio'>
         <br/>
         <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Username:
-        <i class='datoindicado'> {{perfil[1]}} </i> </i>
+        <i class='datoindicado'> _.xanat._ </i> </i>
       </td>
       <td class='espacio'>  </td>
     </tr>
@@ -115,7 +115,7 @@
       <td  COLSPAN=3 class='espacio'>
         <br/>
         <p class='cont'>  URL Perfil:</i>
-        {{perfil[3]}} </p>
+        https://www.instagram.com/_.xanat._ </p>
         <br>
         </td>
     </tr>
@@ -123,13 +123,13 @@
       <td COLSPAN=6> </td>
     </tr>
     
-     {%for publicacon in publicaciones%}
+     
 
     <tr class='espacio'> 
       <td  COLSPAN=2 class='espacio'>
         <br/>
         <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Id Publicaci&oacute;:
-        <i class='datoindicado'> {{publicacon[0]}} </i> </i>
+        <i class='datoindicado'> 78 </i> </i>
         <br/>
         <br/>
       </td>
@@ -137,8 +137,8 @@
     </tr>
 
     <tr class="espacio">
-      <td ROWSPAN=8 class='espacio'>   <img src="../"+"{{publicacon[8]}}"> <br/><br/> </td>
-      <!--<img src="{{ruta_imagen}}" >-->
+      <td ROWSPAN=8 class='espacio'>   <img src="../"+"tmp/post_img/36/32-78.jpg"> <br/><br/> </td>
+      <!--<img src="" >-->
       <td class='espacio'> </td>
       <td class='espacio'> </td>
     </tr>
@@ -146,43 +146,43 @@
       <td  COLSPAN=2 class='espacio'>
         <br/>
         <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ubicaci&oacuten:
-        <i class='datoindicado'> {{publicacon[2]}} </i> </i>
+        <i class='datoindicado'> None </i> </i>
     </tr>
     <tr class='espacio'> 
       <td  COLSPAN=2 class='espacio'>
         <br/>
         <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha:
-        <i class='datoindicado'> {{publicacon[3]}} </i> </i>
+        <i class='datoindicado'> 2020-06-06 00:23:33 </i> </i>
     </tr>
     <tr class='espacio'> 
       <td  COLSPAN=2 class='espacio'>
         <br/>
         <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enlace:
-        <i class='datoindicado'> {{publicacon[4]}} </i> </i>
+        <i class='datoindicado'> https://www.instagram.com/p/CBEsmbtlo0R </i> </i>
     </tr>
     <tr class='espacio'> 
       <td  COLSPAN=2 class='espacio'>
         <br/>
         <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pie de imagen:
-        <i class='datoindicado'> {{publicacon[5]}} </i> </i>
+        <i class='datoindicado'>  </i> </i>
     </tr>
     <tr class='espacio'> 
       <td  COLSPAN=2 class='espacio'>
         <br/>
         <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No de armas detectadas:
-        <i class='datoindicado'> {{publicacon[7]}} </i> </i>
+        <i class='datoindicado'> None </i> </i>
     </tr>
     <tr class='espacio'> 
       <td  COLSPAN=2 class='espacio'>
         <br/>
         <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No de rostros detectados:
-        <i class='datoindicado'> {{publicacon[7]}} </i> </i>
+        <i class='datoindicado'> None </i> </i>
     </tr>
     <tr class='espacio'> 
       <td  COLSPAN=2 class='espacio'>
         <br/>
         <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resultado:
-        <i class='datoindicado'> {{Resultado}} </i> </i>
+        <i class='datoindicado'>  </i> </i>
         <br/>
         <br/>
     </tr>
@@ -192,8 +192,77 @@
         <br/>
       </td>
     </tr>
-     {%endfor%}
-  {%endfor%}
+     
+
+    <tr class='espacio'> 
+      <td  COLSPAN=2 class='espacio'>
+        <br/>
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Id Publicaci&oacute;:
+        <i class='datoindicado'> 79 </i> </i>
+        <br/>
+        <br/>
+      </td>
+      <td class='espacio'>  </td>
+    </tr>
+
+    <tr class="espacio">
+      <td ROWSPAN=8 class='espacio'>   <img src="../"+"tmp/post_img/36/32-79.jpg"> <br/><br/> </td>
+      <!--<img src="" >-->
+      <td class='espacio'> </td>
+      <td class='espacio'> </td>
+    </tr>
+    <tr class='espacio'> 
+      <td  COLSPAN=2 class='espacio'>
+        <br/>
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ubicaci&oacuten:
+        <i class='datoindicado'> None </i> </i>
+    </tr>
+    <tr class='espacio'> 
+      <td  COLSPAN=2 class='espacio'>
+        <br/>
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha:
+        <i class='datoindicado'> 2020-05-12 02:32:20 </i> </i>
+    </tr>
+    <tr class='espacio'> 
+      <td  COLSPAN=2 class='espacio'>
+        <br/>
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enlace:
+        <i class='datoindicado'> https://www.instagram.com/p/CAEjd15HPUq </i> </i>
+    </tr>
+    <tr class='espacio'> 
+      <td  COLSPAN=2 class='espacio'>
+        <br/>
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pie de imagen:
+        <i class='datoindicado'>  </i> </i>
+    </tr>
+    <tr class='espacio'> 
+      <td  COLSPAN=2 class='espacio'>
+        <br/>
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No de armas detectadas:
+        <i class='datoindicado'> None </i> </i>
+    </tr>
+    <tr class='espacio'> 
+      <td  COLSPAN=2 class='espacio'>
+        <br/>
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No de rostros detectados:
+        <i class='datoindicado'> None </i> </i>
+    </tr>
+    <tr class='espacio'> 
+      <td  COLSPAN=2 class='espacio'>
+        <br/>
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resultado:
+        <i class='datoindicado'>  </i> </i>
+        <br/>
+        <br/>
+    </tr>
+    <tr class='espacio'>
+      <td COLSPAN=3 class='espacio'>
+        <br/>
+        <br/>
+      </td>
+    </tr>
+     
+  
   </table>
 </body>
 

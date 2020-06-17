@@ -1,9 +1,9 @@
 {% extends 'general/general.html' %}
 {% block contenido %}
 <div class='Scuerpo'>
+	 {% from "_macro.html" import render_field %}  
    </br>
    <h5 class = 'texT' > CONSULTAS </h5>
-    <form method="POST" action=""> 
     <table class="type2">
 		<tr>
 			<th>Nombre o Username Buscado</th>			
@@ -27,15 +27,32 @@
 			<th>Fecha b&uacute;squeda</th>	
 			<th>Reporte</th>		
 		</tr>
-		{%for consul in consultas%}			
+		{%for consul in consultas%}	
+			{% if name == consul[1] %}		
 		<tr>
 			<td><b>{{consul[0]}}</b></td>
 			<td><b>{{consul[1]}}</b></td>
 			<td><b>{{consul[2]}}</b></td>
-			<td><b><a href="/generar_reportes" class="btn btn-secondary"> Generar Reporte </a> </b></td>
+			<td>
+			 	
+			</td>
+			{% elif name == 'all'%}
+		<tr>
+			<td><b>{{consul[0]}}</b></td>
+			<td><b>{{consul[1]}}</b></td>
+			<td><b>{{consul[2]}}</b></td>
+			{% endif %}
 		</tr>	
 		{% endfor %}	  
 	</table>
 
+	<form action="" method="post" Reporte>
+        			{{ render_field(form.id_con) }} 
+					{{ form.submit(value='Generar Reporte') }}
+    </form> 
+
 {% endblock contenido %}
 </div>    
+
+
+

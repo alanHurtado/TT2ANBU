@@ -75,3 +75,6 @@ class ComentFormCon(Form):
     ])
     submit = SubmitField('')
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
+class ComentFormReport(Form):
+    id_con = StringField('id')
+    submit = SubmitField('')

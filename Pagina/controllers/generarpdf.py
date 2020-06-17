@@ -1,33 +1,35 @@
 from jinja2 import Environment, FileSystemLoader
+from model.Bd_conect import * 
 
-def generarpdf():
+def generarpdf(id_bus):
     env = Environment(loader=FileSystemLoader('templates'))
     template = env.get_template('reporte.html')
-    x = 19
-    a_perfiles = [1,2]  #5+1 #total perfiles analisados
-    a_publicaciones = {1,2} #3+1 #total de publicaciones por perfil
+   #### Obtener datos de la BD
+    dato = select_fechabus(id_bus)
+    fechaBus = dato
+    nomBus = dato
+    dato = num_perfiles(id_bus)
+    numPerfiles = dato
+    dato = num_publicaciones(id_bus)
+    numPublicaciones = dato
+    dato = num_armas(id_bus)
+    numArmas = dato
+    dato = num_rostros(id_bus)
+    numRostros = dato
+    dato = select_perfil(id_bus)
+    perfiles = select_perfil(id_bus)
+    publicaciones = select_publicaciones(id_bus)
+
     datos = {
-        'num_busqueda': 10,
-        'fecha_busqueda' : '10/08/2020',
-        'username': 'Ferrer',
-        'no_perfiles' : 8,
-        'no_publicaciones' : 6,
-        'no_rostros': 10,
-        'no_armas': x,
-        'perfiles': a_perfiles,
-        'perfil': 1,
-        'name_perfil':'Roberto Sanchez',
-        'usernamw': '@Roberto24',
-        'biodrafia': 'Soy provedor de servicios externos en consul..... ',
-        'publicacion': 1,
-        'publicaciones': a_publicaciones,
-        'ruta_imagen':'../static/img/ANBU.jpg',
-        'ubi_publi': 'Mexico',
-        'fecha_publi': '98/87/12',
-        'enlace': 'ruta de enla perfil',
-        'pie_img': 'En la playa',
-        'no_arma_pub': 2,
-        'no_rostro_pub':1,
+        'num_busqueda': id_bus,
+        'fecha_busqueda' : fechaBus,
+        'nombre_buscado': nomBus,
+        'no_perfiles' : numPerfiles,
+        'no_publicaciones' : numPublicaciones,
+        'no_rostros': numRostros,
+        'no_armas': numArmas,
+        'perfiles': perfiles,
+        'publicaciones': publicaciones,
         'resultado': 'Es posible violento'
     }
 
