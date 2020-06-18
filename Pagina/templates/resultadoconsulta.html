@@ -25,7 +25,7 @@
 			<th>Id B&uacute;squeda</th>			
 			<th>Nombre_buscado</th>
 			<th>Fecha b&uacute;squeda</th>	
-			<th>Reporte</th>		
+					
 		</tr>
 		{%for consul in consultas%}	
 			{% if name == consul[1] %}		
@@ -33,9 +33,7 @@
 			<td><b>{{consul[0]}}</b></td>
 			<td><b>{{consul[1]}}</b></td>
 			<td><b>{{consul[2]}}</b></td>
-			<td>
-			 	
-			</td>
+			
 			{% elif name == 'all'%}
 		<tr>
 			<td><b>{{consul[0]}}</b></td>
