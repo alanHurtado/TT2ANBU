@@ -159,8 +159,7 @@ def insertaRostro(data):
 			barbilla_partida,pomulos,rostro_oval,nariz_puntiaguda,entradas,idPublicacion,
 			evaluacion_rostro)
 		#up = upd_val_arma(idPublicacion,"1")
-		if tr:
-			return True
+		return True
 	except Exception as e:
 		print("ERROR al intentar insertar rostro: "+str(e))
 		return False

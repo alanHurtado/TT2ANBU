@@ -406,7 +406,7 @@ def upd_val_arma(idPublicacion,val):
             "SET val_arma = %s "
             "WHERE idPublicacion = %s"
         )
-        data = (idPublicacion,val)
+        data = (val,idPublicacion)
         cursor.execute(query,data)
         conn.commit();
         cursor.close()
@@ -423,7 +423,7 @@ def upd_val_rostro(idPublicacion,val):
             "SET val_rostro = %s "
             "WHERE idPublicacion = %s"
         )
-        data = (idPublicacion,val)
+        data = (val,idPublicacion)
         cursor.execute(query,data)
         conn.commit();
         cursor.close()

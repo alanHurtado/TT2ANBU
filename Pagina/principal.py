@@ -172,7 +172,7 @@ def reporte():
 def enviaRostro():
     error = None
     tr = insertaRostro(request.form['Datos'])
-    return "Correcto"
+    return "True"
 
 if __name__ == '__main__':
     app.debug = True
