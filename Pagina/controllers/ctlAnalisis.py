@@ -134,6 +134,7 @@ def analisisArma(id_srch):
 					if obj["arma"] == "SI":
 						res = 1
 						insert_arma(idPublicacion,obj["porcentaje"],res)
+						upd_val_arma(idPublicacion,"1")
 			except Exception as e:
 				print("ERROR al ejecutar la funcion insert_arma() :"+str(e))			
 				return False		
@@ -151,13 +152,16 @@ def insertaRostro(data):
 	rostro_oval = str(datos[6])
 	nariz_puntiaguda = str(datos[7])
 	entradas = str(datos[8])
-	idPublicacion = "213"#deberia ser datos[9] que viene desde el cliente
-	carevaluacion_rostro = "1"#dato aun pendiente de chev
+	idPublicacion = "213"#deberia ser datos[9] que viene desde el cliente, se pone dato ahora así para pruebas
+	evaluacion_rostro = "1"
 	try:
 		tr = insert_rostro(cejas_arco,labios_grandes,nariz_grande,cejas_pobladas,
 			barbilla_partida,pomulos,rostro_oval,nariz_puntiaguda,entradas,idPublicacion,
 			evaluacion_rostro)
-		return True
+		#up = upd_val_arma(idPublicacion,"1")
+		if tr:
+			return True
 	except Exception as e:
 		print("ERROR al intentar insertar rostro: "+str(e))
 		return False
+		

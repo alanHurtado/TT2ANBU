@@ -171,7 +171,7 @@ def reporte():
 @app.route('/enviaRostro', methods=['POST'])
 def enviaRostro():
     error = None
-    insertaRostro(request.form['Datos'])
+    tr = insertaRostro(request.form['Datos'])
     return "Correcto"
 
 if __name__ == '__main__':
