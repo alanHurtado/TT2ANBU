@@ -396,5 +396,39 @@ def upd_img_path(idPost,path):
         return True
     except Exception as e:
         print("ERROR al realizar upd_img_path(): "+str(e))
-        return False    
+        return False 
+
+def upd_val_arma(idPublicacion,val):
+    cursor = conn.cursor()
+    try:
+        query = (
+            "UPDATE Publicacion "
+            "SET val_arma = %s "
+            "WHERE idPublicacion = %s"
+        )
+        data = (idPublicacion,val)
+        cursor.execute(query,data)
+        conn.commit();
+        cursor.close()
+        return True
+    except Exception as e:
+        print("ERROR al realizar upd_val_arma(): "+str(e))
+        return False  
+
+def upd_val_rostro(idPublicacion,val):
+    cursor = conn.cursor()
+    try:
+        query = (
+            "UPDATE Publicacion "
+            "SET val_rostro = %s "
+            "WHERE idPublicacion = %s"
+        )
+        data = (idPublicacion,val)
+        cursor.execute(query,data)
+        conn.commit();
+        cursor.close()
+        return True
+    except Exception as e:
+        print("ERROR al realizar upd_val_rostro(): "+str(e))
+        return False  
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
