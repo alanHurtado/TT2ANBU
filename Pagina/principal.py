@@ -168,6 +168,12 @@ def generar_reportes(id_con):
 def reporte():
     return render_template('reporte.html')
 
+@app.route('/enviaRostro', methods=['POST'])
+def enviaRostro():
+    error = None
+    insertaRostro(request.form['Datos'])
+    return "Correcto"
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host = '0.0.0.0', port = 8000)

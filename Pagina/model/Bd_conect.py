@@ -100,6 +100,25 @@ def insert_arma(idPublicacion,porcentaje,evaluacion):
     except Exception as e:
         print("ERROR al realizar insert_arma: "+str(e))
         return False
+
+def insert_rostro(cejas_arco,labios_grandes,nariz_grande,cejas_pobladas,
+        barbilla_partida,pomulos,rostro_oval,nariz_puntiaguda,entradas,idPublicacion,
+        evaluacion_rostro):
+    cursor = conn.cursor()
+    try:
+        query = (
+            "INSERT INTO Rostro (cejas_arco,labios_grandes,nariz_grande,cejas_pobladas,barbilla_partida,pomulos,rostro_oval,nariz_puntiaguda,entradas,idPublicacion,evaluacion_rostro)"
+            " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        )
+        data = (cejas_arco,labios_grandes,nariz_grande,cejas_pobladas,
+        barbilla_partida,pomulos,rostro_oval,nariz_puntiaguda,entradas,idPublicacion,
+        evaluacion_rostro)
+        cursor.execute(query,data)
+        conn.commit()        
+        return True
+    except Exception as e:
+        print("ERROR al realizar insert_rostro: "+str(e))
+        return False
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 
 #:::::::::::::::::::::: Funciones SELECT ::::::::::::::::::::::#

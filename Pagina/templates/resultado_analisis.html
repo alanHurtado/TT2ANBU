@@ -150,6 +150,11 @@
             'api_secret': '171e8465-f548-401d-b63b-caf0dc28df5f'
         }
 
+        var a = [];
+        var b = [];
+        var c = [];
+        var unique = [];
+
         window.onload = function() {
             window.Images = [];
             window.Faces = [];
@@ -167,6 +172,7 @@
             {% for profile in url_img_posts%}
                 {%for post in profile%}
                     {%for url in post%}
+                    console.log("{{url[1]}}")
                     funcTest("{{url[1]}}")
                     {% endfor %}
                 {% endfor %}    
@@ -331,6 +337,7 @@
             var msg = '<?xml version="1.0" encoding="utf-8"?><ImageInfoRequestUid>' +
                 '<api_key>' + constants.api_key + '</api_key><api_secret>' + constants.api_secret + '</api_secret>' +
                 '<img_uid>' + image_uid + '</img_uid></ImageInfoRequestUid>';
+                console.log(msg);
 
             $.support.cors = true;
             $.ajax({
@@ -1365,6 +1372,7 @@
                     "mRender": function(tags, type, row) {
                         var ret = '';
                         var importantes = '';
+                        var base = '';
                         if ($(tags).length > 0) {
                             $(tags).each(function() {
                                 if (importantes != '') {
@@ -1374,10 +1382,10 @@
                                 var name = $(this).children("name").text();
                                 if(name == "arched eyebrows" || name == "big lips" || name == "big nose" || name == "bushy eyebrows" || name == "double chin" || name == "high cheekbones" || name == "oval face" || name == "pointy nose" || name == "receding hairline"){
                                     importantes += $(this).children("name").text() + ' : ' + $(this).children("value").text();
-                                    if ((parseFloat($(this).children("confidence").text()) * 100) < 100) {
+                                    if ((parseFloat($(this).children("confidence").text()) * 100) < 101) {
                                         importantes += ' (' + (parseFloat($(this).children("confidence").text()) * 100).toFixed() + '%)';
+                                        base += (parseFloat($(this).children("confidence").text()) * 100).toFixed() + ',';
                                     }
-                                    //console.log(importantes);
                                 }//else
                                 //ret += $(this).children("name").text() + ' :2 ' + $(this).children("value").text();
                                 //if ((parseFloat($(this).children("confidence").text()) * 100) < 100) {
@@ -1385,6 +1393,7 @@
                                 //}
                             })
                         }
+                        myFunction(base);
                         return '<div id="classifiers" class="expandable">' + importantes + '</div>';
                     }
                 },  ]
@@ -1768,7 +1777,7 @@
         document.getElementById('files').addEventListener('change', handleFileSelect, false);
         function funcTest(data_url_posts){
             if (data_url_posts==""){return false}
-            data_url_posts = data_url_posts.split("&amp;").join("&")            
+            data_url_posts = data_url_posts.split("&amp;").join("&")         
             var blob = null
             var xhr = new XMLHttpRequest()
             xhr.open("GET", data_url_posts)
@@ -1778,8 +1787,29 @@
                 loadFile(blob)
             }
             xhr.send()
-            
         }
+
+        function myFunction(base) {
+            b = unique;//igualamos todos los registros unicos para despues detectar un cambio
+            a.push(base);//tiene todos los registros repetidos de rostro
+            unique = a.filter( onlyUnique );//tiene los registros de a que son distintos
+            verifica();
+        }
+
+        function verifica(){ 
+            c = unique.filter(function(obj) { return b.indexOf(obj) == -1; });//regresa el elemento nuevo
+            if(c.length == 1){
+                var correct = $.post("/enviaRostro", {"Datos": c[0]})//insertamos rostro
+                if(correct != ""){
+                    console.log(correct)
+                }
+            }
+        }
+
+        function onlyUnique(value, index, self) { 
+            return self.indexOf(value) === index;
+        }
+
     </script>
 
 {% endblock contenido %}

@@ -138,3 +138,26 @@ def analisisArma(id_srch):
 				print("ERROR al ejecutar la funcion insert_arma() :"+str(e))			
 				return False		
 	return True
+
+def insertaRostro(data):
+	data_r = str(data)
+	datos = data_r.split(",")
+	cejas_arco = str(datos[0])
+	labios_grandes = str(datos[1])
+	nariz_grande = str(datos[2])
+	cejas_pobladas = str(datos[3])
+	barbilla_partida = str(datos[4])
+	pomulos = str(datos[5])
+	rostro_oval = str(datos[6])
+	nariz_puntiaguda = str(datos[7])
+	entradas = str(datos[8])
+	idPublicacion = "213"#deberia ser datos[9] que viene desde el cliente
+	carevaluacion_rostro = "1"#dato aun pendiente de chev
+	try:
+		tr = insert_rostro(cejas_arco,labios_grandes,nariz_grande,cejas_pobladas,
+			barbilla_partida,pomulos,rostro_oval,nariz_puntiaguda,entradas,idPublicacion,
+			evaluacion_rostro)
+		return True
+	except Exception as e:
+		print("ERROR al intentar insertar rostro: "+str(e))
+		return False
