@@ -9,9 +9,9 @@ from model.Bd_conect import *
 import requests
 import json
 
-def do_search(srch_name,srch_limit,no_posts):	
+def do_search(srch_name,no_profiles,no_posts):	
 	dbSrchId = insertar_busqueda(srch_name)
-	data = search_profiles(srch_name,srch_limit,no_posts)
+	data = search_profiles(srch_name,no_profiles,no_posts)
 	
 	if not data:
 		return False
@@ -54,19 +54,18 @@ def do_search(srch_name,srch_limit,no_posts):
 			print("ERROR al ejecutar la funcion do_search() :"+str(e))			
 			return False
 
-def search_profiles(data_name,data_limit,data_posts):
+def search_profiles(data_name,data_no_profiles,data_no_posts):
 	URL = ("https://api.apify.com/v2/actor-tasks/"+taskId+
 		"/run-sync?token="+token+
 		"&outputRecordKey=OUTPUT"+
-		"&timeout=290"+
 		"&build="+buildVersion)
 
 	data = """{
 	    "search": """+'"'+data_name+'"'+""",
 	    "searchType": "user",
-	    "searchLimit": """+data_limit+""",
+	    "searchLimit": """+data_no_profiles+""",
 	    "resultsType": "posts",
-	    "resultsLimit": """+data_posts+""",
+	    "resultsLimit": """+data_no_posts+""",
 	    "extendOutputFunction": "($) => { return {} }",
 	    "proxy":{
 	      "useApifyProxy": true,
@@ -86,7 +85,8 @@ def search_profiles(data_name,data_limit,data_posts):
 
 		if answ.status_code == 200:
 			return answ.text
-	else:		
+	else:
+		print("ERROR al REALIZAR la búsqueda: "+r.text)	
 		return False
 
 def clean_txt_data(inputString):
@@ -97,4 +97,10 @@ def clean_txt_data(inputString):
 	inputString = inputString.replace('ó', 'o')
 	inputString = inputString.replace('ú', 'u')
 	inputString = inputString.replace('ñ', 'n')
+	inputString = inputString.replace('Á', 'A')
+	inputString = inputString.replace('É', 'E')
+	inputString = inputString.replace('Í', 'I')
+	inputString = inputString.replace('Ó', 'O')
+	inputString = inputString.replace('Ú', 'U')
+	inputString = inputString.replace('Ñ', 'N')
 	return inputString.encode('ascii', 'ignore').decode('ascii')

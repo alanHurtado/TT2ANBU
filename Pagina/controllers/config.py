@@ -9,10 +9,10 @@
 #--> 0.1 (beta)
 #--> 0.0 (latest)*
 buildVersion = "latest"
-#taskId = "HGYMshTG6oksXdBfx"
-taskId = "rQJWXu7oKZ2yXnKCf"
-#token = "sX3XNABWjLt9yokBNiufqym3y"
-token = "6gfJwzebdrLR5T7BSiAALAhZf"
+#(TASKS ->  MY-TASK'Instagram Scrapper' -> Settings -> ID )
+taskId = "L5Mh6z6wApo4dKk3B"
+#(APIFY ACCOUNT -> INTEGRATIONS -> API TOKEN)
+token = "DbBBmyEHGPeqY5bu5Etji5YG7"
 #:::::::::::::::::::::::::::::::::::#
 
 #::::::::::::: SISTEMA :::::::::::::#
