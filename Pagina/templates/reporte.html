@@ -115,9 +115,9 @@
       <td  COLSPAN=3 class='espacio'>
         <br/>
         <p class='cont'>  URL Perfil:</i>
-        {{perfil[3]}} </p>
+        <a href="{{perfil[3]}}">{{perfil[3]}}</a> </p>
         <br>
-        </td>
+      </td>
     </tr>
     <tr class="color">
       <td COLSPAN=6> </td>
@@ -134,61 +134,125 @@
         <br/>
         <br/>
       </td>
-      <td class='espacio'>  </td>
     </tr>
 
     <tr class="espacio">
-      <td ROWSPAN=8 class='espacio'>   <img src="../{{publicacon[8]}}"> <br/><br/> </td>
+      <td ROWSPAN=7 class='espacio'>   <img src="../{{publicacon[8]}}"> <br/><br/> </td>
       <!--<img src="{{ruta_imagen}}" >-->
-      <td class='espacio'> </td>
       <td class='espacio'> </td>
     </tr>
     <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
+      <td class='espacio'>
         <br/>
         <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ubicaci&oacuten:
         <i class='datoindicado'> {{publicacon[2]}} </i> </i>
+      </td>
     </tr>
     <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
+      <td class='espacio'>
         <br/>
         <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha:
         <i class='datoindicado'> {{publicacon[3]}} </i> </i>
+      </td>
     </tr>
     <tr class='espacio'> 
       <td  COLSPAN=2 class='espacio'>
         <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enlace:
-        <i class='datoindicado'> {{publicacon[4]}} </i> </i>
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enlace Publicacion
+        <a class='datoindicado' href="{{publicacon[4]}}"> {{publicacon[4]}} </a> </i>
+      </td>
     </tr>
     <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
+      <td class='espacio'>
         <br/>
         <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pie de imagen:
         <i class='datoindicado'> {{publicacon[5]}} </i> </i>
+      </td>
     </tr>
     <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
+      <td  class='espacio'>
         <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No de armas detectadas:
-        <i class='datoindicado'> {{publicacon[7]}} </i> </i>
+        {% if publicacon[7]==1 %}
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Armas detectadas:
+        <i class='datoindicado'> Si </i> </i>
+        {% else %}
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Armas detectadas:
+        <i class='datoindicado'> No </i> </i>
+        {% endif %}
+        </td>
     </tr>
     <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
+      <td  class='espacio'>
         <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No de rostros detectados:
-        <i class='datoindicado'> {{publicacon[7]}} </i> </i>
+        {% if publicacon[6]==1 %}
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rostros detectados:
+        <i class='datoindicado'> No </i> </i>
+        {% else %}
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rostros detectados:
+        <i class='datoindicado'> No </i> </i>
+        {% endif %}
+      </td>
     </tr>
-    <tr class='espacio'> 
-      <td  COLSPAN=2 class='espacio'>
+    <tr>
+    <td COLSPAN=2 >
+    <div class='cont'>
+      <br/>
+      {% if publicacon[7]==1 and val_rostro==2 %}
+        <p class='p2'> 
+        El Perfil analizado de {{perfil[2]}}:  
+        Presenta las caracteristicas de ser un perfil potencialmente violento, ya que las,
+        publicaciones contiene objetos diagnosticados como "arma tipo escuadra" y
+        los rasgos de los rostros analizados presentan rasgos agresivos. 
         <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resultado:
-        <i class='datoindicado'> {{Resultado}} </i> </i>
-        <br/>
-        <br/>
-    </tr>
+        En la grafica 1 se muestra el porcentaje de valides del arma detectada.
+        En la grafica 2 se muestra la relacion en porcentaje de los puntos principales del rostro.
+        </p>
+      {% elif publicacon[7]==1 and val_rostro== 1 %} 
+        <p class='p2'> 
+        El Perfil analizado de {{perfil[2]}}:  
+        Presenta las caracteristicas de ser  un perfil posiblemente violento, ya que las,
+        publicaciones contiene objetos diagnosticados como "arma tipo escuadra" 
+        En la grafica 1 se muestra el porcentaje de valides del arma detectada.
+        </p> 
+      {% elif publicacon[7]== 0 and val_rostro==2 %}
+        <p class='p2'> 
+        El Perfil analizado de {{perfil[2]}}:  
+        Presenta las caracteristicas de ser  un perfil posiblemente violento, ya que las,
+        publicaciones analizadas muestras rostros con rasgos agresivos.
+        En la grafica 1 se muestra la relacion en porcentaje de los puntos principales del rostro. 
+        </p> 
+      {% elif publicacon[7]==0 and val_rostro==1 %}
+      <p class='p2'> 
+        El Perfil analizado de {{perfil[2]}}:  
+        No Presenta ningun dato que lo cataloge como perfil agresivo.
+        </p>
+      {% else %}
+       los datos no se han cargado esperan servicio
+        {% endif %} 
+    </div>    
+      </td>
+    </tr> 
+     <tr>
+    <td COLSPAN=2 >
+    {% if publicacon[7]==1  %}
+    <div class='cont2'>
+      <br/>
+         <img src="../{{publicacon[8]}}">
+    </div>    
+    {% endif %}
+      </td>
+    </tr> 
+     <tr>
+    <td COLSPAN=2 >
+    {% if publicacon[6]==1  %}
+    <div class='cont2'>
+      <img src="../{{publicacon[8]}}"> 
+    </div>    
+    {% endif %}
+      </td>
+    </tr> 
     <tr class='espacio'>
-      <td COLSPAN=3 class='espacio'>
+      <td COLSPAN=2 class='espacio'>
         <br/>
         <br/>
       </td>

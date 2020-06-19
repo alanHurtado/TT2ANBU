@@ -37,6 +37,9 @@ table {
     font-size: 18px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-style: normal;
+    font-variant: normal;
+    text-decoration: none;
+    text-decoration-color: #000;
  }
 
  .datoindicado{
@@ -50,6 +53,16 @@ table {
    margin: auto;
    text-indent: 1cm;
    text-align: justify;
+   text-justify: auto;
+   font-weight: bold;
+   font-size: 18px;
+   font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.cont2{
+   width: 8.8in;
+   margin: auto;
+   text-indent: 1cm;
+   text-align:center;
    text-justify: auto;
    font-weight: bold;
    font-size: 18px;
