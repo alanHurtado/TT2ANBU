@@ -150,10 +150,50 @@
             'api_secret': '171e8465-f548-401d-b63b-caf0dc28df5f'
         }
 
+        // Queue class 
+        class Queue 
+        { 
+            constructor(){ 
+                this.items = []; 
+            } 
+            enqueue(element){    
+                // agrega a la cola
+                this.items.push(element); 
+            } 
+
+            dequeue(){ 
+                // borra de la cola
+                if(this.isEmpty()) 
+                    return "Underflow"; 
+                return this.items.shift(); 
+            } 
+ 
+            front(){ 
+                // primer elemento de la cola
+                if(this.isEmpty()) 
+                    return "No elements in Queue"; 
+                return this.items[0]; 
+            } 
+ 
+            isEmpty(){ 
+                // True si está vacía
+                return this.items.length == 0; 
+            } 
+ 
+            printQueue(){ 
+                var str = ""; 
+                for(var i = 0; i < this.items.length; i++) 
+                    str += this.items[i] +" "; 
+                return str; 
+            } 
+
+        }
+
         var a = [];
         var b = [];
         var c = [];
         var unique = [];
+        var queue = new Queue();
 
         window.onload = function() {
             window.Images = [];
@@ -172,12 +212,16 @@
             {% for profile in url_img_posts%}
                 {%for post in profile%}
                     {%for url in post%}
-                    console.log("{{url[1]}}")
+                    //console.log("{{url[0]}}")
                     funcTest("{{url[1]}}")
                     {% endfor %}
                 {% endfor %}    
             {% endfor %}
             /*-------------------------------*/
+        }
+
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
         }
 
         $(document).ready(function() {
@@ -337,7 +381,6 @@
             var msg = '<?xml version="1.0" encoding="utf-8"?><ImageInfoRequestUid>' +
                 '<api_key>' + constants.api_key + '</api_key><api_secret>' + constants.api_secret + '</api_secret>' +
                 '<img_uid>' + image_uid + '</img_uid></ImageInfoRequestUid>';
-                console.log(msg);
 
             $.support.cors = true;
             $.ajax({
@@ -1799,16 +1842,21 @@
         function verifica(){ 
             c = unique.filter(function(obj) { return b.indexOf(obj) == -1; });//regresa el elemento nuevo
             if(c.length == 1){
-                var correct = $.post("/enviaRostro", {"Datos": c[0]})//insertamos rostro
-                if(correct != ""){
-                    console.log(correct)
-                }
+                    console.log(unique)//se ejecuta cada vez que hay algo nuevo
+                    queue.enqueue(c[0]);
+                    
+                    var correct = $.post("/enviaRostro", {"Datos": queue.front()})//insertamos rostro
+                    if(correct = "True"){
+                        queue.dequeue();
+                    }
+                    console.log(queue.printQueue())
             }
         }
 
         function onlyUnique(value, index, self) { 
             return self.indexOf(value) === index;
-        }
+        } 
+
 
     </script>
 
