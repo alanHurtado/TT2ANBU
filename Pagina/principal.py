@@ -6,7 +6,7 @@
 # el código para la lógica del negocio.
 from datetime import *
 from controllers.ctlBusqueda import *
-from controllers.ctlAnalisis import *
+#from controllers.ctlAnalisis import *
 from controllers.generarpdf import *
 from controllers import formulario
 import pdfkit

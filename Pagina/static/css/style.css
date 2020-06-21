@@ -162,6 +162,29 @@ table.type3 td{
     height: 100000000000px;
   }
 
+td.srchVal{ 
+    color: black; 
+    padding: 6px; 
+    border: 1px solid #ccc; 
+    text-align: left; 
+}
+
+table.srchVal {
+    width: 100%;
+    border: 1px solid #ccc;        
+    background: #A9A9A9;
+    color: black;    
+}
+
+table.srchVal td{    
+    color: black; 
+    padding: 10px; 
+    border: 5px solid #ccc; 
+    text-align: center; 
+    font-size: 14px; 
+}
+
+
 /*-----------------Estilos para secciones desplegables-----------------*/
 .accordion {
   background-color: #eee;

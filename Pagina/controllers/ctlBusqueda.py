@@ -65,12 +65,18 @@ def search_profiles(data_name,data_no_profiles,data_no_posts):
 	    "searchType": "user",
 	    "searchLimit": """+data_no_profiles+""",
 	    "resultsType": "posts",
-	    "resultsLimit": """+data_no_posts+""",
-	    "extendOutputFunction": "($) => { return {} }",
+	    "resultsLimit": """+data_no_posts+""",	    
 	    "proxy":{
 	      "useApifyProxy": true,
 	      "apifyProxyGroups": []
-	    }
+	    },
+	    "expandOwners": false,
+		"extendOutputFunction": "($) => { return {} }",		
+		"maxRequestRetries": 5,
+		"scrollWaitSecs": 15,
+		"likedByLimit": 0,
+		"followingLimit": 0,
+		"followedByLimit": 0
 	}"""
 
 	r = requests.post(url=URL,data=data,headers={'Content-Type':'application/json'})
