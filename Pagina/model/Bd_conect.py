@@ -282,7 +282,7 @@ def num_perfiles(id_bus):
         cursor.close()
         return data
     except Exception as e:
-        print("ERROR al realizar select_fechabus(): "+str(e))
+        print("ERROR al realizar num_perfiles(): "+str(e))
         return False
 
     
@@ -301,7 +301,7 @@ def num_publicaciones(id_bus):
         cursor.close()
         return data
     except Exception as e:
-        print("ERROR al realizar select_fechabus(): "+str(e))
+        print("ERROR al realizar num_publicaciones(): "+str(e))
         return False
 
 def num_armas(id_bus):
@@ -320,7 +320,7 @@ def num_armas(id_bus):
         cursor.close()
         return data
     except Exception as e:
-        print("ERROR al realizar select_fechabus(): "+str(e))
+        print("ERROR al realizar num_armas(): "+str(e))
         return False
 
 def num_rostros(id_bus):
@@ -339,7 +339,7 @@ def num_rostros(id_bus):
         cursor.close()
         return data
     except Exception as e:
-        print("ERROR al realizar select_fechabus(): "+str(e))
+        print("ERROR al realizar select_num_rostros(): "+str(e))
         return False
 
 def select_perfil (id_bus):
@@ -356,7 +356,7 @@ def select_perfil (id_bus):
         cursor.close()
         return data
     except Exception as e:
-        print("ERROR al realizar select_fechabus(): "+str(e))
+        print("ERROR al realizar select_perfil(): "+str(e))
         return False
 
     
@@ -375,9 +375,27 @@ def select_publicaciones(id_bus):
         cursor.close()
         return data
     except Exception as e:
-        print("ERROR al realizar select_fechabus(): "+str(e))
+        print("ERROR al realizar select_publicaciones(): "+str(e))
         return False
 
+def select_armas(id_bus):
+    cursor = conn.cursor()
+    try: 
+        query = (
+
+            "SELECT idpublicacion, porcentaje FROM Arma WHERE idPublicacion IN ("
+            "SELECT idPublicacion FROM Publicacion WHERE idPerfil IN ("
+            "SELECT idPerfil FROM Perfil WHERE idPerfil IN ( "
+                "SELECT  idPerfil FROM busqueda_perfil WHERE idBusqueda IN ("
+                    "SELECT idBusqueda FROM Busqueda WHERE idBusqueda = "+ id_bus + ") ) ) )" 
+        )
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        return data
+    except Exception as e:
+        print("ERROR al realizar select_armas(): "+str(e))
+        return False
 
 
 #:::::::::::::::::::: Funciones UPDATE ::::::::::::::::::::#

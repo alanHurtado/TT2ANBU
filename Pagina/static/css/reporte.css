@@ -14,6 +14,14 @@ h1 {
    text-transform: uppercase;
    text-align: center;
  }
+ h3 {
+   color: #3c1b66;
+   font-weight: normal;
+   font-size: 25px;
+   font-family: Arial;
+   text-transform: uppercase;
+   text-align: center;
+ }
 
 table {
     width: 9.8in;
@@ -25,6 +33,16 @@ table {
     width: 360px;
     height: 360px;
  }
+
+ .grafico1 {
+   width: 640px;
+   height: 480px;
+ }
+
+ .grafico2 {
+   width: 488px;
+   height: 298px;
+ }
  td,th,tr{
     border: 1px solid #000;
  }
@@ -32,6 +50,9 @@ table {
     white-space:nowrap; 
     border: 1px #ffffff;
  }
+ .espacio2{
+   border: 1px #ffffff;
+}
  .dato{
     font-weight: 500;
     font-size: 18px;
@@ -61,7 +82,7 @@ table {
 .cont2{
    width: 8.8in;
    margin: auto;
-   text-indent: 1cm;
+   text-indent: 0cm;
    text-align:center;
    text-justify: auto;
    font-weight: bold;
@@ -72,3 +93,11 @@ table {
    border:3px solid #1b1a2b;
    background-color: rgb(37, 30, 56);
 }
+
+@media print{
+   div.saltopagina{
+      display:block;
+      page-break-before:always;
+   }
+}
+
