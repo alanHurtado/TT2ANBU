@@ -221,14 +221,14 @@
         <div class='cont'>
         <br/>
         <h3> Resultado Publicacion </h3>
-      {% if publicacon[7]!=1 and val_rostro==2 %}
+      {% if publicacon[7]!=1 and val_rostro ==2 %}
         <p>El Perfil analizado de {{perfil[2]}}:  
         Presenta las caracteristicas de ser un perfil potencialmente violento, ya que la,
         publicacion contiene objetos diagnosticados como "arma tipo escuadra" y
         los rasgos de los rostros analizados presentan caracteristicas agresivas. 
         <br/>En la grafica 1 se muestra el porcentaje de valides del arma detectada.
         <br/>En la grafica 2 se muestra la relacion en porcentaje de los puntos principales del rostro.</p>
-      {% elif publicacon[7]==1 and val_rostro== 1 %} 
+      {% elif publicacon[7]!=1 and val_rostro == 1 %} 
         <p > El Perfil analizado de {{perfil[2]}}:  
         Presenta las caracteristicas de ser  un perfil posiblemente violento, ya que las,
         publicaciones contiene objetos diagnosticados como "arma tipo escuadra" 

@@ -1,6 +1,7 @@
 from jinja2 import Environment, FileSystemLoader
 from model.Bd_conect import * 
 from matplotlib import pyplot
+import numpy as np
 
 def generarpdf(id_bus):
     env = Environment(loader=FileSystemLoader('templates'))
@@ -20,8 +21,9 @@ def generarpdf(id_bus):
     dato = select_perfil(id_bus)
     perfiles = select_perfil(id_bus)
     publicaciones = select_publicaciones(id_bus)
+    valRostro=1
     
-    valRostro = 2
+    
 
     ###PAra generar Grafico de arma
     
@@ -46,6 +48,37 @@ def generarpdf(id_bus):
         pyplot.savefig(ruta)
         pyplot.close()
        
+    ###Para Generar Grafico de rostro
+    DatosRostro = select_rostros(id_bus)
+  
+    for porRostro in DatosRostro:
+       
+        Caracteristicas = ['Rostro\nOvalado', 'Entradas', 'Cejas\nPobladas',
+                        'Cejas\nArqueadas', 'Pomulos', 'Nariz\nGrande',
+                        'Nariz\nPunteaguda', 'Labios\nGrandes', 'Barbilla\nPartida']
+        Valo_Carac =[porRostro[1], porRostro[2], porRostro[3], porRostro[4], porRostro[5], porRostro[6], 
+                    porRostro[7], porRostro[8], porRostro[9]]
+        valor_real = [100, 100, 100, 100, 100, 100, 100, 100, 100]
+        
+        x = np.arange(len(Caracteristicas))
+        width = 0.35
+        
+        fig, ax = pyplot.subplots()
+        recta1 = ax.bar(x - width/2, Valo_Carac, width, label ='Coincidencia')
+        recta2 = ax.bar(x + width/2, valor_real, width, label ='Valor Deseado')
+
+        ax.set_ylabel('Ponderacion')
+        ax.set_xticks(x)
+        ax.set_xticklabels(Caracteristicas)
+        ax.legend()
+
+        fig.tight_layout()
+        ruta='static/img/graficoB'+str(porRostro[0])+'.png'
+        pyplot.savefig(ruta)
+        pyplot.close()
+
+
+
 
 
 ### Rutas de los graficos generados 
@@ -62,7 +95,7 @@ def generarpdf(id_bus):
         'perfiles': perfiles,
         'publicaciones': publicaciones,
         'resultado': 'Es posible violento',
-        'val_rostro': valRostro,
+        'val_rostro': valRostro
     }
 
     html = template.render(datos)
@@ -70,4 +103,5 @@ def generarpdf(id_bus):
     f.write(html)
     f.close() 
     #print(html)
-    
+
+

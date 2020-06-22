@@ -383,7 +383,7 @@ def select_armas(id_bus):
     try: 
         query = (
 
-            "SELECT idpublicacion, porcentaje FROM Arma WHERE idPublicacion IN ("
+            "SELECT idPublicacion, porcentaje FROM Arma WHERE idPublicacion IN ("
             "SELECT idPublicacion FROM Publicacion WHERE idPerfil IN ("
             "SELECT idPerfil FROM Perfil WHERE idPerfil IN ( "
                 "SELECT  idPerfil FROM busqueda_perfil WHERE idBusqueda IN ("
@@ -397,6 +397,24 @@ def select_armas(id_bus):
         print("ERROR al realizar select_armas(): "+str(e))
         return False
 
+def select_rostros(id_bus):
+    cursor = conn.cursor()
+    try: 
+        query = (
+            
+            "SELECT idPublicacion, rostro_oval, entradas, cejas_pobladas, cejas_arco, pomulos, nariz_grande, nariz_puntiaguda, labios_grandes, barbilla_partida FROM Rostro WHERE idPublicacion IN ("
+            "SELECT idPublicacion FROM Publicacion WHERE idPerfil IN ("
+            "SELECT idPerfil FROM Perfil WHERE idPerfil IN ( "
+                "SELECT  idPerfil FROM busqueda_perfil WHERE idBusqueda IN ("
+                    "SELECT idBusqueda FROM Busqueda WHERE idBusqueda = "+ id_bus + ") ) ) )" 
+        )
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        return data
+    except Exception as e:
+        print("ERROR al realizar select_rostros(): "+str(e))
+        return False
 
 #:::::::::::::::::::: Funciones UPDATE ::::::::::::::::::::#
 def upd_img_path(idPost,path):
