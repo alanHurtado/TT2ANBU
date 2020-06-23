@@ -33,8 +33,15 @@
 			<td><b>{{consul[0]}}</b></td>
 			<td><b>{{consul[1]}}</b></td>
 			<td><b>{{consul[2]}}</b></td>
+		</tr>
 			
-			{% elif name == 'all'%}
+			{% elif name == consul[0]|string() %}
+		<tr>
+			<td><b>{{consul[0]}}</b></td>
+			<td><b>{{consul[1]}}</b></td>
+			<td><b>{{consul[2]}}</b></td>
+		</tr>
+			{% elif name == 'all' %}
 		<tr>
 			<td><b>{{consul[0]}}</b></td>
 			<td><b>{{consul[1]}}</b></td>

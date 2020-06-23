@@ -61,10 +61,8 @@ class ComentFormBus(Form):
 
 #::::: DEFINICIONES de campos para el formulario de CONSULTA :::::#
 class ComentFormCon(Form):
-    in_name = StringField('Nombre: ',
-    [
-        val_nombre
-    ]) 
+    in_name = StringField('Nombre:')
+     
     fecha_in = StringField('Fecha del : ', 
     [
         validators.InputRequired(message ='Fecha requerida')

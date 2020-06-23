@@ -109,7 +109,12 @@ def resultado_consulta(datos):
         name=datos2[0]
         fecha1=datos2[1]
         fecha2=datos2[2]
+        print(name)
         name=name[1:len(name)-2]
+        print(name)
+        print(type(name))
+        if name =='':
+            name ='all'
 
         fecha1=fecha1[0:len(fecha1)-1]
     
