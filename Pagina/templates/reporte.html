@@ -21,48 +21,42 @@
     <tr class='espacio'>
       <td class='espacio'> 
         <br/>
-        <p class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ID B&uacute;squeda </p> 
+        <p class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No. B&uacute;squeda  
+        <i class='datoindicado'>&nbsp;&nbsp;&nbsp; {{num_busqueda}} </i> </p>
       </td>
-      <td class='espacio'>
-        <br/>
-        <p class='datoindicado'> {{num_busqueda}} </p>
-      </td>
-      <td COLSPAN=2 class='espacio'> 
+      <td class='espacio' COLSPAN=2> 
         <br/>
         <p class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fecha de b&uacute;squeda </p>
-      </td>
-      <td COLSPAN=2 class='espacio'>  
-        <br/>
-        <p class ='datoindicado'> {{fecha_busqueda[0][1]}} </p>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fecha de b&uacute;squeda 
+        <i class ='datoindicado'> {{fecha_busqueda[0][1]}} </i> </p> 
       </td>]
     </tr>  
     <tr class='espacio'>
-      <td COLSPAN=6 class='espacio'> 
+      <td COLSPAN=3 class='espacio'> 
       <br/>
-      <p class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Parametros de b&uacute;squeda <p> 
+      <p class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Informaci&oacute;n de la b&uacute;squeda </p> 
       </td>
     </tr>
     <tr class='espacio'>
-      <td class="espacio" COLSPAN=2>
+      <td class="espacio">
         <br/>
         <p class='dato'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nombre: &nbsp;&nbsp; <a class='datoindicado'> {{nombre_buscado[0][0]}} </a> </p>
       </td>
-      <td COLSPAN=2 class="espacio">
+      <td class="espacio">
         <br/>
         <p class='dato'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No. de perfiles: &nbsp;&nbsp; <a class='datoindicado'> {{no_perfiles[0][0]}} </a> </p>
       </td>
-      <td class="espacio" COLSPAN=2>
+      <td class="espacio">
         <br/>
         <p class='dato'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No. de publicaciones: &nbsp;&nbsp; <a class='datoindicado'> {{no_publicaciones[0][0]}} </a> </p>
       </td>
     </tr>
     <tr class="color">
-      <td COLSPAN=6> </td>
+      <td COLSPAN=3> </td>
     </tr>
     <tr>
-    <td COLSPAN=6 >
+    <td COLSPAN=3 >
     <div class='cont'>
       <br/>
       <br/>
@@ -88,16 +82,8 @@
 <br/>
 {%for perfil in perfiles%}
 <table class='espacio2'>
-
-
     <tr class="color">
       <td COLSPAN=3> </td>
-    </tr>
-    <tr class='espacio'>
-      <td COLSPAN=3 class='espacio'> 
-        <br/>
-        <i class='datoindicado'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ID Perfil  &nbsp;&nbsp;&nbsp; {{perfil[0]}} </i>
-      </td>
     </tr>
     <tr class='espacio'> 
       <td  COLSPAN=2 class='espacio'>
@@ -141,8 +127,7 @@
         <br/>
         <br/>
         <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Id Publicaci&oacute;:
-        <i class='datoindicado'> {{publicacon[0]}} </i> </i>
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Publicaci&oacute;n         
         <br/>
         <br/>
       </td>
@@ -151,16 +136,22 @@
     <tr class="espacio">
       <td ROWSPAN=7 class='espacio'>   <br/>
       <br/>
-      <img src="../static/img/arma.jpeg"> <!--<img src="../{{publicacon[8]}}"> -->
+      <!--<img src="../static/img/arma.jpeg"> --><img src="../{{publicacon[8]}}"> 
       <br/><br/> </td>
       <td class='espacio'> </td>
     </tr>
 
     <tr class='espacio'> 
       <td class='espacio'>
+      {% if publicacon[2] is not none %}
         <br/>
-        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ubicaci&oacuten:
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ubicaci&oacuten;n
         <i class='datoindicado'> {{publicacon[2]}} </i> </i>
+      {% else %}
+        <br/>
+        <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ubicaci&oacuten;n
+        <i class='datoindicado'> No cuenta con una. </i> </i>
+      {% endif %}
       </td>
     </tr>
 
@@ -203,7 +194,7 @@
 
     <tr class='espacio'> 
       <td  class='espacio'>
-        {% if publicacon[6]==1 %}
+        {% if publicacon[6]==1 or publicacon[6]==2 %}
         <i class='dato'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rostros detectados:
         <i class='datoindicado'> Si </i> </i>
         {% else %}
@@ -221,27 +212,27 @@
         <div class='cont'>
         <br/>
         <h3> Resultado Publicacion </h3>
-      {% if publicacon[7]!=1 and val_rostro ==2 %}
+      {% if publicacon[7] == 1 and publicacon[6]==1 %}
         <p>El Perfil analizado de {{perfil[2]}}:  
         Presenta las caracteristicas de ser un perfil potencialmente violento, ya que la,
         publicacion contiene objetos diagnosticados como "arma tipo escuadra" y
         los rasgos de los rostros analizados presentan caracteristicas agresivas. 
         <br/>En la grafica 1 se muestra el porcentaje de valides del arma detectada.
         <br/>En la grafica 2 se muestra la relacion en porcentaje de los puntos principales del rostro.</p>
-      {% elif publicacon[7]!=1 and val_rostro == 1 %} 
+      {% elif publicacon[7]==1 and (publicacon[6]==2 or publicacon[6]==0) %} 
         <p > El Perfil analizado de {{perfil[2]}}:  
         Presenta las caracteristicas de ser  un perfil posiblemente violento, ya que las,
         publicaciones contiene objetos diagnosticados como "arma tipo escuadra" 
         En la grafica 1 se muestra el porcentaje de valides del arma detectada. </p> 
-      {% elif publicacon[7]== 0 and val_rostro==2 %}
+      {% elif publicacon[7]== 0 and publicacon[6]==1 %}
         <p> El Perfil analizado de {{perfil[2]}}:  
         Presenta las caracteristicas de ser  un perfil posiblemente violento, ya que las,
-        publicaciones analizadas muestras rostros con rasgos agresivos.
+        publicaciones analizadas muestran rostros con rasgos agresivos.
         En la grafica 1 se muestra la relacion en porcentaje de los puntos principales del rostro. </p>
-      {% elif publicacon[7]==0 and val_rostro==1 %}
+      {% elif publicacon[7]==0 and (publicacon[6]==2 or publicacon[6]==0) %}
         <p>
         El Perfil analizado de {{perfil[2]}}:  
-        No Presenta ningun dato que lo cataloge como perfil agresivo.
+        No Presenta ningun dato que lo cataloge como perfil violento.
       {% else %}
        los datos no se han cargado esperan servicio
         {% endif %}     
@@ -250,7 +241,7 @@
     </tr> 
      <tr>
     <td COLSPAN=2 >
-    {% if publicacon[7]!=1  %}
+    {% if publicacon[7]==1  %}
     <div class='cont2'>
       <br/>
       <h3> Grafica An&aacute;lisis de arma tipo escuadra <h3>
@@ -261,7 +252,7 @@
     </tr> 
      <tr>
     <td COLSPAN=2 >
-    {% if publicacon[6]!=1  %}
+    {% if publicacon[6]==1  %}
     <div class='cont2'>
     <br/>
     <h3> Grafica an&aacute;lisis Rostro </h3>
@@ -279,7 +270,7 @@
       </td>
     </tr>
 </table>
-<div class="saltopagina"></div>    
+
      {%endfor%}
   {%endfor%}
  

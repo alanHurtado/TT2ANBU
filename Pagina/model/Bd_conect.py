@@ -310,7 +310,7 @@ def num_armas(id_bus):
         query = (
             
             "SELECT COUNT(*) FROM Arma WHERE idPublicacion IN ( "
-             "SELECT idPublicacion FROM Publicacion WHERE idPerfil IN ("
+             "SELECT idPublicacion FROM Publicacion WHERE val_arma = 1 AND idPerfil IN ("
                 "SELECT idPerfil FROM Perfil WHERE idPerfil IN ( "
                     "SELECT  idPerfil FROM busqueda_perfil WHERE idBusqueda IN ("
                         "SELECT idBusqueda FROM Busqueda WHERE idBusqueda = "+ id_bus + ") ) ) )" 
@@ -329,7 +329,7 @@ def num_rostros(id_bus):
         query = (
             
             "SELECT COUNT(*) FROM Rostro WHERE idPublicacion IN ( "
-             "SELECT idPublicacion FROM Publicacion WHERE idPerfil IN ("
+             "SELECT idPublicacion FROM Publicacion WHERE val_rostro=1 AND idPerfil IN ("
                 "SELECT idPerfil FROM Perfil WHERE idPerfil IN ( "
                     "SELECT  idPerfil FROM busqueda_perfil WHERE idBusqueda IN ("
                         "SELECT idBusqueda FROM Busqueda WHERE idBusqueda = "+ id_bus + ") ) ) )" 
@@ -402,7 +402,7 @@ def select_rostros(id_bus):
     try: 
         query = (
             
-            "SELECT idPublicacion, rostro_oval, entradas, cejas_pobladas, cejas_arco, pomulos, nariz_grande, nariz_puntiaguda, labios_grandes, barbilla_partida FROM Rostro WHERE idPublicacion IN ("
+            "SELECT idPublicacion, rostro_oval, entradas, cejas_pobladas, cejas_arco, pomulos, nariz_grande, nariz_puntiaguda, labios_grandes, barbilla_partida, evaluacion_rostro FROM Rostro WHERE idPublicacion IN ("
             "SELECT idPublicacion FROM Publicacion WHERE idPerfil IN ("
             "SELECT idPerfil FROM Perfil WHERE idPerfil IN ( "
                 "SELECT  idPerfil FROM busqueda_perfil WHERE idBusqueda IN ("

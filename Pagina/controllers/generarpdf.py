@@ -21,7 +21,7 @@ def generarpdf(id_bus):
     dato = select_perfil(id_bus)
     perfiles = select_perfil(id_bus)
     publicaciones = select_publicaciones(id_bus)
-    valRostro=1
+    
     
     
 
@@ -95,7 +95,7 @@ def generarpdf(id_bus):
         'perfiles': perfiles,
         'publicaciones': publicaciones,
         'resultado': 'Es posible violento',
-        'val_rostro': valRostro
+        
     }
 
     html = template.render(datos)
