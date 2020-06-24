@@ -40,7 +40,7 @@ def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
         if not id_srch:
             error = 'ERROR: El servicio de búsqueda falló, por favor intente de nuevo.'
             return render_template('busqueda.html',error=error,form = coment_form)
-        else:                        
+        else:
             next = request.args.get('next', 'resultado_busqueda') # especificamos la ruta si se enviaron los datos            
             if next:    # comprobamos si paso por la url
                return redirect(url_for('resultado_busqueda', id_srch=id_srch)) # Se manda a la ruta
@@ -49,8 +49,8 @@ def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
 
 @app.route('/resultado_busqueda/<int:id_srch>', methods=['GET','POST'])
 def resultado_busqueda(id_srch):
-    if request.method == 'GET':
-        coment_form = formulario.ComentFormBus(request.form)
+    coment_form = formulario.ComentFormBus(request.form)
+    if request.method == 'GET':        
         try:
             data_srch=select_srch(id_srch)
             data = result_data_for_view(id_srch)
@@ -66,10 +66,9 @@ def resultado_busqueda(id_srch):
         
     else:
         chekList = request.form.getlist('analisis')
-        print(chekList)
         if not chekList:
             error = 'Seleccione al menos 1 perfil para análisis.'
-            return render_template('resultado_busqueda.html',message=error, form = coment_form)            
+            return redirect(url_for('resultado_busqueda', id_srch=id_srch,message=error, form = coment_form))                    
         try:
             data_url=get_url_post(chekList)
             getImages(chekList,id_srch)
