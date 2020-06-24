@@ -5,6 +5,9 @@
    <h5 class = 'texT' > RESULTADOS DE BÚSQUEDA </h5>
    <br><br>
    <form method="POST" action=""> 
+    {% if message %}
+        <p class='error'><strong>{{ error }}</strong>
+    {% endif %}
     <h4 class="subtitle">Datos de Búsqueda</h4>
    
     <table class="srchVal">

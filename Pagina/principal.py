@@ -50,15 +50,26 @@ def busqueda(): # accedemos al atributo method POST = enviar GET = mostrar
 @app.route('/resultado_busqueda/<int:id_srch>', methods=['GET','POST'])
 def resultado_busqueda(id_srch):
     if request.method == 'GET':
-        data_srch=select_srch(id_srch)
-        data = result_data_for_view(id_srch)
-        if data:                        
-            return render_template('resultadobusqueda.html', Busqueda = data_srch, Perfiles = data, noResults = len(data))
-        else:
+        coment_form = formulario.ComentFormBus(request.form)
+        try:
+            data_srch=select_srch(id_srch)
+            data = result_data_for_view(id_srch)
+            if data:                        
+                return render_template('resultadobusqueda.html', Busqueda = data_srch, Perfiles = data, noResults = len(data))
+            else:
+                error = 'ERROR al mostrar los resultados, por favor intente de nuevo.'
+            return render_template('busqueda.html',error=error, form = coment_form)
+        except Exception as e:
+            print("ERROR Ejecutando resultado_busqueda/select_srch | result_data_for_view :"+str(e))
             error = 'ERROR al mostrar los resultados, por favor intente de nuevo.'
-            return render_template('busqueda.html',error=error)
+            return render_template('busqueda.html',error=error, form = coment_form)
+        
     else:
         chekList = request.form.getlist('analisis')
+        print(chekList)
+        if not chekList:
+            error = 'Seleccione al menos 1 perfil para análisis.'
+            return render_template('resultado_busqueda.html',message=error, form = coment_form)            
         try:
             data_url=get_url_post(chekList)
             getImages(chekList,id_srch)
@@ -76,7 +87,7 @@ def resultado_busqueda(id_srch):
         except Exception as e:
             print("--ERROR-- en getImages, creaCarpeta, analisisArma. Exception: "+str(e))
             error = 'ERROR al comenzar el análisis, por favor intente de nuevo.'
-            return render_template('/resultado_busqueda/', message=error, id_srch = id_srch)
+            return redirect(url_for('resultado_busqueda', id_srch=id_srch , message=error)) 
 
 @app.route('/consulta', methods = ['GET', 'POST'])
 def consulta():
